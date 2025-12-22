@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Your local guide to Colorado. Discover Denver, Estes Park, Boulder, Vail, Aspen and more. Weather, attractions, restaurants, and insider tips for travelers.">
+    <link rel="canonical" href="https://denversam.com/">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <title>Denver Sam | Your Colorado Local Guide</title>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LLL4VPHMHH"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-LLL4VPHMHH');
+        gtag('config', 'GT-5N2922J');
+    </script>
+
+    <link rel="stylesheet" href="/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <a class="skip-link visually-hidden" href="#main-content">Skip to main content</a>
+
+    <header class="site-header" role="banner">
+        <div class="header-container">
+            <a href="/" class="site-logo" aria-label="Denver Sam - Home">
+                DENVER SAM
+            </a>
+            <nav class="main-nav" aria-label="Main navigation">
+                <ul>
+                    <li><a href="/denver">Denver</a></li>
+                    <li><a href="/estes-park">Estes Park</a></li>
+                    <li><a href="/boulder">Boulder</a></li>
+                    <li><a href="#cities">All Cities</a></li>
+                </ul>
+            </nav>
+            <button class="mobile-menu-toggle" aria-label="Open mobile menu" aria-expanded="false" aria-controls="mobile-menu">
+                <span aria-hidden="true">☰</span>
+            </button>
+        </div>
+
+        <nav class="mobile-menu" id="mobile-menu" aria-label="Mobile navigation" aria-hidden="true">
+            <button class="mobile-menu-close" aria-label="Close mobile menu">
+                <span aria-hidden="true">×</span>
+            </button>
+            <div class="mobile-menu-content">
+                <nav>
+                    <ul role="list">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/denver">Denver</a></li>
+                        <li><a href="/estes-park">Estes Park</a></li>
+                        <li><a href="/boulder">Boulder</a></li>
+                        <li><a href="/fort-collins">Fort Collins</a></li>
+                        <li><a href="/colorado-springs">Colorado Springs</a></li>
+                        <li><a href="/breckenridge">Breckenridge</a></li>
+                        <li><a href="/vail">Vail</a></li>
+                        <li><a href="/aspen">Aspen</a></li>
+                        <li><a href="/loveland">Loveland</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </nav>
+    </header>
+
+    <main class="site-main" id="main-content" role="main">
+        <!-- Hero Section -->
+        <section class="hero-section" aria-labelledby="hero-title">
+            <div class="hero-container">
+                <h1 id="hero-title" class="hero-title">Your Colorado Local Guide</h1>
+                <p class="hero-subtitle">Discover the best of Denver, the Rockies, and beyond</p>
+            </div>
+        </section>
+
+        <!-- Weather Widget Section -->
+        <section class="content-section weather-section">
+            <div class="section-header">
+                <h2>Colorado Weather</h2>
+                <p class="section-subtitle">Current conditions across the state</p>
+            </div>
+            <div class="weather-grid" id="weather-container">
+                <!-- Weather cards will be populated by JavaScript -->
+                <div class="weather-loading">Loading weather data...</div>
+            </div>
+        </section>
+
+        <!-- Colorado Facts Section -->
+        <section class="content-section alt-bg">
+            <div class="section-header">
+                <h2>Explore Colorado</h2>
+                <p class="section-subtitle">The Centennial State awaits</p>
+            </div>
+            <div class="article-content">
+                <div class="article-text">
+                    <p>
+                        Colorado offers something for everyone. From the vibrant streets of Denver to the majestic peaks of Rocky Mountain National Park, from world-class ski resorts to charming mountain towns, this is a state built for adventure.
+                    </p>
+                    <p>
+                        Whether you're hiking fourteeners, exploring craft breweries, catching a concert at Red Rocks, or simply soaking in hot springs after a day on the slopes, Colorado delivers experiences you won't forget.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Colorado Quick Facts -->
+            <div class="facts-grid">
+                <div class="fact-card">
+                    <span class="fact-icon">🏔️</span>
+                    <span class="fact-number">58</span>
+                    <span class="fact-label">Fourteeners (peaks over 14,000 ft)</span>
+                </div>
+                <div class="fact-card">
+                    <span class="fact-icon">🎿</span>
+                    <span class="fact-number">28</span>
+                    <span class="fact-label">Ski Resorts</span>
+                </div>
+                <div class="fact-card">
+                    <span class="fact-icon">🍺</span>
+                    <span class="fact-number">400+</span>
+                    <span class="fact-label">Craft Breweries</span>
+                </div>
+                <div class="fact-card">
+                    <span class="fact-icon">☀️</span>
+                    <span class="fact-number">300</span>
+                    <span class="fact-label">Days of Sunshine</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- City Directory -->
+        <section id="cities" class="content-section">
+            <div class="section-header">
+                <h2>Explore Colorado Cities</h2>
+                <p class="section-subtitle">Your guide to the best destinations</p>
+            </div>
+
+            <div class="cards-grid cities-grid">
+                <article class="city-card">
+                    <div class="city-card-header denver">
+                        <h3>Denver</h3>
+                        <span class="city-tagline">The Mile High City</span>
+                    </div>
+                    <div class="city-card-body">
+                        <p>Colorado's capital city. World-class dining, craft beer scene, professional sports, and easy access to the mountains.</p>
+                        <ul class="city-highlights">
+                            <li>Red Rocks Amphitheatre</li>
+                            <li>Union Station</li>
+                            <li>RiNo Art District</li>
+                        </ul>
+                        <a href="/denver" class="city-link">Explore Denver →</a>
+                    </div>
+                </article>
+
+                <article class="city-card">
+                    <div class="city-card-header estes-park">
+                        <h3>Estes Park</h3>
+                        <span class="city-tagline">Gateway to Rocky Mountain NP</span>
+                    </div>
+                    <div class="city-card-body">
+                        <p>Mountain town at the entrance to Rocky Mountain National Park. Wildlife, hiking, and stunning alpine scenery.</p>
+                        <ul class="city-highlights">
+                            <li>Rocky Mountain National Park</li>
+                            <li>Trail Ridge Road</li>
+                            <li>Elk Watching</li>
+                        </ul>
+                        <a href="/estes-park" class="city-link">Explore Estes Park →</a>
+                    </div>
+                </article>
+
+                <article class="city-card">
+                    <div class="city-card-header boulder">
+                        <h3>Boulder</h3>
+                        <span class="city-tagline">Where the Mountains Meet the Plains</span>
+                    </div>
+                    <div class="city-card-body">
+                        <p>College town with incredible outdoor access. Flatirons hiking, Pearl Street Mall, and a thriving food scene.</p>
+                        <ul class="city-highlights">
+                            <li>Flatirons</li>
+                            <li>Pearl Street Mall</li>
+                            <li>Chautauqua Park</li>
+                        </ul>
+                        <a href="/boulder" class="city-link">Explore Boulder →</a>
+                    </div>
+                </article>
+
+                <article class="city-card">
+                    <div class="city-card-header fort-collins">
+                        <h3>Fort Collins</h3>
+                        <span class="city-tagline">Craft Beer Capital</span>
+                    </div>
+                    <div class="city-card-body">
+                        <p>Home to New Belgium and Odell. College town charm with mountain access and the scenic Poudre Canyon.</p>
+                        <ul class="city-highlights">
+                            <li>Old Town</li>
+                            <li>Horsetooth Reservoir</li>
+                            <li>Brewery Tours</li>
+                        </ul>
+                        <a href="/fort-collins" class="city-link">Explore Fort Collins →</a>
+                    </div>
+                </article>
+
+                <article class="city-card">
+                    <div class="city-card-header colorado-springs">
+                        <h3>Colorado Springs</h3>
+                        <span class="city-tagline">Olympic City USA</span>
+                    </div>
+                    <div class="city-card-body">
+                        <p>Garden of the Gods, Pikes Peak, and the US Olympic Training Center. Natural beauty meets military history.</p>
+                        <ul class="city-highlights">
+                            <li>Garden of the Gods</li>
+                            <li>Pikes Peak</li>
+                            <li>Manitou Springs</li>
+                        </ul>
+                        <a href="/colorado-springs" class="city-link">Explore Colorado Springs →</a>
+                    </div>
+                </article>
+
+                <article class="city-card">
+                    <div class="city-card-header breckenridge">
+                        <h3>Breckenridge</h3>
+                        <span class="city-tagline">Historic Mountain Town</span>
+                    </div>
+                    <div class="city-card-body">
+                        <p>Victorian mining town turned ski destination. Year-round mountain activities and charming Main Street.</p>
+                        <ul class="city-highlights">
+                            <li>Breckenridge Ski Resort</li>
+                            <li>Historic Main Street</li>
+                            <li>Summer Hiking</li>
+                        </ul>
+                        <a href="/breckenridge" class="city-link">Explore Breckenridge →</a>
+                    </div>
+                </article>
+
+                <article class="city-card">
+                    <div class="city-card-header vail">
+                        <h3>Vail</h3>
+                        <span class="city-tagline">World-Class Skiing</span>
+                    </div>
+                    <div class="city-card-body">
+                        <p>Legendary ski resort with European-style village. Summer brings hiking, biking, and golf in stunning alpine setting.</p>
+                        <ul class="city-highlights">
+                            <li>Vail Mountain</li>
+                            <li>Vail Village</li>
+                            <li>Betty Ford Alpine Gardens</li>
+                        </ul>
+                        <a href="/vail" class="city-link">Explore Vail →</a>
+                    </div>
+                </article>
+
+                <article class="city-card">
+                    <div class="city-card-header aspen">
+                        <h3>Aspen</h3>
+                        <span class="city-tagline">Mountain Luxury</span>
+                    </div>
+                    <div class="city-card-body">
+                        <p>Iconic resort town with four ski mountains. Celebrity sightings, fine dining, and the stunning Maroon Bells.</p>
+                        <ul class="city-highlights">
+                            <li>Maroon Bells</li>
+                            <li>Aspen Mountain</li>
+                            <li>Downtown Galleries</li>
+                        </ul>
+                        <a href="/aspen" class="city-link">Explore Aspen →</a>
+                    </div>
+                </article>
+
+                <article class="city-card">
+                    <div class="city-card-header loveland">
+                        <h3>Loveland</h3>
+                        <span class="city-tagline">The Sweetheart City</span>
+                    </div>
+                    <div class="city-card-body">
+                        <p>Gateway to the Big Thompson Canyon and Estes Park. Public art, lakes, and mountain access without the crowds.</p>
+                        <ul class="city-highlights">
+                            <li>Sculpture Gardens</li>
+                            <li>Lake Loveland</li>
+                            <li>Devil's Backbone</li>
+                        </ul>
+                        <a href="/loveland" class="city-link">Explore Loveland →</a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- News Feed Section -->
+        <section class="content-section alt-bg">
+            <div class="section-header">
+                <h2>Colorado News & Events</h2>
+                <p class="section-subtitle">What's happening across the state</p>
+            </div>
+            <div class="news-grid" id="news-container">
+                <!-- News items will be populated by JavaScript -->
+                <div class="news-loading">Loading latest news...</div>
+            </div>
+        </section>
+
+        <!-- Instagram Section -->
+        <section class="content-section">
+            <div class="section-header">
+                <h2>Colorado Through Our Lens</h2>
+                <p class="section-subtitle">Follow the adventure</p>
+            </div>
+            <div class="instagram-grid" id="instagram-container">
+                <!-- Instagram embeds will go here -->
+                <p class="instagram-placeholder">Instagram posts coming soon</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer" role="contentinfo">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Denver Sam</h3>
+                    <p>Your local guide to Colorado. Helping travelers discover the best of the Centennial State.</p>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Popular Cities</h3>
+                    <ul role="list">
+                        <li><a href="/denver">Denver</a></li>
+                        <li><a href="/estes-park">Estes Park</a></li>
+                        <li><a href="/boulder">Boulder</a></li>
+                        <li><a href="/colorado-springs">Colorado Springs</a></li>
+                        <li><a href="/vail">Vail</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Mountain Towns</h3>
+                    <ul role="list">
+                        <li><a href="/breckenridge">Breckenridge</a></li>
+                        <li><a href="/aspen">Aspen</a></li>
+                        <li><a href="/fort-collins">Fort Collins</a></li>
+                        <li><a href="/loveland">Loveland</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>About</h3>
+                    <p>Denver Sam is your insider guide to Colorado travel. Local knowledge, honest recommendations.</p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025 Denver Sam. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/script.js"></script>
+</body>
+</html>

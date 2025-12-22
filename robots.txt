@@ -1,0 +1,13 @@
+# Denver Sam - Colorado Local Guide
+# https://denversam.com
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://denversam.com/sitemap.xml
+
+# Note: Site uses clean URLs without trailing slashes
+
+# Crawl-delay for respectful crawling
+Crawl-delay: 1
