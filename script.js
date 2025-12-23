@@ -431,11 +431,8 @@ function getPlaceholderNews() {
  * Paste Instagram URLs and they'll be converted to lazy-loaded embeds
  */
 function initInstagramEmbeds() {
-    const container = document.getElementById('instagram-container');
-    if (!container) return;
-
-    // Find all Instagram embed placeholders
-    const embedPlaceholders = container.querySelectorAll('[data-instagram-url]');
+    // Find all Instagram embed placeholders anywhere on the page
+    const embedPlaceholders = document.querySelectorAll('[data-instagram-url]');
 
     if (embedPlaceholders.length === 0) return;
 
