@@ -347,9 +347,103 @@
     <priority>0.8</priority>
   </url>
 
+  <!-- Denver Neighborhoods -->
+  <url>
+    <loc>https://denversam.com/denver/neighborhoods/lodo</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://denversam.com/denver/neighborhoods/rino</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://denversam.com/denver/neighborhoods/highlands-lohi</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Colorado Springs Attractions -->
+  <url>
+    <loc>https://denversam.com/colorado-springs/attractions/garden-of-the-gods</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://denversam.com/colorado-springs/attractions/pikes-peak</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://denversam.com/colorado-springs/attractions/manitou-springs</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Fort Collins Attractions -->
+  <url>
+    <loc>https://denversam.com/fort-collins/attractions/old-town</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://denversam.com/fort-collins/attractions/horsetooth-reservoir</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Aspen Attractions -->
+  <url>
+    <loc>https://denversam.com/aspen/attractions/maroon-bells</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://denversam.com/aspen/attractions/independence-pass</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Breckenridge Attractions -->
+  <url>
+    <loc>https://denversam.com/breckenridge/attractions/main-street</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Vail Attractions -->
+  <url>
+    <loc>https://denversam.com/vail/attractions/vail-village</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Loveland Attractions -->
+  <url>
+    <loc>https://denversam.com/loveland/attractions/devils-backbone</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://denversam.com/loveland/attractions/sculpture-gardens</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
   <!-- Estes Park Attractions -->
   <url>
     <loc>https://denversam.com/estes-park/attractions/rocky-mountain-national-park</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://denversam.com/estes-park/attractions/trail-ridge-road</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://denversam.com/estes-park/attractions/elkhorn-avenue</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
