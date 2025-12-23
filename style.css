@@ -917,6 +917,105 @@ select:focus {
     font-size: 14px;
 }
 
+/* Article Page Styles */
+.article-page {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px 20px 80px;
+}
+
+.article-header {
+    margin-bottom: 40px;
+    padding-top: 40px;
+}
+
+.article-header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1f2937;
+    line-height: 1.2;
+    margin-bottom: 20px;
+}
+
+.article-page .article-content p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 25px;
+    color: #374151;
+}
+
+.article-page .article-content h2 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin-top: 50px;
+    margin-bottom: 25px;
+    padding-top: 30px;
+    border-top: 1px solid #e5e7eb;
+}
+
+.article-page .article-content h3 {
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: #1f2937;
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+.article-page .article-content ul {
+    margin-bottom: 30px;
+    padding-left: 0;
+    list-style: none;
+}
+
+.article-page .article-content ul li {
+    position: relative;
+    padding-left: 25px;
+    margin-bottom: 12px;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #374151;
+}
+
+.article-page .article-content ul li::before {
+    content: "•";
+    position: absolute;
+    left: 8px;
+    color: #3498db;
+    font-weight: bold;
+}
+
+.article-page .article-content a {
+    color: #3498db;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s ease;
+}
+
+.article-page .article-content a:hover {
+    border-bottom-color: #3498db;
+}
+
+.article-image {
+    margin: 40px 0;
+}
+
+.article-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+}
+
+.article-page .instagram-embed {
+    margin: 30px 0;
+    min-height: 400px;
+    background: #f8f9fa;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .hero-section {
@@ -1017,11 +1116,35 @@ select:focus {
     .facts-grid {
         grid-template-columns: repeat(2, 1fr);
     }
+
+    .article-header h1 {
+        font-size: 2rem;
+    }
+
+    .article-page .article-content h2 {
+        font-size: 1.5rem;
+    }
+
+    .article-page .article-content h3 {
+        font-size: 1.2rem;
+    }
 }
 
 @media (max-width: 480px) {
     .hero-title {
         font-size: 2rem;
+    }
+
+    .article-header h1 {
+        font-size: 1.75rem;
+    }
+
+    .article-page .article-content p {
+        font-size: 1rem;
+    }
+
+    .article-page .instagram-embed {
+        min-height: 300px;
     }
 
     .hero-subtitle {
