@@ -269,19 +269,19 @@ function generatePlaceholderWeather() {
  */
 const NEWS_SOURCES = [
     {
-        name: 'OutThere Colorado',
-        url: 'https://api.rss2json.com/v1/api.json?rss_url=https://www.outtherecolorado.com/feed/',
-        category: 'outdoor'
+        name: 'YouTube',
+        url: 'https://api.rss2json.com/v1/api.json?rss_url=https://www.youtube.com/feeds/videos.xml?channel_id=UC72nbKQLSDyiSARhg0Ywj4w',
+        category: 'videos'
     },
     {
-        name: 'NPS - Rocky Mountain',
-        url: 'https://api.rss2json.com/v1/api.json?rss_url=https://www.nps.gov/feeds/getNewsRSS.htm?id=romo',
-        category: 'parks'
+        name: 'Denver7',
+        url: 'https://api.rss2json.com/v1/api.json?rss_url=https://www.denver7.com/news/local-news.rss',
+        category: 'news'
     },
     {
-        name: 'Visit Denver',
-        url: 'https://api.rss2json.com/v1/api.json?rss_url=https://www.denver.org/feed/',
-        category: 'events'
+        name: 'FOX31',
+        url: 'https://api.rss2json.com/v1/api.json?rss_url=https://kdvr.com/news/feed/',
+        category: 'news'
     }
 ];
 
@@ -322,12 +322,19 @@ async function fetchNews(source) {
 
         if (data.status !== 'ok' || !data.items) return null;
 
+        // Use feed title for YouTube channels, otherwise use configured source name
+        let channelName = source.name;
+        if (source.category === 'videos' && data.feed?.title) {
+            channelName = data.feed.title;
+        }
+
         return data.items.slice(0, 3).map(item => ({
             title: item.title,
             link: item.link,
             date: item.pubDate,
-            source: source.name,
-            category: source.category
+            source: channelName,
+            category: source.category,
+            thumbnail: extractThumbnail(item, source.category)
         }));
     } catch (error) {
         console.error(`Error fetching ${source.name}:`, error);
@@ -335,20 +342,60 @@ async function fetchNews(source) {
     }
 }
 
+function extractThumbnail(item, category) {
+    // For YouTube videos, extract from video ID
+    if (category === 'videos' && item.link) {
+        const videoIdMatch = item.link.match(/[?&]v=([^&]+)/) || item.link.match(/youtube\.com\/watch\?v=([^&]+)/);
+        if (videoIdMatch) {
+            return `https://img.youtube.com/vi/${videoIdMatch[1]}/mqdefault.jpg`;
+        }
+        // YouTube RSS feed format
+        const ytIdMatch = item.link.match(/youtube\.com\/watch\?v=([^&]+)/);
+        if (ytIdMatch) {
+            return `https://img.youtube.com/vi/${ytIdMatch[1]}/mqdefault.jpg`;
+        }
+    }
+
+    // Check common thumbnail locations in RSS
+    if (item.thumbnail) return item.thumbnail;
+    if (item.enclosure?.link) return item.enclosure.link;
+    if (item.enclosure?.url) return item.enclosure.url;
+
+    // Try to extract image from content/description
+    if (item.content) {
+        const imgMatch = item.content.match(/<img[^>]+src=["']([^"']+)["']/i);
+        if (imgMatch) return imgMatch[1];
+    }
+    if (item.description) {
+        const imgMatch = item.description.match(/<img[^>]+src=["']([^"']+)["']/i);
+        if (imgMatch) return imgMatch[1];
+    }
+
+    return null;
+}
+
 function generateNewsCard(item) {
     const date = item.date ? new Date(item.date).toLocaleDateString('en-US', {
         month: 'short',
         day: 'numeric',
-        year: 'numeric'
+        year: 'numeric',
+        timeZone: 'America/Denver'
     }) : '';
 
+    const thumbnailHtml = item.thumbnail
+        ? `<div class="news-thumbnail"><img src="${item.thumbnail}" alt="" loading="lazy"></div>`
+        : '';
+
     return `
-        <article class="news-card">
-            <div class="news-source">${item.source}</div>
-            <h3 class="news-title">
-                <a href="${item.link}" target="_blank" rel="noopener noreferrer">${item.title}</a>
-            </h3>
-            ${date ? `<div class="news-date">${date}</div>` : ''}
+        <article class="news-card ${item.thumbnail ? 'has-thumbnail' : ''}">
+            ${thumbnailHtml}
+            <div class="news-content">
+                <div class="news-source">${item.source}</div>
+                <h3 class="news-title">
+                    <a href="${item.link}" target="_blank" rel="noopener noreferrer">${item.title}</a>
+                </h3>
+                ${date ? `<div class="news-date">${date}</div>` : ''}
+            </div>
         </article>
     `;
 }
@@ -356,46 +403,25 @@ function generateNewsCard(item) {
 function getPlaceholderNews() {
     return [
         {
-            title: 'Best Hiking Trails Opening for Spring Season',
-            source: 'OutThere Colorado',
+            title: 'Exploring Colorado with Denver Sam',
+            source: 'Denver Sam',
             date: new Date().toISOString(),
-            link: 'https://www.outtherecolorado.com/',
-            category: 'outdoor'
+            link: 'https://www.youtube.com/@DenverSam',
+            category: 'videos'
         },
         {
-            title: 'Rocky Mountain National Park Trail Updates',
-            source: 'NPS - Rocky Mountain',
+            title: 'Best Places to Visit in Denver',
+            source: 'Denver Sam',
             date: new Date().toISOString(),
-            link: 'https://www.nps.gov/romo/index.htm',
-            category: 'parks'
+            link: 'https://www.youtube.com/@DenverSam',
+            category: 'videos'
         },
         {
-            title: 'Denver Restaurant Week Returns This Spring',
-            source: 'Visit Denver',
+            title: 'Colorado Travel Guide',
+            source: 'Denver Sam',
             date: new Date().toISOString(),
-            link: 'https://www.denver.org/',
-            category: 'events'
-        },
-        {
-            title: 'Colorado Ski Season Wrap-Up and Summer Plans',
-            source: 'OutThere Colorado',
-            date: new Date().toISOString(),
-            link: 'https://www.outtherecolorado.com/',
-            category: 'outdoor'
-        },
-        {
-            title: 'New Exhibits Coming to Denver Art Museum',
-            source: 'Visit Denver',
-            date: new Date().toISOString(),
-            link: 'https://www.denver.org/',
-            category: 'events'
-        },
-        {
-            title: 'Bear Lake Road Construction Schedule',
-            source: 'NPS - Rocky Mountain',
-            date: new Date().toISOString(),
-            link: 'https://www.nps.gov/romo/index.htm',
-            category: 'parks'
+            link: 'https://www.youtube.com/@DenverSam',
+            category: 'videos'
         }
     ];
 }
