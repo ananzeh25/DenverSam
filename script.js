@@ -65,12 +65,7 @@ function initMobileMenu() {
 const OPENWEATHER_API_KEY = 'f2e448edda185831ee6151bbffec8c5e';
 
 const COLORADO_CITIES = [
-    { name: 'Denver', lat: 39.7392, lon: -104.9903 },
-    { name: 'Boulder', lat: 40.0150, lon: -105.2705 },
-    { name: 'Estes Park', lat: 40.3772, lon: -105.5217 },
-    { name: 'Colorado Springs', lat: 38.8339, lon: -104.8214 },
-    { name: 'Vail', lat: 39.6403, lon: -106.3742 },
-    { name: 'Aspen', lat: 39.1911, lon: -106.8175 }
+    { name: 'Denver', lat: 39.7392, lon: -104.9903 }
 ];
 
 async function initWeatherWidget() {
@@ -84,16 +79,20 @@ async function initWeatherWidget() {
     }
 
     try {
-        const weatherPromises = COLORADO_CITIES.map(city => fetchWeather(city));
-        const weatherData = await Promise.all(weatherPromises);
+        const city = COLORADO_CITIES[0];
+        const [currentWeather, forecast] = await Promise.all([
+            fetchWeather(city),
+            fetchForecast(city)
+        ]);
 
-        container.innerHTML = weatherData
-            .filter(data => data !== null)
-            .map(data => generateWeatherCard(data))
-            .join('');
+        if (currentWeather) {
+            container.innerHTML = generateWeatherWidget(currentWeather, forecast);
+        } else {
+            container.innerHTML = generatePlaceholderWeather();
+        }
     } catch (error) {
         console.error('Weather fetch error:', error);
-        container.innerHTML = '<p class="weather-loading">Weather data temporarily unavailable</p>';
+        container.innerHTML = generatePlaceholderWeather();
     }
 }
 
@@ -109,11 +108,51 @@ async function fetchWeather(city) {
         return {
             city: city.name,
             temp: Math.round(data.main.temp),
+            feelsLike: Math.round(data.main.feels_like),
+            humidity: data.main.humidity,
+            wind: Math.round(data.wind.speed),
             description: data.weather[0].description,
             icon: getWeatherEmoji(data.weather[0].main)
         };
     } catch (error) {
         console.error(`Error fetching weather for ${city.name}:`, error);
+        return null;
+    }
+}
+
+async function fetchForecast(city) {
+    try {
+        const response = await fetch(
+            `https://api.openweathermap.org/data/2.5/forecast?lat=${city.lat}&lon=${city.lon}&appid=${OPENWEATHER_API_KEY}&units=imperial`
+        );
+
+        if (!response.ok) throw new Error('Forecast API error');
+
+        const data = await response.json();
+
+        // Get one forecast per day (noon time)
+        const dailyForecasts = [];
+        const seenDays = new Set();
+
+        for (const item of data.list) {
+            const date = new Date(item.dt * 1000);
+            const dayKey = date.toDateString();
+
+            if (!seenDays.has(dayKey) && date.getHours() >= 11 && date.getHours() <= 14) {
+                seenDays.add(dayKey);
+                dailyForecasts.push({
+                    day: date.toLocaleDateString('en-US', { weekday: 'short' }),
+                    temp: Math.round(item.main.temp),
+                    icon: getWeatherEmoji(item.weather[0].main)
+                });
+            }
+
+            if (dailyForecasts.length >= 5) break;
+        }
+
+        return dailyForecasts;
+    } catch (error) {
+        console.error('Error fetching forecast:', error);
         return null;
     }
 }
@@ -133,36 +172,95 @@ function getWeatherEmoji(condition) {
     return conditions[condition] || '🌤️';
 }
 
-function generateWeatherCard(data) {
+function generateWeatherWidget(data, forecast) {
+    let forecastHtml = '';
+    if (forecast && forecast.length > 0) {
+        forecastHtml = `
+            <div class="weather-forecast">
+                ${forecast.map(day => `
+                    <div class="forecast-day">
+                        <div class="forecast-day-name">${day.day}</div>
+                        <div class="forecast-icon">${day.icon}</div>
+                        <div class="forecast-temp">${day.temp}°</div>
+                    </div>
+                `).join('')}
+            </div>
+        `;
+    }
+
     return `
-        <div class="weather-card">
-            <div class="weather-city">${data.city}</div>
-            <div class="weather-icon">${data.icon}</div>
-            <div class="weather-temp">${data.temp}°F</div>
-            <div class="weather-desc">${data.description}</div>
+        <div class="weather-widget">
+            <div class="weather-main">
+                <div class="weather-icon">${data.icon}</div>
+                <div class="weather-temp-block">
+                    <div class="weather-city">${data.city}</div>
+                    <div class="weather-temp">${data.temp}°F</div>
+                    <div class="weather-desc">${data.description}</div>
+                </div>
+            </div>
+            <div class="weather-details">
+                <div class="weather-detail-item">
+                    <div class="weather-detail-label">Feels Like</div>
+                    <div class="weather-detail-value">${data.feelsLike}°F</div>
+                </div>
+                <div class="weather-detail-item">
+                    <div class="weather-detail-label">Humidity</div>
+                    <div class="weather-detail-value">${data.humidity}%</div>
+                </div>
+                <div class="weather-detail-item">
+                    <div class="weather-detail-label">Wind</div>
+                    <div class="weather-detail-value">${data.wind} mph</div>
+                </div>
+            </div>
+            ${forecastHtml}
         </div>
     `;
 }
 
 function generatePlaceholderWeather() {
-    // Placeholder data when API key is not configured
-    const placeholderData = [
-        { city: 'Denver', temp: 55, icon: '☀️', desc: 'Sunny' },
-        { city: 'Boulder', temp: 52, icon: '🌤️', desc: 'Partly Cloudy' },
-        { city: 'Estes Park', temp: 45, icon: '☁️', desc: 'Cloudy' },
-        { city: 'Colorado Springs', temp: 58, icon: '☀️', desc: 'Clear' },
-        { city: 'Vail', temp: 38, icon: '❄️', desc: 'Snow' },
-        { city: 'Aspen', temp: 35, icon: '🌨️', desc: 'Light Snow' }
+    const placeholderForecast = [
+        { day: 'Mon', temp: 52, icon: '☀️' },
+        { day: 'Tue', temp: 48, icon: '🌤️' },
+        { day: 'Wed', temp: 55, icon: '☀️' },
+        { day: 'Thu', temp: 45, icon: '☁️' },
+        { day: 'Fri', temp: 50, icon: '🌤️' }
     ];
 
-    return placeholderData.map(data => `
-        <div class="weather-card">
-            <div class="weather-city">${data.city}</div>
-            <div class="weather-icon">${data.icon}</div>
-            <div class="weather-temp">${data.temp}°F</div>
-            <div class="weather-desc">${data.desc}</div>
+    return `
+        <div class="weather-widget">
+            <div class="weather-main">
+                <div class="weather-icon">☀️</div>
+                <div class="weather-temp-block">
+                    <div class="weather-city">Denver</div>
+                    <div class="weather-temp">55°F</div>
+                    <div class="weather-desc">Sunny</div>
+                </div>
+            </div>
+            <div class="weather-details">
+                <div class="weather-detail-item">
+                    <div class="weather-detail-label">Feels Like</div>
+                    <div class="weather-detail-value">52°F</div>
+                </div>
+                <div class="weather-detail-item">
+                    <div class="weather-detail-label">Humidity</div>
+                    <div class="weather-detail-value">35%</div>
+                </div>
+                <div class="weather-detail-item">
+                    <div class="weather-detail-label">Wind</div>
+                    <div class="weather-detail-value">8 mph</div>
+                </div>
+            </div>
+            <div class="weather-forecast">
+                ${placeholderForecast.map(day => `
+                    <div class="forecast-day">
+                        <div class="forecast-day-name">${day.day}</div>
+                        <div class="forecast-icon">${day.icon}</div>
+                        <div class="forecast-temp">${day.temp}°</div>
+                    </div>
+                `).join('')}
+            </div>
         </div>
-    `).join('');
+    `;
 }
 
 /**
