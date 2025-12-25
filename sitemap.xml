@@ -686,6 +686,48 @@
     <priority>0.8</priority>
   </url>
 
+  <!-- Hot Springs Guide -->
+  <url>
+    <loc>https://denversam.com/hot-springs</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://denversam.com/closest-7-hot-springs-to-denver</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://denversam.com/hot-springs/indian-hot-springs</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://denversam.com/hot-springs/mount-princeton-hot-springs</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://denversam.com/hot-springs/glenwood-hot-springs</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://denversam.com/hot-springs/strawberry-park-hot-springs</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://denversam.com/hot-springs/pagosa-springs</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://denversam.com/hot-springs/ouray-hot-springs</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
   <!-- Legal Pages -->
   <url>
     <loc>https://denversam.com/privacy-policy</loc>
