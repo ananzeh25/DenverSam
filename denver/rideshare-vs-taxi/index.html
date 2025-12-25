@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Rideshare vs taxi in Denver: Complete 2026 comparison of Uber, Lyft, and Denver taxis. Compare prices, wait times, availability, and find which option saves you money.">
+    <link rel="canonical" href="https://denversam.com/denver/rideshare-vs-taxi/">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <title>Rideshare vs Taxi in Denver: Which Is Cheaper & Faster in 2026? | Denver Sam</title>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LLL4VPHMHH"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-LLL4VPHMHH');
+        gtag('config', 'GT-5N2922J');
+    </script>
+
+    <link rel="stylesheet" href="/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        .article-image {
+            margin: 30px 0;
+        }
+        .article-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+        .article-text h2 {
+            font-size: 1.6rem;
+            color: #1f2937;
+            margin: 40px 0 20px 0;
+            padding-top: 20px;
+            border-top: 1px solid #e5e7eb;
+        }
+        .article-text h2:first-of-type {
+            border-top: none;
+            margin-top: 20px;
+        }
+        .article-text h3 {
+            font-size: 1.3rem;
+            color: #374151;
+            margin: 30px 0 15px 0;
+        }
+        .article-text ul, .article-text ol {
+            margin: 20px 0;
+            padding-left: 24px;
+        }
+        .article-text li {
+            margin-bottom: 10px;
+            line-height: 1.7;
+            color: #444;
+        }
+        .article-text p {
+            margin-bottom: 16px;
+            line-height: 1.8;
+            color: #374151;
+        }
+        .article-text a {
+            color: #2563eb;
+            text-decoration: underline;
+        }
+        .article-text a:hover {
+            color: #1d4ed8;
+        }
+
+        /* Quick Answer Box */
+        .quick-answer {
+            background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+            color: white;
+            padding: 28px;
+            border-radius: 12px;
+            margin: 0 0 35px 0;
+        }
+        .quick-answer h2 {
+            color: white !important;
+            font-size: 1.3rem;
+            margin: 0 0 12px 0 !important;
+            padding: 0 !important;
+            border: none !important;
+        }
+        .quick-answer p {
+            color: rgba(255,255,255,0.95);
+            margin: 0;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+        .quick-answer strong {
+            color: white;
+        }
+
+        /* Comparison Table */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            font-size: 0.95rem;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .comparison-table th {
+            background: linear-gradient(135deg, #1e3a5f 0%, #2c5282 100%);
+            color: white;
+            padding: 16px;
+            text-align: left;
+            font-weight: 600;
+        }
+        .comparison-table td {
+            padding: 14px 16px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .comparison-table tr:nth-child(even) {
+            background: #f8fafc;
+        }
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+        .winner {
+            color: #059669;
+            font-weight: 600;
+        }
+
+        /* Callout Boxes */
+        .callout-box {
+            padding: 20px 24px;
+            border-radius: 10px;
+            margin: 25px 0;
+        }
+        .callout-box p {
+            margin: 0;
+            color: inherit;
+        }
+        .callout-tip {
+            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+            border-left: 4px solid #3b82f6;
+        }
+        .callout-tip strong {
+            color: #1e40af;
+        }
+        .callout-warning {
+            background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+            border-left: 4px solid #ef4444;
+        }
+        .callout-warning strong {
+            color: #b91c1c;
+        }
+        .callout-note {
+            background: linear-gradient(135deg, #fefce8 0%, #fef9c3 100%);
+            border-left: 4px solid #eab308;
+        }
+        .callout-note strong {
+            color: #a16207;
+        }
+        .callout-money {
+            background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+            border-left: 4px solid #10b981;
+        }
+        .callout-money strong {
+            color: #047857;
+        }
+
+        /* Scenario Cards */
+        .scenario-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+        .scenario-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 20px;
+        }
+        .scenario-card h4 {
+            margin: 0 0 10px 0;
+            color: #1e293b;
+            font-size: 1.05rem;
+        }
+        .scenario-card .winner-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        .badge-rideshare {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+        .badge-taxi {
+            background: #fef3c7;
+            color: #92400e;
+        }
+        .badge-either {
+            background: #e0e7ff;
+            color: #4338ca;
+        }
+        .scenario-card p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: #64748b;
+            line-height: 1.5;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            margin: 40px 0;
+        }
+        .faq-item {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 20px 24px;
+            margin-bottom: 15px;
+        }
+        .faq-item h3 {
+            color: #1e293b;
+            font-size: 1.1rem;
+            margin: 0 0 10px 0 !important;
+            padding: 0;
+        }
+        .faq-item p {
+            margin: 0;
+            color: #475569;
+            line-height: 1.6;
+        }
+
+        /* Related Articles */
+        .related-articles {
+            background: #f0f9ff;
+            padding: 24px;
+            border-radius: 12px;
+            margin: 40px 0;
+        }
+        .related-articles h3 {
+            margin: 0 0 16px 0;
+            color: #0c4a6e;
+        }
+        .related-articles ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+        .related-articles li {
+            margin-bottom: 8px;
+        }
+        .related-articles a {
+            color: #0369a1;
+        }
+    </style>
+</head>
+<body>
+    <a class="skip-link visually-hidden" href="#main-content">Skip to main content</a>
+
+    <header class="site-header" role="banner">
+        <div class="header-container">
+            <a href="/" class="site-logo" aria-label="Denver Sam - Home">
+                DENVER SAM
+            </a>
+            <nav class="main-nav" aria-label="Main navigation">
+                <ul>
+                    <li><a href="/denver">Denver</a></li>
+                    <li><a href="/estes-park">Estes Park</a></li>
+                    <li><a href="/boulder">Boulder</a></li>
+                    <li><a href="/#cities">All Cities</a></li>
+                </ul>
+            </nav>
+            <button class="mobile-menu-toggle" aria-label="Open mobile menu" aria-expanded="false" aria-controls="mobile-menu">
+                <span aria-hidden="true">☰</span>
+            </button>
+        </div>
+
+        <nav class="mobile-menu" id="mobile-menu" aria-label="Mobile navigation" aria-hidden="true">
+            <button class="mobile-menu-close" aria-label="Close mobile menu">
+                <span aria-hidden="true">×</span>
+            </button>
+            <div class="mobile-menu-content">
+                <nav>
+                    <ul role="list">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/denver">Denver</a></li>
+                        <li><a href="/estes-park">Estes Park</a></li>
+                        <li><a href="/boulder">Boulder</a></li>
+                        <li><a href="/colorado-springs">Colorado Springs</a></li>
+                        <li><a href="/vail">Vail</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </nav>
+    </header>
+
+    <main class="site-main" id="main-content" role="main">
+        <!-- Hero Section -->
+        <section class="hero-section" style="padding: 60px 20px;">
+            <div class="hero-container">
+                <h1 class="hero-title" style="font-size: 2.2rem;">Rideshare vs Taxi in Denver: Which Is Cheaper & Faster in 2026?</h1>
+            </div>
+        </section>
+
+        <!-- Content Section -->
+        <section class="content-section">
+            <div class="article-content">
+                <div class="article-text">
+
+                    <!-- Quick Answer Box -->
+                    <div class="quick-answer">
+                        <h2>Quick Answer: Which Should You Use?</h2>
+                        <p><strong>Rideshares (Uber/Lyft)</strong> are faster and more convenient for most trips. <strong>Taxis</strong> can be cheaper during surge pricing and are readily available at DIA and downtown. <strong>Best strategy:</strong> Compare both during peak hours - the difference can be $20+.</p>
+                    </div>
+
+                    <p>Denver offers two main options for getting around without a car: rideshares like Uber and Lyft, or traditional taxis. While rideshares dominate the market, taxis still have their place - especially when surge pricing hits or you're at a taxi stand. Here's the complete 2026 breakdown of how they compare.</p>
+
+                    <h2 id="comparison-table">Rideshare vs Taxi: Side-by-Side Comparison</h2>
+
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>Factor</th>
+                                <th>Rideshare (Uber/Lyft)</th>
+                                <th>Denver Taxi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Pricing</strong></td>
+                                <td>Upfront pricing, but surge during peak times</td>
+                                <td class="winner">Metered, consistent pricing</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Wait Time</strong></td>
+                                <td class="winner">3-8 minutes average</td>
+                                <td>15-30 minutes (unless at taxi stand)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Availability</strong></td>
+                                <td class="winner">Widespread, all neighborhoods</td>
+                                <td>Limited outside downtown/DIA</td>
+                            </tr>
+                            <tr>
+                                <td><strong>App Experience</strong></td>
+                                <td class="winner">Full tracking, cashless, ratings</td>
+                                <td>Basic apps, often phone dispatch</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Vehicle Options</strong></td>
+                                <td class="winner">Standard, XL, Comfort, Black</td>
+                                <td>Whatever shows up</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Payment</strong></td>
+                                <td class="winner">Automatic via app</td>
+                                <td>Cash preferred, cards accepted</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Peak Hours</strong></td>
+                                <td>2-3x surge pricing</td>
+                                <td class="winner">Same metered rate</td>
+                            </tr>
+                            <tr>
+                                <td><strong>DIA Pickup</strong></td>
+                                <td>Level 5, Island 5 (dedicated area)</td>
+                                <td class="winner">Taxi stand, no app needed</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h2 id="price-comparison">Price Comparison: Surge Pricing vs Metered Fares</h2>
+
+                    <p>Understanding when each option is cheaper can save you real money in Denver.</p>
+
+                    <h3>Rideshare Pricing</h3>
+                    <p>Uber and Lyft show you the exact fare before you book - no meter anxiety. However, during high demand (Nuggets games, snowstorms, Saturday nights in LoDo, concert let-outs), surge pricing kicks in. Fares can jump to <strong>2x, 3x, or even higher</strong>.</p>
+
+                    <h3>Taxi Pricing</h3>
+                    <p>Denver taxis use traditional meters with regulated rates. You won't see the final price until arrival, but rates stay consistent regardless of demand. During peak times when rideshares surge, taxis are often the cheaper option.</p>
+
+                    <div class="callout-money">
+                        <p><strong>Money-Saving Tip:</strong> During major events (Broncos games, concerts, New Year's Eve), check both Uber/Lyft AND taxi availability. Surge pricing can make rideshares 2-3x more expensive than a metered cab.</p>
+                    </div>
+
+                    <h3>Sample Fare Comparison (Normal vs Surge)</h3>
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>Route</th>
+                                <th>Rideshare (Normal)</th>
+                                <th>Rideshare (2x Surge)</th>
+                                <th>Taxi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>DIA to Downtown</td>
+                                <td>$35-45</td>
+                                <td>$70-90</td>
+                                <td>$55-65</td>
+                            </tr>
+                            <tr>
+                                <td>LoDo to Cherry Creek</td>
+                                <td>$15-20</td>
+                                <td>$30-40</td>
+                                <td>$22-28</td>
+                            </tr>
+                            <tr>
+                                <td>Union Station to Ball Arena</td>
+                                <td>$10-15</td>
+                                <td>$20-30</td>
+                                <td>$15-20</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h2 id="speed-availability">Wait Times & Availability Across Denver</h2>
+
+                    <p>This is where rideshares have a clear advantage for most trips.</p>
+
+                    <div class="callout-tip">
+                        <p><strong>Rideshare:</strong> Typically 3-8 minute wait times. Drivers are spread throughout the city, including neighborhoods where taxis rarely venture (Park Hill, Stapleton, Highlands).</p>
+                    </div>
+
+                    <div class="callout-note">
+                        <p><strong>Taxi:</strong> At DIA or Union Station taxi stands, you'll find cars waiting. Calling a cab in Capitol Hill or residential areas? Expect 15-30+ minute waits - if one's available at all.</p>
+                    </div>
+
+                    <figure class="article-image">
+                        <img src="/media/uploads/Downtown-Denver-Residence-Inn.jpg" alt="Downtown Denver street with rideshare and taxi options" style="width:100%;height:auto"/>
+                    </figure>
+
+                    <h2 id="when-choose">When to Choose Rideshare vs Taxi</h2>
+
+                    <div class="scenario-grid">
+                        <div class="scenario-card">
+                            <span class="winner-badge badge-rideshare">Choose Rideshare</span>
+                            <h4>Everyday Trips Around Denver</h4>
+                            <p>Faster pickup, app tracking, automatic payment. Better for neighborhoods outside downtown.</p>
+                        </div>
+                        <div class="scenario-card">
+                            <span class="winner-badge badge-rideshare">Choose Rideshare</span>
+                            <h4>Late Night in RiNo or LoDo</h4>
+                            <p>More drivers available, GPS tracking for safety, no cash needed.</p>
+                        </div>
+                        <div class="scenario-card">
+                            <span class="winner-badge badge-taxi">Choose Taxi</span>
+                            <h4>After Major Events (Concerts, Games)</h4>
+                            <p>Surge pricing makes rideshares 2-3x more expensive. Taxi meter stays the same.</p>
+                        </div>
+                        <div class="scenario-card">
+                            <span class="winner-badge badge-taxi">Choose Taxi</span>
+                            <h4>DIA Arrival (Just Want to Leave)</h4>
+                            <p>Taxi stand has cars waiting. No app, no surge, just grab and go.</p>
+                        </div>
+                        <div class="scenario-card">
+                            <span class="winner-badge badge-rideshare">Choose Rideshare</span>
+                            <h4>Need Specific Vehicle (XL, Comfort)</h4>
+                            <p>Choose your vehicle type based on group size or comfort preference.</p>
+                        </div>
+                        <div class="scenario-card">
+                            <span class="winner-badge badge-either">Either Works</span>
+                            <h4>Union Station / Downtown Hotels</h4>
+                            <p>Both options readily available. Compare prices on your apps.</p>
+                        </div>
+                    </div>
+
+                    <h2 id="technology-experience">App Technology & Booking Experience</h2>
+
+                    <p>Rideshares dominate in the technology department:</p>
+
+                    <ul>
+                        <li><strong>Real-time GPS tracking</strong> - see exactly where your driver is</li>
+                        <li><strong>Driver ratings</strong> - check reviews before you ride</li>
+                        <li><strong>Fare splitting</strong> - divide costs with friends automatically</li>
+                        <li><strong>Trip sharing</strong> - send your route to family for safety</li>
+                        <li><strong>Cashless payment</strong> - everything handled in-app</li>
+                    </ul>
+
+                    <p>Denver taxi companies have apps, but they're catching up. Many still rely on phone dispatch, which means explaining your location to a dispatcher and hoping the cab arrives when promised. Some accept cards, but cash is often preferred.</p>
+
+                    <h2 id="safety-accountability">Safety: Background Checks & Accountability</h2>
+
+                    <p>Both options have safety measures, but they work differently:</p>
+
+                    <h3>Taxi Safety</h3>
+                    <ul>
+                        <li>Commercial licensing through the city</li>
+                        <li>Clearly marked vehicles with medallions</li>
+                        <li>Immediately recognizable as legitimate</li>
+                    </ul>
+
+                    <h3>Rideshare Safety</h3>
+                    <ul>
+                        <li>Background checks on all drivers</li>
+                        <li>Every ride tracked via GPS</li>
+                        <li>Driver ratings visible before pickup</li>
+                        <li>Trip sharing with contacts</li>
+                    </ul>
+
+                    <div class="callout-warning">
+                        <p><strong>Safety First:</strong> Before getting in ANY rideshare, verify the license plate matches your app and confirm the driver's name. Share your trip with a friend when riding alone at night.</p>
+                    </div>
+
+                    <h2 id="accessibility">Accessibility Options in Denver</h2>
+
+                    <p>Both services offer wheelchair-accessible vehicles:</p>
+
+                    <ul>
+                        <li><strong>Uber:</strong> UberWAV (Wheelchair Accessible Vehicles)</li>
+                        <li><strong>Lyft:</strong> Lyft Access in select areas</li>
+                        <li><strong>Taxis:</strong> Required to have accessible vehicles available</li>
+                    </ul>
+
+                    <p>The challenge with both is that accessible vehicles are fewer in number, so expect longer wait times when requesting one.</p>
+
+                    <h2 id="environmental-impact">Environmental Impact: Which Is Greener?</h2>
+
+                    <p>Rideshares are currently ahead on sustainability:</p>
+
+                    <ul>
+                        <li><strong>Uber:</strong> Incentivizes EV drivers, committed to zero-emission by 2030 in major cities</li>
+                        <li><strong>Lyft:</strong> Green Mode option to request hybrid/electric vehicles</li>
+                        <li><strong>Denver Taxis:</strong> Most fleets still run on traditional gas vehicles</li>
+                    </ul>
+
+                    <p>You'll increasingly see Teslas and other EVs in the rideshare fleet around Denver.</p>
+
+                    <h2 id="faq">Frequently Asked Questions</h2>
+
+                    <div class="faq-section">
+                        <div class="faq-item">
+                            <h3>Is Uber or a taxi cheaper from Denver Airport?</h3>
+                            <p>During normal hours, Uber/Lyft runs $35-45 to downtown while taxis are $55-65. But during surge pricing (holidays, late nights, bad weather), taxis can be cheaper since they use fixed metered rates.</p>
+                        </div>
+
+                        <div class="faq-item">
+                            <h3>Can I hail a taxi on the street in Denver?</h3>
+                            <p>Street hailing isn't common in Denver like NYC. Your best options are taxi stands at DIA, Union Station, and major hotels, or calling/using a taxi app to request pickup.</p>
+                        </div>
+
+                        <div class="faq-item">
+                            <h3>Are Denver taxis safe?</h3>
+                            <p>Yes. Denver taxi drivers are commercially licensed through the city, vehicles are inspected and clearly marked with medallions. Both taxis and rideshares have good safety records in Denver.</p>
+                        </div>
+
+                        <div class="faq-item">
+                            <h3>Which is better for getting to Red Rocks?</h3>
+                            <p>Rideshares are better for getting TO Red Rocks (more availability in residential areas). After concerts, expect massive surge pricing - consider booking a taxi in advance or waiting 30-60 minutes for surge to drop.</p>
+                        </div>
+
+                        <div class="faq-item">
+                            <h3>Do Denver taxis take credit cards?</h3>
+                            <p>Most do now, but some drivers still prefer cash. If you're planning to pay by card, confirm with the driver before the trip starts to avoid awkwardness at the end.</p>
+                        </div>
+                    </div>
+
+                    <h2 id="verdict">The Bottom Line: Best Strategy for Denver</h2>
+
+                    <div class="callout-tip">
+                        <p><strong>Smart Move:</strong> Download both Uber/Lyft AND a taxi app (Metro Taxi Denver). During normal hours, rideshares win on speed and convenience. During peak times, compare prices - taxis can save you $20-40 when surge hits.</p>
+                    </div>
+
+                    <p><strong>For everyday trips:</strong> Rideshares are faster, easier, and more available throughout Denver's neighborhoods.</p>
+
+                    <p><strong>For peak times and events:</strong> Check both options. Taxis at DIA, Union Station, and downtown hotels are readily available without surge pricing.</p>
+
+                    <p><strong>For budget travelers:</strong> Always compare during high-demand times. The extra minute to check taxi rates can save you real money.</p>
+
+                    <div class="related-articles">
+                        <h3>Related Rideshare Guides</h3>
+                        <ul>
+                            <li><a href="/rideshare/">Complete Denver Rideshare Guide 2026</a></li>
+                            <li><a href="/denver/uber-vs-lyft/">Uber vs Lyft in Denver: Full Comparison</a></li>
+                            <li><a href="/rideshare/is-uber-or-lyft-cheaper-denver/">Is Uber or Lyft Cheaper in Denver?</a></li>
+                            <li><a href="/rideshare/best-time-avoid-surge-pricing-denver/">Best Times to Avoid Surge Pricing</a></li>
+                            <li><a href="/rideshare/denver-airport-rideshare-guide/">Denver Airport Rideshare Guide 2026</a></li>
+                            <li><a href="/transportation/rideshare-tipping/">Tipping Etiquette for Rideshare Drivers</a></li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer" role="contentinfo">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Denver Sam</h3>
+                    <p>Your local guide to Colorado. Helping travelers discover the best of the Centennial State.</p>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Rideshare Guides</h3>
+                    <ul role="list">
+                        <li><a href="/denver/uber-vs-lyft">Uber vs Lyft in Denver</a></li>
+                        <li><a href="/rideshare/denver-airport-rideshare-guide">Denver Airport Rideshare</a></li>
+                        <li><a href="/rideshare/best-time-avoid-surge-pricing-denver">Avoid Surge Pricing</a></li>
+                        <li><a href="/transportation/rideshare-tipping">Tipping Etiquette</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Popular Cities</h3>
+                    <ul role="list">
+                        <li><a href="/denver">Denver</a></li>
+                        <li><a href="/estes-park">Estes Park</a></li>
+                        <li><a href="/boulder">Boulder</a></li>
+                        <li><a href="/colorado-springs">Colorado Springs</a></li>
+                        <li><a href="/vail">Vail</a></li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025 Denver Sam. All rights reserved. <a href="/privacy-policy" style="color: inherit; text-decoration: underline;">Privacy Policy</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/script.js"></script>
+</body>
+</html>
