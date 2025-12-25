@@ -285,6 +285,12 @@ const NEWS_SOURCES = [
     }
 ];
 
+// Store all news items for "Show More" functionality
+let allNewsItems = [];
+let currentlyShown = 0;
+const ITEMS_PER_PAGE = 6;
+const MAX_ITEMS = 24;
+
 async function initNewsFeed() {
     const container = document.getElementById('news-container');
     if (!container) return;
@@ -295,23 +301,65 @@ async function initNewsFeed() {
         const results = await Promise.all(newsPromises);
 
         // Flatten and combine all news items
-        let allNews = results
+        allNewsItems = results
             .filter(result => result !== null)
             .flat()
             .sort((a, b) => new Date(b.date) - new Date(a.date))
-            .slice(0, 6); // Show top 6 items
+            .slice(0, MAX_ITEMS); // Store up to MAX_ITEMS
 
-        if (allNews.length === 0) {
+        if (allNewsItems.length === 0) {
             // Show placeholder if no feeds available
-            allNews = getPlaceholderNews();
+            allNewsItems = getPlaceholderNews();
         }
 
-        container.innerHTML = allNews.map(item => generateNewsCard(item)).join('');
+        // Show initial items
+        currentlyShown = Math.min(ITEMS_PER_PAGE, allNewsItems.length);
+        renderNewsItems(container);
     } catch (error) {
         console.error('News fetch error:', error);
-        container.innerHTML = getPlaceholderNews().map(item => generateNewsCard(item)).join('');
+        allNewsItems = getPlaceholderNews();
+        currentlyShown = allNewsItems.length;
+        renderNewsItems(container);
     }
 }
+
+function renderNewsItems(container) {
+    const itemsToShow = allNewsItems.slice(0, currentlyShown);
+    let html = itemsToShow.map(item => generateNewsCard(item)).join('');
+
+    // Add "Show More" button if there are more items to show
+    if (currentlyShown < allNewsItems.length) {
+        html += `
+            <div class="news-show-more-container">
+                <button class="news-show-more-btn" onclick="showMoreNews()">
+                    Show More News
+                </button>
+            </div>
+        `;
+    }
+
+    container.innerHTML = html;
+}
+
+function showMoreNews() {
+    const container = document.getElementById('news-container');
+    if (!container) return;
+
+    currentlyShown = Math.min(currentlyShown + ITEMS_PER_PAGE, allNewsItems.length);
+    renderNewsItems(container);
+
+    // Scroll smoothly to the new items
+    const newsCards = container.querySelectorAll('.news-card');
+    if (newsCards.length > ITEMS_PER_PAGE) {
+        const targetCard = newsCards[newsCards.length - ITEMS_PER_PAGE];
+        if (targetCard) {
+            targetCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+    }
+}
+
+// Expose function globally
+window.showMoreNews = showMoreNews;
 
 async function fetchNews(source) {
     try {
@@ -382,9 +430,9 @@ function generateNewsCard(item) {
         timeZone: 'America/Denver'
     }) : '';
 
-    const placeholderThumb = `<div class="placeholder-thumb"><span>DENVER</span><span>SAM</span></div>`;
+    const placeholderThumb = `<div class="placeholder-thumb"><span>No</span><span>Image</span></div>`;
     const thumbnailHtml = item.thumbnail
-        ? `<div class="news-thumbnail"><img src="${item.thumbnail}" alt="" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="placeholder-thumb" style="display:none"><span>DENVER</span><span>SAM</span></div></div>`
+        ? `<div class="news-thumbnail"><img src="${item.thumbnail}" alt="" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="placeholder-thumb" style="display:none"><span>No</span><span>Image</span></div></div>`
         : `<div class="news-thumbnail">${placeholderThumb}</div>`;
 
     return `
