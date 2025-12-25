@@ -10,6 +10,122 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .error-code {
+            font-size: 140px;
+            font-weight: 700;
+            margin: 0;
+            background: linear-gradient(135deg, #059669 0%, #0891b2 50%, #2563eb 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+        }
+        .error-tagline {
+            font-size: 1.5rem;
+            color: #1f2937;
+            margin: 20px 0 10px 0;
+            font-weight: 600;
+        }
+        .error-description {
+            color: #6b7280;
+            max-width: 500px;
+            margin: 0 auto 30px;
+            line-height: 1.6;
+        }
+        .btn-primary {
+            display: inline-block;
+            background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+            color: white;
+            padding: 14px 32px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(5, 150, 105, 0.3);
+        }
+        .btn-secondary {
+            display: inline-block;
+            background: #f3f4f6;
+            color: #374151;
+            padding: 14px 32px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+        .btn-secondary:hover {
+            background: #e5e7eb;
+        }
+        .explore-section {
+            padding: 50px 20px;
+            background: #f9fafb;
+        }
+        .explore-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            max-width: 1000px;
+            margin: 30px auto 0;
+        }
+        .explore-card {
+            background: white;
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            border: 1px solid #e5e7eb;
+        }
+        .explore-card h3 {
+            margin: 0 0 8px 0;
+            font-size: 1.1rem;
+        }
+        .explore-card h3 a {
+            color: #1f2937;
+            text-decoration: none;
+        }
+        .explore-card h3 a:hover {
+            color: #059669;
+        }
+        .explore-card p {
+            margin: 0;
+            color: #6b7280;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        .explore-card .card-tag {
+            display: inline-block;
+            background: #ecfdf5;
+            color: #059669;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+        .quick-links {
+            max-width: 800px;
+            margin: 40px auto 0;
+            text-align: center;
+        }
+        .quick-links h3 {
+            color: #374151;
+            margin-bottom: 16px;
+            font-size: 1rem;
+        }
+        .quick-links a {
+            color: #059669;
+            text-decoration: none;
+            margin: 0 12px;
+            font-weight: 500;
+        }
+        .quick-links a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
     <header class="site-header" role="banner">
@@ -27,41 +143,70 @@
     </header>
 
     <main class="site-main" id="main-content" role="main">
-        <section class="hero-section" style="min-height: 60vh; display: flex; align-items: center;">
+        <section class="hero-section" style="min-height: 50vh; display: flex; align-items: center; padding: 60px 20px;">
             <div class="hero-container" style="text-align: center;">
-                <h1 style="font-size: 120px; margin: 0; color: #2c3e50;">404</h1>
-                <p class="hero-subtitle" style="font-size: 24px; margin: 20px 0;">Trail Not Found</p>
-                <p style="color: #6b7280; max-width: 500px; margin: 0 auto 30px;">
+                <h1 class="error-code">404</h1>
+                <p class="error-tagline">Trail Not Found</p>
+                <p class="error-description">
                     Looks like you've wandered off the beaten path. This page doesn't exist, but there's plenty more to explore in Colorado.
                 </p>
                 <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
-                    <a href="/" style="display: inline-block; background: #2c3e50; color: white; padding: 14px 32px; border-radius: 8px; text-decoration: none; font-weight: 600;">Back to Home</a>
-                    <a href="/estes-park" style="display: inline-block; background: #059669; color: white; padding: 14px 32px; border-radius: 8px; text-decoration: none; font-weight: 600;">Explore Estes Park</a>
+                    <a href="/" class="btn-primary">Back to Home</a>
+                    <a href="/hot-springs/" class="btn-secondary">Explore Hot Springs</a>
                 </div>
             </div>
         </section>
 
-        <section class="content-section">
-            <div class="section-header">
-                <h2>Popular Destinations</h2>
-                <p class="section-subtitle">Get back on track with these guides</p>
+        <section class="explore-section">
+            <div style="text-align: center; max-width: 600px; margin: 0 auto;">
+                <h2 style="margin: 0 0 10px 0; color: #1f2937;">Popular Destinations</h2>
+                <p style="color: #6b7280; margin: 0;">Get back on track with these Colorado guides</p>
             </div>
-            <div class="cards-grid" style="max-width: 800px; margin: 30px auto;">
-                <article class="category-card">
-                    <div class="card-icon">CITY</div>
-                    <h3 class="card-title"><a href="/denver">Denver Guide</a></h3>
-                    <p class="card-description">The Mile High City - restaurants, breweries, and attractions</p>
+
+            <div class="explore-grid">
+                <article class="explore-card">
+                    <span class="card-tag">City Guide</span>
+                    <h3><a href="/denver">Denver</a></h3>
+                    <p>The Mile High City - restaurants, breweries, attractions, and neighborhoods.</p>
                 </article>
-                <article class="category-card">
-                    <div class="card-icon">MOUNTAINS</div>
-                    <h3 class="card-title"><a href="/estes-park">Estes Park Guide</a></h3>
-                    <p class="card-description">Gateway to Rocky Mountain National Park</p>
+
+                <article class="explore-card">
+                    <span class="card-tag">Mountains</span>
+                    <h3><a href="/estes-park">Estes Park</a></h3>
+                    <p>Gateway to Rocky Mountain National Park. Hiking, wildlife, and mountain dining.</p>
                 </article>
-                <article class="category-card">
-                    <div class="card-icon">DINING</div>
-                    <h3 class="card-title"><a href="/estes-park/restaurants">Estes Park Restaurants</a></h3>
-                    <p class="card-description">Wild game, craft breweries, and mountain dining</p>
+
+                <article class="explore-card">
+                    <span class="card-tag">Hot Springs</span>
+                    <h3><a href="/hot-springs/">Colorado Hot Springs</a></h3>
+                    <p>Natural mineral pools from Indian Hot Springs to Pagosa Springs.</p>
                 </article>
+
+                <article class="explore-card">
+                    <span class="card-tag">College Town</span>
+                    <h3><a href="/boulder">Boulder</a></h3>
+                    <p>Pearl Street, Flatirons, craft breweries, and outdoor adventure.</p>
+                </article>
+
+                <article class="explore-card">
+                    <span class="card-tag">Rideshare</span>
+                    <h3><a href="/uber-vs-lyft-in-denver-comparing-prices-wait-times-and-features/">Uber vs Lyft in Denver</a></h3>
+                    <p>Comparing prices, wait times, and features from a 7-year driver.</p>
+                </article>
+
+                <article class="explore-card">
+                    <span class="card-tag">Ski Town</span>
+                    <h3><a href="/vail">Vail</a></h3>
+                    <p>World-class skiing, dining, and Rocky Mountain luxury.</p>
+                </article>
+            </div>
+
+            <div class="quick-links">
+                <h3>More to Explore</h3>
+                <a href="/colorado-springs">Colorado Springs</a>
+                <a href="/closest-7-hot-springs-to-denver/">Hot Springs Near Denver</a>
+                <a href="/estes-park/restaurants">Estes Park Restaurants</a>
+                <a href="/denver/restaurants">Denver Restaurants</a>
             </div>
         </section>
     </main>
@@ -71,11 +216,29 @@
             <div class="footer-content">
                 <div class="footer-section">
                     <h3>Denver Sam</h3>
-                    <p>Your local guide to Colorado.</p>
+                    <p>Your local guide to Colorado adventures.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Popular Guides</h3>
+                    <ul role="list">
+                        <li><a href="/hot-springs/">Colorado Hot Springs</a></li>
+                        <li><a href="/denver">Denver Guide</a></li>
+                        <li><a href="/estes-park">Estes Park Guide</a></li>
+                        <li><a href="/boulder">Boulder Guide</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>All Cities</h3>
+                    <ul role="list">
+                        <li><a href="/denver">Denver</a></li>
+                        <li><a href="/boulder">Boulder</a></li>
+                        <li><a href="/colorado-springs">Colorado Springs</a></li>
+                        <li><a href="/vail">Vail</a></li>
+                    </ul>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 Denver Sam. All rights reserved. <a href="/privacy-policy" style="color: inherit; text-decoration: underline;">Privacy Policy</a></p>
+                <p>&copy; 2025 Denver Sam. <a href="/privacy-policy" style="color: inherit; text-decoration: underline;">Privacy Policy</a></p>
             </div>
         </div>
     </footer>
