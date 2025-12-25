@@ -600,6 +600,70 @@
     <priority>0.8</priority>
   </url>
 
+  <!-- Breckenridge Detailed Guides -->
+  <url>
+    <loc>https://denversam.com/breckenridge/ski-resort</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://denversam.com/breckenridge/main-street</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://denversam.com/breckenridge/summer-activities</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://denversam.com/breckenridge/craft-breweries</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://denversam.com/breckenridge/mining-heritage</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://denversam.com/breckenridge/free-bus-system</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Colorado Springs Detailed Guides -->
+  <url>
+    <loc>https://denversam.com/colorado-springs/garden-of-the-gods</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://denversam.com/colorado-springs/pikes-peak</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://denversam.com/colorado-springs/manitou-springs</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://denversam.com/colorado-springs/cheyenne-mountain-zoo</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://denversam.com/colorado-springs/air-force-academy</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://denversam.com/colorado-springs/olympic-training-center</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
   <!-- Colorado Springs Attractions -->
   <url>
     <loc>https://denversam.com/colorado-springs/attractions/garden-of-the-gods</loc>
