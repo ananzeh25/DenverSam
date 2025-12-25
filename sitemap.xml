@@ -568,6 +568,38 @@
     <priority>0.8</priority>
   </url>
 
+  <!-- Fort Collins Detailed Guides -->
+  <url>
+    <loc>https://denversam.com/fort-collins/craft-breweries</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://denversam.com/fort-collins/old-town</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://denversam.com/fort-collins/horsetooth-reservoir</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://denversam.com/fort-collins/poudre-canyon</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://denversam.com/fort-collins/csu-campus</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://denversam.com/fort-collins/trail-system</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
   <!-- Colorado Springs Attractions -->
   <url>
     <loc>https://denversam.com/colorado-springs/attractions/garden-of-the-gods</loc>
