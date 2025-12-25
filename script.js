@@ -382,12 +382,13 @@ function generateNewsCard(item) {
         timeZone: 'America/Denver'
     }) : '';
 
+    const placeholderThumb = `<div class="placeholder-thumb"><span>DENVER</span><span>SAM</span></div>`;
     const thumbnailHtml = item.thumbnail
-        ? `<div class="news-thumbnail"><img src="${item.thumbnail}" alt="" loading="lazy"></div>`
-        : '';
+        ? `<div class="news-thumbnail"><img src="${item.thumbnail}" alt="" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="placeholder-thumb" style="display:none"><span>DENVER</span><span>SAM</span></div></div>`
+        : `<div class="news-thumbnail">${placeholderThumb}</div>`;
 
     return `
-        <article class="news-card ${item.thumbnail ? 'has-thumbnail' : ''}">
+        <article class="news-card has-thumbnail">
             ${thumbnailHtml}
             <div class="news-content">
                 <div class="news-source">${item.source}</div>
