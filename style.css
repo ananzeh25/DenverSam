@@ -847,37 +847,6 @@ select:focus {
     color: #888;
 }
 
-/* Show More Button */
-.news-show-more-container {
-    grid-column: 1 / -1;
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-}
-
-.news-show-more-btn {
-    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
-    color: #fff;
-    border: none;
-    padding: 14px 40px;
-    font-size: 1rem;
-    font-weight: 600;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(44, 62, 80, 0.3);
-}
-
-.news-show-more-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(44, 62, 80, 0.4);
-    background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%);
-}
-
-.news-show-more-btn:active {
-    transform: translateY(0);
-}
-
 /* Instagram Section */
 .instagram-grid {
     display: grid;
