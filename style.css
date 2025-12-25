@@ -616,8 +616,6 @@ select:focus {
 
 /* FAQ Section */
 .faq-section {
-    background: #fff;
-    padding: 80px 20px;
 }
 
 .faq-container {
@@ -1084,9 +1082,6 @@ select:focus {
         padding: 30px;
     }
 
-    .faq-section {
-        padding: 60px 15px;
-    }
 
     .faq-item {
         padding: 20px;
