@@ -931,6 +931,43 @@
     <priority>0.8</priority>
   </url>
 
+  <!-- Steamboat Springs Detailed Guides -->
+  <url>
+    <loc>https://denversam.com/steamboat-springs/skiing</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://denversam.com/steamboat-springs/hot-springs</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://denversam.com/steamboat-springs/downtown</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://denversam.com/steamboat-springs/rodeo</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://denversam.com/steamboat-springs/restaurants</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://denversam.com/steamboat-springs/hotels</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://denversam.com/steamboat-springs/summer-activities</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
   <!-- Glenwood Springs Detailed Guides -->
   <url>
     <loc>https://denversam.com/glenwood-springs/hot-springs</loc>
