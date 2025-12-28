@@ -20,6 +20,28 @@
     </script>
 
     <link rel="stylesheet" href="/style.css">
+
+    <style>
+        .toggle-block { margin: 20px 0; padding: 15px; background: #f8f9fa; border-radius: 8px; border-left: 4px solid #0369a1; }
+        .toggle-block input[type="checkbox"] { display: none; }
+        .toggle-block .show-label { color: #0369a1; cursor: pointer; font-weight: 500; margin-left: 10px; }
+        .toggle-block .show-label:hover { text-decoration: underline; }
+        .toggle-block .more-content { display: none; margin-top: 15px; padding-top: 15px; border-top: 1px solid #e5e7eb; }
+        .toggle-block input[type="checkbox"]:checked ~ .more-content { display: block; }
+        .toggle-block input[type="checkbox"]:checked ~ p .show-label { display: none; }
+        .toggle-block .more-content p { margin: 8px 0; }
+        .directions-button { display: inline-block; background: #0369a1; color: white; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: 500; margin-top: 10px; }
+        .directions-button:hover { background: #0c4a6e; }
+        .instagram-embed-container { margin: 30px 0; max-width: 540px; }
+        .related-springs { background: #f0f9ff; padding: 24px; border-radius: 12px; margin: 40px 0; }
+        .related-springs h3 { margin: 0 0 16px 0; color: #0c4a6e; }
+        .related-springs ul { margin: 0; padding-left: 20px; }
+        .related-springs li { margin-bottom: 8px; }
+        .related-springs a { color: #0369a1; }
+        .article-image { margin: 30px 0; }
+        .article-image img { width: 100%; height: auto; border-radius: 12px; }
+    </style>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
