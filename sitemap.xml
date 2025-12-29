@@ -1926,6 +1926,31 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://denversam.com/estes-park/wild-game-restaurants</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://denversam.com/estes-park/breakfast-brunch</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://denversam.com/estes-park/budget-restaurants</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://denversam.com/estes-park/dog-friendly-restaurants</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://denversam.com/estes-park/craft-beer-breweries</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://denversam.com/estes-park/antlers-rooftop</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
