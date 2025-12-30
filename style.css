@@ -582,6 +582,11 @@ select:focus {
     margin-top: 40px;
 }
 
+.category-card-link {
+    text-decoration: none;
+    color: inherit;
+}
+
 .category-card {
     background: #fff;
     padding: 40px;
