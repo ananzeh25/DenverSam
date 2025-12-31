@@ -1244,6 +1244,46 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+  <url>
+    <loc>https://denversam.com/broomfield/flatiron-crossing/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://denversam.com/broomfield/1stbank-center/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://denversam.com/broomfield/trails/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://denversam.com/broomfield/flatiron-vista/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://denversam.com/broomfield/recreation-center/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://denversam.com/broomfield/golf/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://denversam.com/broomfield/hotels/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://denversam.com/broomfield/getting-there/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 
   <!-- Denver Category Pages -->
   <url>
@@ -3407,6 +3447,48 @@
   </url>
   <url>
     <loc>https://denversam.com/parker/parker-days/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Thornton Detailed Guides -->
+  <url>
+    <loc>https://denversam.com/thornton/carpenter-park/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://denversam.com/thornton/trails/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://denversam.com/thornton/recreation-centers/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://denversam.com/thornton/golf/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://denversam.com/thornton/larkridge/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://denversam.com/thornton/water-park/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://denversam.com/thornton/hotels/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://denversam.com/thornton/getting-there/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
