@@ -4020,6 +4020,28 @@
     <priority>0.7</priority>
   </url>
 
+  <!-- Colorado State Guides -->
+  <url>
+    <loc>https://denversam.com/colorado/fourteeners/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://denversam.com/colorado/ski-resorts/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://denversam.com/colorado/craft-breweries/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://denversam.com/colorado/sunshine/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
   <!-- Legal Pages -->
   <url>
     <loc>https://denversam.com/privacy-policy</loc>
