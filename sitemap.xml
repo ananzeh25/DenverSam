@@ -4210,6 +4210,99 @@
     <priority>0.7</priority>
   </url>
 
+  <!-- Additional Winter Subcategory Pages -->
+  <url>
+    <loc>https://denversam.com/colorado/winter/hot-springs/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Additional Spring Subcategory Pages -->
+  <url>
+    <loc>https://denversam.com/colorado/spring/denver-arts-week/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://denversam.com/colorado/spring/collaboration-fest/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://denversam.com/colorado/spring/spring-skiing/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://denversam.com/colorado/spring/road-cycling/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://denversam.com/colorado/spring/birdwatching/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://denversam.com/colorado/spring/fishing/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Additional Summer Subcategory Pages -->
+  <url>
+    <loc>https://denversam.com/colorado/summer/telluride-festivals/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://denversam.com/colorado/summer/crested-butte-wildflowers/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://denversam.com/colorado/summer/mountain-biking/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://denversam.com/colorado/summer/fly-fishing/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Additional Fall Subcategory Pages -->
+  <url>
+    <loc>https://denversam.com/colorado/fall/fall-drives/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://denversam.com/colorado/fall/fall-hiking/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://denversam.com/colorado/fall/photography/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://denversam.com/colorado/fall/fall-fishing/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://denversam.com/colorado/fall/fall-biking/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://denversam.com/colorado/fall/wine-harvest/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
   <!-- Legal Pages -->
   <url>
     <loc>https://denversam.com/privacy-policy</loc>
