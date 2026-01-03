@@ -115,6 +115,42 @@
         .copy-prompt-btn.copied {
             background: #7f8c8d;
         }
+        .done-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 14px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+        }
+        .done-btn:hover {
+            background: #c0392b;
+        }
+        .distance-badge {
+            background: #3498db;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-left: auto;
+        }
+        .location-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+        .loading-location {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+        }
         .toast {
             position: fixed;
             bottom: 20px;
@@ -172,11 +208,11 @@
                 <div class="stats-bar">
                     <div class="stat-item">
                         <div class="stat-number" id="totalLocations">0</div>
-                        <div class="stat-label">Total Locations</div>
+                        <div class="stat-label">Remaining</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-number" id="categoriesCount">0</div>
-                        <div class="stat-label">Categories</div>
+                        <div class="stat-number" id="doneCount">0</div>
+                        <div class="stat-label">Done</div>
                     </div>
                 </div>
 
@@ -221,6 +257,74 @@
 
     <script>
         const BASE_PATH = '/Users/ibraheemananzeh/Desktop/DenverSam';
+
+        // User location
+        let userLat = null;
+        let userLng = null;
+
+        // Get done locations from localStorage
+        function getDoneLocations() {
+            const done = localStorage.getItem('photoGuideDone');
+            return done ? JSON.parse(done) : [];
+        }
+
+        // Mark location as done
+        function markDone(locationName) {
+            const done = getDoneLocations();
+            if (!done.includes(locationName)) {
+                done.push(locationName);
+                localStorage.setItem('photoGuideDone', JSON.stringify(done));
+            }
+            renderLocations();
+        }
+
+        // Calculate distance between two points (Haversine formula)
+        function calculateDistance(lat1, lng1, lat2, lng2) {
+            const R = 3959; // Earth's radius in miles
+            const dLat = (lat2 - lat1) * Math.PI / 180;
+            const dLng = (lng2 - lng1) * Math.PI / 180;
+            const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                      Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+                      Math.sin(dLng/2) * Math.sin(dLng/2);
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+            return R * c;
+        }
+
+        // Colorado location coordinates (approximate)
+        const cityCoords = {
+            "Denver": { lat: 39.7392, lng: -104.9903 },
+            "Aurora": { lat: 39.7294, lng: -104.8319 },
+            "Lakewood": { lat: 39.7047, lng: -105.0814 },
+            "Westminster": { lat: 39.8367, lng: -105.0372 },
+            "Arvada": { lat: 39.8028, lng: -105.0875 },
+            "Thornton": { lat: 39.8680, lng: -104.9719 },
+            "Centennial": { lat: 39.5807, lng: -104.8772 },
+            "Littleton": { lat: 39.6133, lng: -105.0166 },
+            "Englewood": { lat: 39.6478, lng: -104.9878 },
+            "Commerce City": { lat: 39.8083, lng: -104.9339 },
+            "Northglenn": { lat: 39.8853, lng: -104.9872 },
+            "Broomfield": { lat: 39.9205, lng: -105.0867 },
+            "Parker": { lat: 39.5186, lng: -104.7614 },
+            "Castle Rock": { lat: 39.3722, lng: -104.8561 },
+            "Golden": { lat: 39.7555, lng: -105.2211 },
+            "Morrison": { lat: 39.6536, lng: -105.1911 },
+            "Boulder": { lat: 40.0150, lng: -105.2705 },
+            "Colorado Springs": { lat: 38.8339, lng: -104.8214 },
+            "Manitou Springs": { lat: 38.8586, lng: -104.9175 },
+            "Breckenridge": { lat: 39.4817, lng: -106.0384 },
+            "Vail": { lat: 39.6403, lng: -106.3742 },
+            "Aspen": { lat: 39.1911, lng: -106.8175 },
+            "Telluride": { lat: 37.9375, lng: -107.8123 },
+            "Crested Butte": { lat: 38.8697, lng: -106.9878 },
+            "Steamboat Springs": { lat: 40.4850, lng: -106.8317 },
+            "Glenwood Springs": { lat: 39.5505, lng: -107.3248 },
+            "Nathrop": { lat: 38.7386, lng: -106.1067 },
+            "Ouray": { lat: 38.0228, lng: -107.6714 },
+            "Pagosa Springs": { lat: 37.2694, lng: -107.0098 },
+            "Estes Park": { lat: 40.3772, lng: -105.5217 },
+            "Alamosa": { lat: 37.4695, lng: -105.8700 },
+            "Cortez": { lat: 37.3489, lng: -108.5859 }
+        };
 
         // All photo locations data
         const locations = [
@@ -504,55 +608,109 @@ Instructions:
             }, 2000);
         }
 
+        // Get distance for a location
+        function getDistance(loc) {
+            if (!userLat || !userLng) return null;
+            const coords = cityCoords[loc.city];
+            if (!coords) return null;
+            return calculateDistance(userLat, userLng, coords.lat, coords.lng);
+        }
+
         // Render locations
         function renderLocations() {
             const container = document.getElementById('locationsContainer');
-            const categories = [...new Set(locations.map(l => l.category))].sort();
+            const doneLocations = getDoneLocations();
+
+            // Filter out done locations
+            const activeLocations = locations.filter(loc => !doneLocations.includes(loc.name));
+
+            // Calculate distances and sort if user location available
+            if (userLat && userLng) {
+                activeLocations.forEach(loc => {
+                    loc.distance = getDistance(loc);
+                });
+                activeLocations.sort((a, b) => (a.distance || 999) - (b.distance || 999));
+            }
 
             // Update stats
-            document.getElementById('totalLocations').textContent = locations.length;
-            document.getElementById('categoriesCount').textContent = categories.length;
-
-            // Group by category
-            const grouped = {};
-            locations.forEach(loc => {
-                if (!grouped[loc.category]) {
-                    grouped[loc.category] = [];
-                }
-                grouped[loc.category].push(loc);
-            });
+            document.getElementById('totalLocations').textContent = activeLocations.length;
+            document.getElementById('doneCount').textContent = doneLocations.length;
 
             let html = '';
-            Object.keys(grouped).sort().forEach(category => {
-                html += `<div class="category-section">
-                    <h2 class="category-title">${category} (${grouped[category].length})</h2>
-                    <div class="location-grid">`;
-                grouped[category].forEach((loc, idx) => {
-                    html += renderLocationCard(loc, idx);
+
+            if (userLat && userLng) {
+                // Sort by distance - show as flat list
+                html = '<div class="location-grid">';
+                activeLocations.forEach((loc, idx) => {
+                    html += renderLocationCard(loc);
                 });
-                html += '</div></div>';
-            });
+                html += '</div>';
+            } else {
+                // Group by category if no location
+                const grouped = {};
+                activeLocations.forEach(loc => {
+                    if (!grouped[loc.category]) {
+                        grouped[loc.category] = [];
+                    }
+                    grouped[loc.category].push(loc);
+                });
+
+                Object.keys(grouped).sort().forEach(category => {
+                    html += `<div class="category-section">
+                        <h2 class="category-title">${category} (${grouped[category].length})</h2>
+                        <div class="location-grid">`;
+                    grouped[category].forEach((loc, idx) => {
+                        html += renderLocationCard(loc);
+                    });
+                    html += '</div></div>';
+                });
+            }
 
             container.innerHTML = html;
         }
 
-        function renderLocationCard(loc, idx) {
-            const promptButtons = loc.articles.map((article, i) =>
-                `<button class="copy-prompt-btn" onclick="copyPrompt(locations.find(l => l.name === '${loc.name.replace(/'/g, "\\'")}'), '${article}', this)">Copy Prompt${loc.articles.length > 1 ? ` (${i + 1})` : ''}</button>`
-            ).join('');
+        function renderLocationCard(loc) {
+            const distanceBadge = loc.distance ? `<span class="distance-badge">${loc.distance.toFixed(1)} mi</span>` : '';
+            const primaryArticle = loc.articles[0]; // Use first article only
 
             return `<div class="location-card">
-                <div class="location-name">${loc.name}</div>
+                <div class="location-header">
+                    <div class="location-name">${loc.name}</div>
+                    ${distanceBadge}
+                </div>
                 <div class="location-city">${loc.city}, Colorado</div>
                 <div class="location-links">
-                    <a href="${getMapsLink(loc)}" class="maps-link" target="_blank" rel="noopener">View on Maps</a>
-                    ${promptButtons}
+                    <a href="${getMapsLink(loc)}" class="maps-link" target="_blank" rel="noopener">Maps</a>
+                    <button class="copy-prompt-btn" onclick="copyPrompt(locations.find(l => l.name === '${loc.name.replace(/'/g, "\\'")}'), '${primaryArticle}', this)">Copy Prompt</button>
+                    <button class="done-btn" onclick="markDone('${loc.name.replace(/'/g, "\\'")}')">Done</button>
                 </div>
             </div>`;
         }
 
-        // Initialize
-        renderLocations();
+        // Initialize with geolocation
+        function init() {
+            const container = document.getElementById('locationsContainer');
+            container.innerHTML = '<div class="loading-location">Detecting your location...</div>';
+
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        userLat = position.coords.latitude;
+                        userLng = position.coords.longitude;
+                        renderLocations();
+                    },
+                    (error) => {
+                        console.log('Location not available, showing by category');
+                        renderLocations();
+                    },
+                    { timeout: 5000 }
+                );
+            } else {
+                renderLocations();
+            }
+        }
+
+        init();
     </script>
 </body>
 </html>
