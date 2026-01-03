@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Photo location guide for Denver Sam - find all Colorado locations that need photography with maps and directions.">
+    <meta name="description" content="Photo location guide for Denver Sam - find all Colorado locations that need photography.">
     <meta name="robots" content="noindex, nofollow">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <title>Photo Location Guide | Denver Sam</title>
@@ -17,64 +17,26 @@
             margin: 0 auto;
             padding: 20px;
         }
-        .location-status {
-            background: #f8f9fa;
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 30px;
-            border-left: 4px solid #2c3e50;
-        }
-        .location-status.success {
-            border-left-color: #27ae60;
-            background: #e8f5e9;
-        }
-        .location-status.error {
-            border-left-color: #e74c3c;
-            background: #ffebee;
-        }
-        .controls {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin-bottom: 30px;
-            align-items: center;
-        }
-        .search-box {
-            flex: 1;
-            min-width: 250px;
-            padding: 12px 16px;
-            border: 2px solid #ddd;
-            border-radius: 8px;
-            font-size: 16px;
-        }
-        .search-box:focus {
-            border-color: #2c3e50;
-            outline: none;
-        }
-        .filter-select {
-            padding: 12px 16px;
-            border: 2px solid #ddd;
-            border-radius: 8px;
-            font-size: 16px;
-            background: white;
-            cursor: pointer;
-        }
-        .sort-btn {
-            padding: 12px 20px;
+        .stats-bar {
             background: #2c3e50;
             color: white;
-            border: none;
+            padding: 15px 20px;
             border-radius: 8px;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: 500;
+            margin-bottom: 30px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
         }
-        .sort-btn:hover {
-            background: #34495e;
+        .stat-item {
+            text-align: center;
         }
-        .sort-btn:disabled {
-            background: #bdc3c7;
-            cursor: not-allowed;
+        .stat-number {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        .stat-label {
+            font-size: 0.85rem;
+            opacity: 0.8;
         }
         .category-section {
             margin-bottom: 40px;
@@ -113,15 +75,6 @@
             font-size: 0.9rem;
             margin-bottom: 12px;
         }
-        .location-distance {
-            background: #e3f2fd;
-            color: #1565c0;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            display: inline-block;
-            margin-bottom: 12px;
-        }
         .location-links {
             display: flex;
             flex-wrap: wrap;
@@ -143,55 +96,50 @@
         .maps-link:hover {
             background: #3367d6;
         }
-        .article-link {
+        .copy-prompt-btn {
             display: inline-flex;
             align-items: center;
             gap: 6px;
             padding: 8px 14px;
-            background: #f5f5f5;
-            color: #333;
-            text-decoration: none;
+            background: #27ae60;
+            color: white;
+            border: none;
             border-radius: 6px;
             font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
         }
-        .article-link:hover {
-            background: #e0e0e0;
+        .copy-prompt-btn:hover {
+            background: #219a52;
         }
-        .stats-bar {
-            background: #2c3e50;
+        .copy-prompt-btn.copied {
+            background: #7f8c8d;
+        }
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #333;
             color: white;
-            padding: 15px 20px;
+            padding: 12px 24px;
             border-radius: 8px;
-            margin-bottom: 20px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 30px;
+            display: none;
+            z-index: 1000;
         }
-        .stat-item {
-            text-align: center;
+        .toast.show {
+            display: block;
+            animation: fadeInOut 2s ease;
         }
-        .stat-number {
-            font-size: 1.8rem;
-            font-weight: 700;
-        }
-        .stat-label {
-            font-size: 0.85rem;
-            opacity: 0.8;
-        }
-        .no-results {
-            text-align: center;
-            padding: 40px;
-            color: #666;
+        @keyframes fadeInOut {
+            0% { opacity: 0; }
+            15% { opacity: 1; }
+            85% { opacity: 1; }
+            100% { opacity: 0; }
         }
         @media (max-width: 600px) {
             .location-grid {
                 grid-template-columns: 1fr;
-            }
-            .controls {
-                flex-direction: column;
-            }
-            .search-box, .filter-select {
-                width: 100%;
             }
         }
     </style>
@@ -221,11 +169,6 @@
 
         <section class="content-section">
             <div class="photo-guide-container">
-                <div id="locationStatus" class="location-status">
-                    <strong>Your Location:</strong> <span id="locationText">Detecting...</span>
-                    <button id="retryLocation" style="display:none; margin-left: 15px;" class="sort-btn">Retry Location</button>
-                </div>
-
                 <div class="stats-bar">
                     <div class="stat-item">
                         <div class="stat-number" id="totalLocations">0</div>
@@ -235,27 +178,14 @@
                         <div class="stat-number" id="categoriesCount">0</div>
                         <div class="stat-label">Categories</div>
                     </div>
-                    <div class="stat-item">
-                        <div class="stat-number" id="visibleCount">0</div>
-                        <div class="stat-label">Showing</div>
-                    </div>
-                </div>
-
-                <div class="controls">
-                    <input type="text" id="searchBox" class="search-box" placeholder="Search locations...">
-                    <select id="categoryFilter" class="filter-select">
-                        <option value="all">All Categories</option>
-                    </select>
-                    <select id="cityFilter" class="filter-select">
-                        <option value="all">All Cities</option>
-                    </select>
-                    <button id="sortByDistance" class="sort-btn" disabled>Sort by Distance</button>
                 </div>
 
                 <div id="locationsContainer"></div>
             </div>
         </section>
     </main>
+
+    <div id="toast" class="toast">Prompt copied to clipboard!</div>
 
     <footer class="site-footer" role="contentinfo">
         <div class="footer-container">
@@ -290,321 +220,240 @@
     </footer>
 
     <script>
+        const BASE_PATH = '/Users/ibraheemananzeh/Desktop/DenverSam';
+
         // All photo locations data
         const locations = [
             // Denver Parks & Outdoor Spaces
-            { name: "Washington Park", city: "Denver", category: "Denver Parks", lat: 39.6977, lng: -104.9728, articles: ["/denver/parks/washington-park/", "/denver/lakes/washington-park/"] },
-            { name: "City Park", city: "Denver", category: "Denver Parks", lat: 39.7476, lng: -104.9519, articles: ["/denver/parks/city-park/"] },
-            { name: "Cheesman Park", city: "Denver", category: "Denver Parks", lat: 39.7318, lng: -104.9668, articles: ["/denver/parks/cheesman-park/"] },
-            { name: "Confluence Park", city: "Denver", category: "Denver Parks", lat: 39.7548, lng: -105.0069, articles: ["/denver/parks/confluence-park/", "/denver/confluence-park/"] },
-            { name: "Sloan Lake Park", city: "Denver", category: "Denver Parks", lat: 39.7514, lng: -105.0428, articles: ["/denver/parks/sloan-lake-park/", "/denver/lakes/sloan-lake/"] },
-            { name: "Ruby Hill Park", city: "Denver", category: "Denver Parks", lat: 39.6847, lng: -105.0086, articles: ["/denver/parks/ruby-hill-park/"] },
-            { name: "Commons Park", city: "Denver", category: "Denver Parks", lat: 39.7596, lng: -105.0062, articles: ["/denver/parks/commons-park/"] },
-            { name: "Governors Park", city: "Denver", category: "Denver Parks", lat: 39.7238, lng: -104.9756, articles: ["/denver/parks/governors-park/"] },
+            { name: "Washington Park", city: "Denver", category: "Denver Parks", articles: ["/denver/parks/washington-park/index.html", "/denver/lakes/washington-park/index.html"] },
+            { name: "City Park", city: "Denver", category: "Denver Parks", articles: ["/denver/parks/city-park/index.html"] },
+            { name: "Cheesman Park", city: "Denver", category: "Denver Parks", articles: ["/denver/parks/cheesman-park/index.html"] },
+            { name: "Confluence Park", city: "Denver", category: "Denver Parks", articles: ["/denver/parks/confluence-park/index.html", "/denver/confluence-park/index.html"] },
+            { name: "Sloan Lake Park", city: "Denver", category: "Denver Parks", articles: ["/denver/parks/sloan-lake-park/index.html", "/denver/lakes/sloan-lake/index.html"] },
+            { name: "Ruby Hill Park", city: "Denver", category: "Denver Parks", articles: ["/denver/parks/ruby-hill-park/index.html"] },
+            { name: "Commons Park", city: "Denver", category: "Denver Parks", articles: ["/denver/parks/commons-park/index.html"] },
+            { name: "Governors Park", city: "Denver", category: "Denver Parks", articles: ["/denver/parks/governors-park/index.html"] },
 
             // Denver Lakes
-            { name: "Cherry Creek Reservoir", city: "Aurora", category: "Denver Lakes", lat: 39.6397, lng: -104.8558, articles: ["/denver/lakes/cherry-creek-reservoir/", "/aurora/cherry-creek-state-park/"] },
-            { name: "Bear Creek Lake", city: "Lakewood", category: "Denver Lakes", lat: 39.6458, lng: -105.1422, articles: ["/denver/lakes/bear-creek-lake/", "/lakewood/bear-creek-lake-park/"] },
-            { name: "Standley Lake", city: "Westminster", category: "Denver Lakes", lat: 39.8333, lng: -105.1167, articles: ["/denver/lakes/standley-lake/"] },
+            { name: "Cherry Creek Reservoir", city: "Aurora", category: "Denver Lakes", articles: ["/denver/lakes/cherry-creek-reservoir/index.html", "/aurora/cherry-creek-state-park/index.html"] },
+            { name: "Bear Creek Lake", city: "Lakewood", category: "Denver Lakes", articles: ["/denver/lakes/bear-creek-lake/index.html", "/lakewood/bear-creek-lake-park/index.html"] },
+            { name: "Standley Lake", city: "Westminster", category: "Denver Lakes", articles: ["/denver/lakes/standley-lake/index.html"] },
 
             // Denver Neighborhoods
-            { name: "RiNo Art District", city: "Denver", category: "Denver Neighborhoods", lat: 39.7693, lng: -104.9817, articles: ["/denver/neighborhoods/rino/", "/denver/rino-hidden-spots/", "/denver/rino-street-art-guide/", "/denver/rino-art-district/"] },
-            { name: "LoDo (Lower Downtown)", city: "Denver", category: "Denver Neighborhoods", lat: 39.7530, lng: -105.0000, articles: ["/denver/neighborhoods/lodo/", "/denver/lodo/"] },
-            { name: "Highlands", city: "Denver", category: "Denver Neighborhoods", lat: 39.7708, lng: -105.0197, articles: ["/denver/highlands/", "/denver/neighborhoods/highlands-lohi/"] },
-            { name: "Capitol Hill", city: "Denver", category: "Denver Neighborhoods", lat: 39.7328, lng: -104.9794, articles: ["/denver/capitol-hill/"] },
-            { name: "Berkeley Tennyson", city: "Denver", category: "Denver Neighborhoods", lat: 39.7744, lng: -105.0397, articles: ["/denver/berkeley-tennyson/"] },
-            { name: "Cherry Creek", city: "Denver", category: "Denver Neighborhoods", lat: 39.7175, lng: -104.9533, articles: ["/denver/cherry-creek/"] },
+            { name: "RiNo Art District", city: "Denver", category: "Denver Neighborhoods", articles: ["/denver/neighborhoods/rino/index.html", "/denver/rino-hidden-spots/index.html", "/denver/rino-street-art-guide/index.html", "/denver/rino-art-district/index.html"] },
+            { name: "LoDo (Lower Downtown)", city: "Denver", category: "Denver Neighborhoods", articles: ["/denver/neighborhoods/lodo/index.html", "/denver/lodo/index.html"] },
+            { name: "Highlands", city: "Denver", category: "Denver Neighborhoods", articles: ["/denver/highlands/index.html", "/denver/neighborhoods/highlands-lohi/index.html"] },
+            { name: "Capitol Hill", city: "Denver", category: "Denver Neighborhoods", articles: ["/denver/capitol-hill/index.html"] },
+            { name: "Berkeley Tennyson", city: "Denver", category: "Denver Neighborhoods", articles: ["/denver/berkeley-tennyson/index.html"] },
+            { name: "Cherry Creek", city: "Denver", category: "Denver Neighborhoods", articles: ["/denver/cherry-creek/index.html"] },
+            { name: "Golden Triangle", city: "Denver", category: "Denver Neighborhoods", articles: ["/denver/neighborhoods/golden-triangle/index.html"] },
+            { name: "Baker", city: "Denver", category: "Denver Neighborhoods", articles: ["/denver/neighborhoods/baker/index.html"] },
+            { name: "South Pearl Street", city: "Denver", category: "Denver Neighborhoods", articles: ["/denver/neighborhoods/south-pearl/index.html"] },
+            { name: "Uptown", city: "Denver", category: "Denver Neighborhoods", articles: ["/denver/neighborhoods/uptown/index.html"] },
 
             // Denver Major Attractions
-            { name: "Red Rocks Amphitheatre", city: "Morrison", category: "Denver Attractions", lat: 39.6654, lng: -105.2057, articles: ["/denver/attractions/red-rocks-amphitheatre/", "/denver/red-rocks/", "/denver/red-rocks-hikes/"] },
-            { name: "Denver Botanic Gardens", city: "Denver", category: "Denver Attractions", lat: 39.7324, lng: -104.9610, articles: ["/denver/attractions/denver-botanic-gardens/", "/colorado/spring/botanic-gardens/"] },
-            { name: "Union Station", city: "Denver", category: "Denver Attractions", lat: 39.7527, lng: -105.0007, articles: ["/denver/attractions/union-station/", "/denver/union-station/", "/denver/union-station-toddlers/"] },
-            { name: "Denver Art Museum", city: "Denver", category: "Denver Attractions", lat: 39.7372, lng: -104.9894, articles: ["/denver/attractions/denver-art-museum/", "/denver/art-museum/", "/denver/art-museum-tips/"] },
-            { name: "Denver Zoo", city: "Denver", category: "Denver Attractions", lat: 39.7500, lng: -104.9500, articles: ["/denver/attractions/denver-zoo/", "/denver/zoo/"] },
-            { name: "Denver Museum of Nature & Science", city: "Denver", category: "Denver Attractions", lat: 39.7475, lng: -104.9425, articles: ["/denver/attractions/denver-museum-nature-science/", "/denver/nature-science-museum/"] },
-            { name: "Coors Field", city: "Denver", category: "Denver Attractions", lat: 39.7559, lng: -104.9942, articles: ["/denver/attractions/coors-field/", "/denver/pro-sports/"] },
-            { name: "Larimer Square", city: "Denver", category: "Denver Attractions", lat: 39.7479, lng: -104.9997, articles: ["/denver/attractions/larimer-square/", "/denver/larimer-square/"] },
-            { name: "Colorado State Capitol", city: "Denver", category: "Denver Attractions", lat: 39.7393, lng: -104.9848, articles: ["/denver/attractions/colorado-state-capitol/"] },
-            { name: "16th Street Mall", city: "Denver", category: "Denver Attractions", lat: 39.7462, lng: -104.9942, articles: ["/denver/16th-street-mall/"] },
-            { name: "Central Market", city: "Denver", category: "Denver Attractions", lat: 39.7672, lng: -104.9819, articles: ["/denver/central-market/"] },
+            { name: "Red Rocks Amphitheatre", city: "Morrison", category: "Denver Attractions", articles: ["/denver/attractions/red-rocks-amphitheatre/index.html", "/denver/red-rocks/index.html", "/denver/red-rocks-hikes/index.html"] },
+            { name: "Denver Botanic Gardens", city: "Denver", category: "Denver Attractions", articles: ["/denver/attractions/denver-botanic-gardens/index.html", "/colorado/spring/botanic-gardens/index.html"] },
+            { name: "Union Station", city: "Denver", category: "Denver Attractions", articles: ["/denver/attractions/union-station/index.html", "/denver/union-station/index.html", "/denver/union-station-toddlers/index.html"] },
+            { name: "Denver Art Museum", city: "Denver", category: "Denver Attractions", articles: ["/denver/attractions/denver-art-museum/index.html", "/denver/art-museum/index.html", "/denver/art-museum-tips/index.html"] },
+            { name: "Denver Zoo", city: "Denver", category: "Denver Attractions", articles: ["/denver/attractions/denver-zoo/index.html", "/denver/zoo/index.html"] },
+            { name: "Denver Museum of Nature & Science", city: "Denver", category: "Denver Attractions", articles: ["/denver/attractions/denver-museum-nature-science/index.html", "/denver/nature-science-museum/index.html"] },
+            { name: "Coors Field", city: "Denver", category: "Denver Attractions", articles: ["/denver/attractions/coors-field/index.html", "/denver/pro-sports/index.html"] },
+            { name: "Larimer Square", city: "Denver", category: "Denver Attractions", articles: ["/denver/attractions/larimer-square/index.html", "/denver/larimer-square/index.html"] },
+            { name: "Colorado State Capitol", city: "Denver", category: "Denver Attractions", articles: ["/denver/attractions/colorado-state-capitol/index.html"] },
+            { name: "16th Street Mall", city: "Denver", category: "Denver Attractions", articles: ["/denver/16th-street-mall/index.html"] },
+            { name: "Blucifer (Blue Mustang)", city: "Denver", category: "Denver Attractions", articles: ["/denver/blucifer/index.html"] },
+            { name: "Civic Center Park", city: "Denver", category: "Denver Attractions", articles: ["/denver/attractions/civic-center-park/index.html"] },
 
             // Denver Trails
-            { name: "Cherry Creek Trail", city: "Denver", category: "Denver Trails", lat: 39.7175, lng: -104.9533, articles: ["/denver/cherry-creek-trail/", "/denver/cherry-creek-trail-guide/", "/denver/walking-trails/cherry-creek-trail/"] },
-            { name: "South Platte River Trail", city: "Denver", category: "Denver Trails", lat: 39.7548, lng: -105.0069, articles: ["/denver/walking-trails/south-platte-river-trail/"] },
-            { name: "Clear Creek Trail", city: "Golden", category: "Denver Trails", lat: 39.7556, lng: -105.2211, articles: ["/denver/walking-trails/clear-creek-trail/", "/golden/clear-creek-trail/"] },
-            { name: "Bear Creek Trail", city: "Lakewood", category: "Denver Trails", lat: 39.6794, lng: -105.0814, articles: ["/denver/walking-trails/bear-creek-trail/"] },
-            { name: "Highline Canal Trail", city: "Denver", category: "Denver Trails", lat: 39.6500, lng: -104.9200, articles: ["/denver/walking-trails/highline-canal-trail/"] },
-            { name: "Mount Falcon", city: "Morrison", category: "Denver Trails", lat: 39.6392, lng: -105.2017, articles: ["/denver/mount-falcon-hike/"] },
+            { name: "Cherry Creek Trail", city: "Denver", category: "Denver Trails", articles: ["/denver/cherry-creek-trail/index.html", "/denver/cherry-creek-trail-guide/index.html", "/denver/walking-trails/cherry-creek-trail/index.html"] },
+            { name: "South Platte River Trail", city: "Denver", category: "Denver Trails", articles: ["/denver/walking-trails/south-platte-river-trail/index.html"] },
+            { name: "Clear Creek Trail", city: "Golden", category: "Denver Trails", articles: ["/denver/walking-trails/clear-creek-trail/index.html", "/golden/clear-creek-trail/index.html"] },
+            { name: "Bear Creek Trail", city: "Lakewood", category: "Denver Trails", articles: ["/denver/walking-trails/bear-creek-trail/index.html"] },
+            { name: "Highline Canal Trail", city: "Denver", category: "Denver Trails", articles: ["/denver/walking-trails/highline-canal-trail/index.html"] },
+            { name: "Mount Falcon", city: "Morrison", category: "Denver Trails", articles: ["/denver/mount-falcon-hike/index.html"] },
+            { name: "Sand Creek Greenway", city: "Denver", category: "Denver Trails", articles: ["/denver/walking-trails/sand-creek-greenway/index.html"] },
+            { name: "Green Mountain Trail", city: "Lakewood", category: "Denver Trails", articles: ["/denver/walking-trails/green-mountain-trail/index.html", "/lakewood/green-mountain/index.html"] },
 
             // Denver Restaurants
-            { name: "Acorn", city: "Denver", category: "Denver Restaurants", lat: 39.7693, lng: -104.9817, articles: ["/denver/restaurants/acorn/"] },
-            { name: "El Five", city: "Denver", category: "Denver Restaurants", lat: 39.7583, lng: -105.0139, articles: ["/denver/restaurants/el-five/"] },
-            { name: "Guard and Grace", city: "Denver", category: "Denver Restaurants", lat: 39.7489, lng: -104.9928, articles: ["/denver/restaurants/guard-and-grace/"] },
-            { name: "Hop Alley", city: "Denver", category: "Denver Restaurants", lat: 39.7650, lng: -104.9819, articles: ["/denver/restaurants/hop-alley/"] },
-            { name: "Mercantile Dining & Provision", city: "Denver", category: "Denver Restaurants", lat: 39.7527, lng: -105.0007, articles: ["/denver/restaurants/mercantile/"] },
-            { name: "Rioja", city: "Denver", category: "Denver Restaurants", lat: 39.7479, lng: -104.9997, articles: ["/denver/restaurants/rioja/"] },
-            { name: "Safta", city: "Denver", category: "Denver Restaurants", lat: 39.7693, lng: -104.9817, articles: ["/denver/restaurants/safta/"] },
-            { name: "Tavernetta", city: "Denver", category: "Denver Restaurants", lat: 39.7533, lng: -105.0014, articles: ["/denver/restaurants/tavernetta/"] },
-            { name: "Uncle (Highlands)", city: "Denver", category: "Denver Restaurants", lat: 39.7611, lng: -105.0208, articles: ["/denver/restaurants/uncle/"] },
-            { name: "Work & Class", city: "Denver", category: "Denver Restaurants", lat: 39.7594, lng: -104.9878, articles: ["/denver/restaurants/work-and-class/"] },
-            { name: "Culinary Dropout", city: "Denver", category: "Denver Restaurants", lat: 39.7500, lng: -104.9950, articles: ["/denver/outdoor-dining/"] },
-            { name: "54thirty Rooftop", city: "Denver", category: "Denver Restaurants", lat: 39.7489, lng: -104.9928, articles: ["/denver/outdoor-dining/"] },
-            { name: "Avanti Food & Beverage", city: "Denver", category: "Denver Food Halls", lat: 39.7617, lng: -105.0061, articles: ["/denver/outdoor-dining/"] },
-            { name: "Ace Eat Serve", city: "Denver", category: "Denver Restaurants", lat: 39.7400, lng: -104.9700, articles: ["/denver/outdoor-dining/"] },
-            { name: "Ash'Kara", city: "Denver", category: "Denver Restaurants", lat: 39.7550, lng: -104.9900, articles: ["/denver/outdoor-dining/"] },
-            { name: "Room for Milly", city: "Denver", category: "Denver Restaurants", lat: 39.7583, lng: -105.0069, articles: ["/denver/outdoor-dining/"] },
-            { name: "Joy Hill", city: "Denver", category: "Denver Restaurants", lat: 39.7550, lng: -104.9900, articles: ["/denver/outdoor-dining/"] },
-            { name: "Postino", city: "Denver", category: "Denver Restaurants", lat: 39.7200, lng: -104.9850, articles: ["/denver/outdoor-dining/"] },
-            { name: "McDevitt Taco Supply", city: "Denver", category: "Denver Restaurants", lat: 39.7693, lng: -104.9817, articles: ["/denver/outdoor-dining/"] },
-            { name: "Stoic & Genuine", city: "Denver", category: "Denver Restaurants", lat: 39.7527, lng: -105.0007, articles: ["/denver/union-station/"] },
-            { name: "Snooze AM Eatery", city: "Denver", category: "Denver Restaurants", lat: 39.7527, lng: -105.0007, articles: ["/denver/union-station/"] },
-            { name: "Terminal Bar", city: "Denver", category: "Denver Restaurants", lat: 39.7527, lng: -105.0007, articles: ["/denver/union-station/"] },
-            { name: "Ultreia", city: "Denver", category: "Denver Restaurants", lat: 39.7527, lng: -105.0007, articles: ["/denver/union-station/"] },
+            { name: "Acorn", city: "Denver", category: "Denver Restaurants", articles: ["/denver/restaurants/acorn/index.html"] },
+            { name: "El Five", city: "Denver", category: "Denver Restaurants", articles: ["/denver/restaurants/el-five/index.html"] },
+            { name: "Guard and Grace", city: "Denver", category: "Denver Restaurants", articles: ["/denver/restaurants/guard-and-grace/index.html"] },
+            { name: "Hop Alley", city: "Denver", category: "Denver Restaurants", articles: ["/denver/restaurants/hop-alley/index.html"] },
+            { name: "Mercantile Dining & Provision", city: "Denver", category: "Denver Restaurants", articles: ["/denver/restaurants/mercantile/index.html"] },
+            { name: "Rioja", city: "Denver", category: "Denver Restaurants", articles: ["/denver/restaurants/rioja/index.html"] },
+            { name: "Safta", city: "Denver", category: "Denver Restaurants", articles: ["/denver/restaurants/safta/index.html"] },
+            { name: "Tavernetta", city: "Denver", category: "Denver Restaurants", articles: ["/denver/restaurants/tavernetta/index.html"] },
+            { name: "Uncle", city: "Denver", category: "Denver Restaurants", articles: ["/denver/restaurants/uncle/index.html"] },
+            { name: "Work & Class", city: "Denver", category: "Denver Restaurants", articles: ["/denver/restaurants/work-and-class/index.html"] },
+            { name: "Culinary Dropout", city: "Denver", category: "Denver Restaurants", articles: ["/denver/outdoor-dining/index.html"] },
+            { name: "54thirty Rooftop", city: "Denver", category: "Denver Restaurants", articles: ["/denver/outdoor-dining/index.html"] },
+            { name: "Ace Eat Serve", city: "Denver", category: "Denver Restaurants", articles: ["/denver/outdoor-dining/index.html"] },
+            { name: "Ash'Kara", city: "Denver", category: "Denver Restaurants", articles: ["/denver/outdoor-dining/index.html"] },
+            { name: "Room for Milly", city: "Denver", category: "Denver Restaurants", articles: ["/denver/outdoor-dining/index.html"] },
+            { name: "Postino", city: "Denver", category: "Denver Restaurants", articles: ["/denver/outdoor-dining/index.html"] },
+            { name: "Stoic & Genuine", city: "Denver", category: "Denver Restaurants", articles: ["/denver/union-station/index.html"] },
+            { name: "Snooze AM Eatery", city: "Denver", category: "Denver Restaurants", articles: ["/denver/union-station/index.html"] },
+            { name: "Terminal Bar", city: "Denver", category: "Denver Restaurants", articles: ["/denver/union-station/index.html"] },
+            { name: "Ultreia", city: "Denver", category: "Denver Restaurants", articles: ["/denver/union-station/index.html"] },
 
             // Denver Coffee Shops
-            { name: "Improper City", city: "Denver", category: "Denver Coffee Shops", lat: 39.7594, lng: -104.9878, articles: ["/denver/remote-work-coffee-shops/"] },
-            { name: "Metropolis Coffee", city: "Denver", category: "Denver Coffee Shops", lat: 39.7200, lng: -104.9850, articles: ["/denver/remote-work-coffee-shops/"] },
-            { name: "The Bardo", city: "Denver", category: "Denver Coffee Shops", lat: 39.7150, lng: -104.9878, articles: ["/denver/remote-work-coffee-shops/"] },
-            { name: "Thump Coffee", city: "Denver", category: "Denver Coffee Shops", lat: 39.7350, lng: -104.9694, articles: ["/denver/remote-work-coffee-shops/"] },
-            { name: "Novo Coffee", city: "Denver", category: "Denver Coffee Shops", lat: 39.7450, lng: -104.9900, articles: ["/denver/remote-work-coffee-shops/"] },
-            { name: "Hooked on Colfax", city: "Denver", category: "Denver Coffee Shops", lat: 39.7400, lng: -104.9500, articles: ["/denver/remote-work-coffee-shops/"] },
-            { name: "Aviano Coffee", city: "Denver", category: "Denver Coffee Shops", lat: 39.7175, lng: -104.9533, articles: ["/denver/remote-work-coffee-shops/"] },
-            { name: "Stella's Coffee Haus", city: "Denver", category: "Denver Coffee Shops", lat: 39.6900, lng: -104.9778, articles: ["/denver/remote-work-coffee-shops/"] },
-            { name: "Middle State Coffee", city: "Denver", category: "Denver Coffee Shops", lat: 39.7700, lng: -105.0300, articles: ["/denver/remote-work-coffee-shops/"] },
-            { name: "Queen City Collective", city: "Denver", category: "Denver Coffee Shops", lat: 39.7250, lng: -104.9850, articles: ["/denver/remote-work-coffee-shops/"] },
-            { name: "Pigtrain Coffee", city: "Denver", category: "Denver Coffee Shops", lat: 39.7527, lng: -105.0007, articles: ["/denver/union-station/"] },
+            { name: "Improper City", city: "Denver", category: "Denver Coffee Shops", articles: ["/denver/remote-work-coffee-shops/index.html"] },
+            { name: "Metropolis Coffee", city: "Denver", category: "Denver Coffee Shops", articles: ["/denver/remote-work-coffee-shops/index.html"] },
+            { name: "The Bardo", city: "Denver", category: "Denver Coffee Shops", articles: ["/denver/remote-work-coffee-shops/index.html"] },
+            { name: "Thump Coffee", city: "Denver", category: "Denver Coffee Shops", articles: ["/denver/remote-work-coffee-shops/index.html"] },
+            { name: "Novo Coffee", city: "Denver", category: "Denver Coffee Shops", articles: ["/denver/remote-work-coffee-shops/index.html"] },
+            { name: "Hooked on Colfax", city: "Denver", category: "Denver Coffee Shops", articles: ["/denver/remote-work-coffee-shops/index.html"] },
+            { name: "Aviano Coffee", city: "Denver", category: "Denver Coffee Shops", articles: ["/denver/remote-work-coffee-shops/index.html"] },
+            { name: "Stella's Coffee Haus", city: "Denver", category: "Denver Coffee Shops", articles: ["/denver/remote-work-coffee-shops/index.html"] },
+            { name: "Middle State Coffee", city: "Denver", category: "Denver Coffee Shops", articles: ["/denver/remote-work-coffee-shops/index.html"] },
+            { name: "Queen City Collective", city: "Denver", category: "Denver Coffee Shops", articles: ["/denver/remote-work-coffee-shops/index.html"] },
+            { name: "Pigtrain Coffee", city: "Denver", category: "Denver Coffee Shops", articles: ["/denver/union-station/index.html"] },
 
             // Denver Street Art & Murals
-            { name: "Love This City Angel Wings Mural", city: "Denver", category: "Denver Street Art", lat: 39.7606, lng: -104.9847, articles: ["/denver/rino-street-art-guide/"] },
-            { name: "Greetings from Denver Postcard Mural", city: "Denver", category: "Denver Street Art", lat: 39.7594, lng: -104.9858, articles: ["/denver/rino-street-art-guide/"] },
-            { name: "Rainbow Stairs", city: "Denver", category: "Denver Street Art", lat: 39.7611, lng: -104.9869, articles: ["/denver/rino-street-art-guide/"] },
-            { name: "Larimer Boy and Girl Mural", city: "Denver", category: "Denver Street Art", lat: 39.7650, lng: -104.9847, articles: ["/denver/rino-street-art-guide/"] },
-            { name: "Walnut Street Desert Highway Mural", city: "Denver", category: "Denver Street Art", lat: 39.7628, lng: -104.9878, articles: ["/denver/rino-street-art-guide/"] },
-            { name: "Denver Central Market Loading Dock Murals", city: "Denver", category: "Denver Street Art", lat: 39.7606, lng: -104.9847, articles: ["/denver/rino-street-art-guide/"] },
-            { name: "Zeppelin Station Murals", city: "Denver", category: "Denver Street Art", lat: 39.7650, lng: -104.9900, articles: ["/denver/rino-street-art-guide/"] },
-            { name: "Broadway Viaduct Legal Wall", city: "Denver", category: "Denver Street Art", lat: 39.7550, lng: -104.9878, articles: ["/denver/rino-street-art-guide/"] },
-            { name: "Dairy Block Alley", city: "Denver", category: "Denver Street Art", lat: 39.7533, lng: -104.9972, articles: ["/denver/rino-street-art-guide/"] },
-            { name: "Ironton Studios", city: "Denver", category: "Denver Street Art", lat: 39.7700, lng: -104.9750, articles: ["/denver/rino-street-art-guide/"] },
+            { name: "Love This City Angel Wings Mural", city: "Denver", category: "Denver Street Art", articles: ["/denver/rino-street-art-guide/index.html"] },
+            { name: "Greetings from Denver Postcard Mural", city: "Denver", category: "Denver Street Art", articles: ["/denver/rino-street-art-guide/index.html"] },
+            { name: "Rainbow Stairs", city: "Denver", category: "Denver Street Art", articles: ["/denver/rino-street-art-guide/index.html"] },
+            { name: "Larimer Boy and Girl Mural", city: "Denver", category: "Denver Street Art", articles: ["/denver/rino-street-art-guide/index.html"] },
+            { name: "Walnut Street Desert Highway Mural", city: "Denver", category: "Denver Street Art", articles: ["/denver/rino-street-art-guide/index.html"] },
+            { name: "Denver Central Market Loading Dock Murals", city: "Denver", category: "Denver Street Art", articles: ["/denver/rino-street-art-guide/index.html"] },
+            { name: "Zeppelin Station Murals", city: "Denver", category: "Denver Street Art", articles: ["/denver/rino-street-art-guide/index.html"] },
+            { name: "Broadway Viaduct Legal Wall", city: "Denver", category: "Denver Street Art", articles: ["/denver/rino-street-art-guide/index.html"] },
+            { name: "Dairy Block Alley", city: "Denver", category: "Denver Street Art", articles: ["/denver/rino-street-art-guide/index.html"] },
+            { name: "Ironton Studios", city: "Denver", category: "Denver Street Art", articles: ["/denver/rino-street-art-guide/index.html"] },
 
-            // Denver Hotels & Historic Buildings
-            { name: "The Crawford Hotel", city: "Denver", category: "Denver Hotels", lat: 39.7527, lng: -105.0007, articles: ["/denver/unique-hotels/"] },
-            { name: "Brown Palace Hotel", city: "Denver", category: "Denver Hotels", lat: 39.7428, lng: -104.9878, articles: ["/denver/unique-hotels/"] },
-            { name: "The Art Hotel", city: "Denver", category: "Denver Hotels", lat: 39.7350, lng: -104.9878, articles: ["/denver/unique-hotels/"] },
-            { name: "Hotel Teatro", city: "Denver", category: "Denver Hotels", lat: 39.7433, lng: -104.9922, articles: ["/denver/unique-hotels/"] },
-            { name: "Kimpton Hotel Monaco", city: "Denver", category: "Denver Hotels", lat: 39.7461, lng: -104.9897, articles: ["/denver/unique-hotels/"] },
-            { name: "Renaissance Denver Downtown", city: "Denver", category: "Denver Hotels", lat: 39.7467, lng: -104.9886, articles: ["/denver/unique-hotels/"] },
-            { name: "Magnolia Hotel Denver", city: "Denver", category: "Denver Hotels", lat: 39.7467, lng: -104.9886, articles: ["/denver/unique-hotels/"] },
-            { name: "The Warwick Denver", city: "Denver", category: "Denver Hotels", lat: 39.7394, lng: -104.9811, articles: ["/denver/unique-hotels/"] },
-            { name: "Ember Hostel", city: "Denver", category: "Denver Hotels", lat: 39.7328, lng: -104.9794, articles: ["/denver/unique-hotels/"] },
+            // Denver Hotels
+            { name: "The Crawford Hotel", city: "Denver", category: "Denver Hotels", articles: ["/denver/unique-hotels/index.html"] },
+            { name: "Brown Palace Hotel", city: "Denver", category: "Denver Hotels", articles: ["/denver/unique-hotels/index.html"] },
+            { name: "The Art Hotel", city: "Denver", category: "Denver Hotels", articles: ["/denver/unique-hotels/index.html"] },
+            { name: "Hotel Teatro", city: "Denver", category: "Denver Hotels", articles: ["/denver/unique-hotels/index.html"] },
+            { name: "Kimpton Hotel Monaco", city: "Denver", category: "Denver Hotels", articles: ["/denver/unique-hotels/index.html"] },
+            { name: "Renaissance Denver Downtown", city: "Denver", category: "Denver Hotels", articles: ["/denver/unique-hotels/index.html"] },
+            { name: "Magnolia Hotel Denver", city: "Denver", category: "Denver Hotels", articles: ["/denver/unique-hotels/index.html"] },
+            { name: "The Warwick Denver", city: "Denver", category: "Denver Hotels", articles: ["/denver/unique-hotels/index.html"] },
+            { name: "Ember Hostel", city: "Denver", category: "Denver Hotels", articles: ["/denver/unique-hotels/index.html"] },
 
             // Denver Shopping
-            { name: "I Heart Denver Store", city: "Denver", category: "Denver Shopping", lat: 39.7560, lng: -104.9958, articles: ["/denver/souvenir-shops/"] },
-            { name: "Tattered Cover Bookstore (Union Station)", city: "Denver", category: "Denver Shopping", lat: 39.7527, lng: -105.0007, articles: ["/denver/souvenir-shops/"] },
-            { name: "Cry Baby Ranch", city: "Denver", category: "Denver Shopping", lat: 39.7479, lng: -104.9997, articles: ["/denver/souvenir-shops/"] },
-            { name: "Artisan Center", city: "Denver", category: "Denver Shopping", lat: 39.7606, lng: -104.9847, articles: ["/denver/souvenir-shops/"] },
-            { name: "Rocky Mountain Chocolate Factory", city: "Denver", category: "Denver Shopping", lat: 39.7479, lng: -104.9997, articles: ["/denver/souvenir-shops/"] },
-            { name: "Where the Buffalo Roam", city: "Denver", category: "Denver Shopping", lat: 39.7462, lng: -104.9942, articles: ["/denver/souvenir-shops/"] },
-            { name: "Welcome to Denver Store", city: "Denver", category: "Denver Shopping", lat: 39.7479, lng: -104.9997, articles: ["/denver/souvenir-shops/"] },
-            { name: "Five Green Boxes", city: "Denver", category: "Denver Shopping", lat: 39.6900, lng: -104.9778, articles: ["/denver/souvenir-shops/"] },
-            { name: "Talulah Jones", city: "Denver", category: "Denver Shopping", lat: 39.7400, lng: -104.9700, articles: ["/denver/souvenir-shops/"] },
+            { name: "I Heart Denver Store", city: "Denver", category: "Denver Shopping", articles: ["/denver/souvenir-shops/index.html"] },
+            { name: "Tattered Cover Bookstore", city: "Denver", category: "Denver Shopping", articles: ["/denver/souvenir-shops/index.html"] },
+            { name: "Cry Baby Ranch", city: "Denver", category: "Denver Shopping", articles: ["/denver/souvenir-shops/index.html"] },
+            { name: "Artisan Center", city: "Denver", category: "Denver Shopping", articles: ["/denver/souvenir-shops/index.html"] },
+            { name: "Rocky Mountain Chocolate Factory", city: "Denver", category: "Denver Shopping", articles: ["/denver/souvenir-shops/index.html"] },
+            { name: "Where the Buffalo Roam", city: "Denver", category: "Denver Shopping", articles: ["/denver/souvenir-shops/index.html"] },
+            { name: "Welcome to Denver Store", city: "Denver", category: "Denver Shopping", articles: ["/denver/souvenir-shops/index.html"] },
+            { name: "Five Green Boxes", city: "Denver", category: "Denver Shopping", articles: ["/denver/souvenir-shops/index.html"] },
+            { name: "Talulah Jones", city: "Denver", category: "Denver Shopping", articles: ["/denver/souvenir-shops/index.html"] },
 
-            // Denver Food Halls & Markets
-            { name: "The Source Food Hall", city: "Denver", category: "Denver Food Halls", lat: 39.7693, lng: -104.9817, articles: ["/denver/restaurants/acorn/", "/denver/restaurants/safta/"] },
-            { name: "Denver Central Market", city: "Denver", category: "Denver Food Halls", lat: 39.7606, lng: -104.9847, articles: ["/denver/central-market/", "/denver/rino-street-art-guide/"] },
-            { name: "Zeppelin Station", city: "Denver", category: "Denver Food Halls", lat: 39.7650, lng: -104.9900, articles: ["/denver/rino-street-art-guide/"] },
+            // Denver Food Halls
+            { name: "The Source Food Hall", city: "Denver", category: "Denver Food Halls", articles: ["/denver/restaurants/acorn/index.html", "/denver/restaurants/safta/index.html"] },
+            { name: "Denver Central Market", city: "Denver", category: "Denver Food Halls", articles: ["/denver/central-market/index.html", "/denver/rino-street-art-guide/index.html"] },
+            { name: "Zeppelin Station", city: "Denver", category: "Denver Food Halls", articles: ["/denver/rino-street-art-guide/index.html"] },
+            { name: "Avanti Food & Beverage", city: "Denver", category: "Denver Food Halls", articles: ["/denver/outdoor-dining/index.html"] },
+            { name: "Stanley Marketplace", city: "Aurora", category: "Denver Food Halls", articles: ["/aurora/stanley-marketplace/index.html"] },
 
-            // Boulder Parks & Lakes
-            { name: "Chautauqua Park", city: "Boulder", category: "Boulder", lat: 39.9986, lng: -105.2811, articles: ["/boulder/parks/chautauqua-park/", "/boulder/chautauqua/", "/boulder/attractions/chautauqua-park/"] },
-            { name: "Boulder Reservoir", city: "Boulder", category: "Boulder", lat: 40.0750, lng: -105.2389, articles: ["/boulder/lakes/boulder-reservoir/"] },
-            { name: "Walden Ponds", city: "Boulder", category: "Boulder", lat: 40.0333, lng: -105.2333, articles: ["/boulder/lakes/walden-ponds/"] },
-            { name: "Wonderland Lake", city: "Boulder", category: "Boulder", lat: 40.0478, lng: -105.2892, articles: ["/boulder/lakes/wonderland-lake/"] },
-            { name: "Gross Reservoir", city: "Boulder", category: "Boulder", lat: 39.9456, lng: -105.3567, articles: ["/boulder/lakes/gross-reservoir/"] },
-            { name: "Eben G. Fine Park", city: "Boulder", category: "Boulder", lat: 40.0117, lng: -105.2967, articles: ["/boulder/parks/eben-g-fine-park/"] },
+            // Metro Denver - Aurora
+            { name: "Cherry Creek State Park", city: "Aurora", category: "Metro Aurora", articles: ["/aurora/cherry-creek-state-park/index.html", "/aurora/things-to-do/index.html"] },
+            { name: "Stanley Marketplace", city: "Aurora", category: "Metro Aurora", articles: ["/aurora/stanley-marketplace/index.html"] },
+            { name: "Aurora Reservoir", city: "Aurora", category: "Metro Aurora", articles: ["/aurora/aurora-reservoir/index.html"] },
+            { name: "Plains Conservation Center", city: "Aurora", category: "Metro Aurora", articles: ["/aurora/plains-conservation-center/index.html"] },
+            { name: "Aurora History Museum", city: "Aurora", category: "Metro Aurora", articles: ["/aurora/history-museum/index.html"] },
+            { name: "Southlands Mall", city: "Aurora", category: "Metro Aurora", articles: ["/aurora/southlands/index.html"] },
 
-            // Boulder Landmarks
-            { name: "Flatirons", city: "Boulder", category: "Boulder", lat: 39.9886, lng: -105.2928, articles: ["/boulder/flatirons/", "/boulder/attractions/flatirons/"] },
-            { name: "Pearl Street Mall", city: "Boulder", category: "Boulder", lat: 40.0176, lng: -105.2797, articles: ["/boulder/pearl-street/", "/boulder/attractions/pearl-street-mall/"] },
-            { name: "NCAR (National Center for Atmospheric Research)", city: "Boulder", category: "Boulder", lat: 39.9786, lng: -105.2750, articles: ["/boulder/ncar-science/", "/boulder/attractions/ncar/"] },
-            { name: "CU Campus", city: "Boulder", category: "Boulder", lat: 40.0076, lng: -105.2659, articles: ["/boulder/cu-campus/", "/boulder/attractions/cu-campus/"] },
-            { name: "Boulder Creek Path", city: "Boulder", category: "Boulder", lat: 40.0150, lng: -105.2750, articles: ["/boulder/boulder-creek-path/", "/boulder/attractions/boulder-creek-path/"] },
-            { name: "Flagstaff Mountain", city: "Boulder", category: "Boulder", lat: 39.9917, lng: -105.3083, articles: ["/boulder/attractions/flagstaff-mountain/"] },
-            { name: "Eldorado Canyon", city: "Boulder", category: "Boulder", lat: 39.9314, lng: -105.2833, articles: ["/boulder/eldorado-canyon/"] },
-            { name: "Nederland", city: "Nederland", category: "Boulder", lat: 39.9614, lng: -105.5108, articles: ["/boulder/nederland/"] },
-            { name: "Peak-to-Peak Scenic Byway", city: "Boulder", category: "Boulder", lat: 40.0000, lng: -105.5000, articles: ["/boulder/peak-to-peak/"] },
+            // Metro Denver - Lakewood
+            { name: "Bear Creek Lake Park", city: "Lakewood", category: "Metro Lakewood", articles: ["/lakewood/bear-creek-lake-park/index.html"] },
+            { name: "Green Mountain", city: "Lakewood", category: "Metro Lakewood", articles: ["/lakewood/green-mountain/index.html"] },
+            { name: "Casa Bonita", city: "Lakewood", category: "Metro Lakewood", articles: ["/lakewood/casa-bonita/index.html"] },
+            { name: "40 West Arts District", city: "Lakewood", category: "Metro Lakewood", articles: ["/lakewood/40-west-arts/index.html"] },
+            { name: "Belmar", city: "Lakewood", category: "Metro Lakewood", articles: ["/lakewood/belmar/index.html"] },
+            { name: "Crown Hill Park", city: "Lakewood", category: "Metro Lakewood", articles: ["/lakewood/crown-hill-park/index.html"] },
 
-            // Boulder Trails
-            { name: "Mesa Trail", city: "Boulder", category: "Boulder Trails", lat: 39.9500, lng: -105.2833, articles: ["/boulder/walking-trails/mesa-trail/"] },
-            { name: "Royal Arch Trail", city: "Boulder", category: "Boulder Trails", lat: 39.9967, lng: -105.2867, articles: ["/boulder/walking-trails/royal-arch-trail/"] },
-            { name: "Sanitas Valley Trail", city: "Boulder", category: "Boulder Trails", lat: 40.0283, lng: -105.3000, articles: ["/boulder/walking-trails/sanitas-valley-trail/"] },
-            { name: "Bear Peak Trail", city: "Boulder", category: "Boulder Trails", lat: 39.9633, lng: -105.2900, articles: ["/boulder/walking-trails/bear-peak-trail/"] },
+            // Metro Denver - Westminster/Arvada/Thornton
+            { name: "Westminster Promenade", city: "Westminster", category: "Metro Northwest", articles: ["/westminster/promenade/index.html"] },
+            { name: "Standley Lake Regional Park", city: "Westminster", category: "Metro Northwest", articles: ["/westminster/standley-lake/index.html"] },
+            { name: "Arvada Olde Town", city: "Arvada", category: "Metro Northwest", articles: ["/arvada/olde-town/index.html", "/arvada/index.html"] },
+            { name: "Two Ponds National Wildlife Refuge", city: "Arvada", category: "Metro Northwest", articles: ["/arvada/two-ponds/index.html"] },
+            { name: "Carpenter Park", city: "Thornton", category: "Metro Northwest", articles: ["/thornton/carpenter-park/index.html"] },
+            { name: "Margaret Carpenter Recreation Center", city: "Thornton", category: "Metro Northwest", articles: ["/thornton/recreation-center/index.html"] },
+
+            // Metro Denver - Littleton/Centennial/Englewood
+            { name: "Littleton Historic Downtown", city: "Littleton", category: "Metro South", articles: ["/littleton/historic-downtown/index.html", "/littleton/index.html"] },
+            { name: "Hudson Gardens", city: "Littleton", category: "Metro South", articles: ["/littleton/hudson-gardens/index.html"] },
+            { name: "Chatfield State Park", city: "Littleton", category: "Metro South", articles: ["/littleton/chatfield-state-park/index.html"] },
+            { name: "South Platte Park", city: "Littleton", category: "Metro South", articles: ["/littleton/south-platte-park/index.html"] },
+            { name: "Streets at SouthGlenn", city: "Centennial", category: "Metro South", articles: ["/centennial/southglenn/index.html"] },
+            { name: "Centennial Center Park", city: "Centennial", category: "Metro South", articles: ["/centennial/center-park/index.html"] },
+            { name: "Englewood Civic Center", city: "Englewood", category: "Metro South", articles: ["/englewood/civic-center/index.html"] },
+            { name: "Pirates Cove", city: "Englewood", category: "Metro South", articles: ["/englewood/pirates-cove/index.html"] },
+
+            // Metro Denver - Commerce City/Northglenn/Broomfield
+            { name: "Rocky Mountain Arsenal", city: "Commerce City", category: "Metro Northeast", articles: ["/commerce-city/rocky-mountain-arsenal/index.html"] },
+            { name: "Dick's Sporting Goods Park", city: "Commerce City", category: "Metro Northeast", articles: ["/commerce-city/dicks-sporting-goods-park/index.html"] },
+            { name: "E.B. Rains Jr. Memorial Park", city: "Northglenn", category: "Metro Northeast", articles: ["/northglenn/eb-rains-park/index.html"] },
+            { name: "Northglenn Recreation Center", city: "Northglenn", category: "Metro Northeast", articles: ["/northglenn/recreation-center/index.html"] },
+            { name: "1stBank Center", city: "Broomfield", category: "Metro Northeast", articles: ["/broomfield/1stbank-center/index.html"] },
+            { name: "Broomfield County Commons", city: "Broomfield", category: "Metro Northeast", articles: ["/broomfield/county-commons/index.html"] },
+            { name: "Flatiron Crossing", city: "Broomfield", category: "Metro Northeast", articles: ["/broomfield/flatiron-crossing/index.html"] },
+
+            // Metro Denver - Parker/Castle Rock
+            { name: "Parker Downtown Main Street", city: "Parker", category: "Metro Southeast", articles: ["/parker/downtown-main-street/index.html"] },
+            { name: "Parker Arts Culture & Events Center", city: "Parker", category: "Metro Southeast", articles: ["/parker/pace-center/index.html"] },
+            { name: "Cherry Creek Trail (Parker)", city: "Parker", category: "Metro Southeast", articles: ["/parker/cherry-creek-trail/index.html"] },
+            { name: "Castle Rock Downtown", city: "Castle Rock", category: "Metro Southeast", articles: ["/castle-rock/index.html", "/castle-rock/the-rock/index.html"] },
+            { name: "The Rock Park", city: "Castle Rock", category: "Metro Southeast", articles: ["/castle-rock/the-rock/index.html"] },
+            { name: "Philip S. Miller Park", city: "Castle Rock", category: "Metro Southeast", articles: ["/castle-rock/philip-s-miller-park/index.html"] },
+            { name: "Castle Rock Outlets", city: "Castle Rock", category: "Metro Southeast", articles: ["/castle-rock/outlets/index.html"] },
+
+            // Golden
+            { name: "Lookout Mountain", city: "Golden", category: "Golden", articles: ["/golden/lookout-mountain/index.html"] },
+            { name: "Buffalo Bill Museum and Grave", city: "Golden", category: "Golden", articles: ["/golden/buffalo-bill-museum/index.html"] },
+            { name: "Coors Brewery", city: "Golden", category: "Golden", articles: ["/golden/coors-brewery/index.html"] },
+            { name: "Clear Creek Kayak Park", city: "Golden", category: "Golden", articles: ["/golden/clear-creek-kayak-park/index.html"] },
+            { name: "Golden Downtown", city: "Golden", category: "Golden", articles: ["/golden/index.html", "/golden/downtown/index.html"] },
+            { name: "Colorado School of Mines", city: "Golden", category: "Golden", articles: ["/golden/school-of-mines/index.html"] },
+            { name: "North Table Mountain", city: "Golden", category: "Golden", articles: ["/golden/north-table-mountain/index.html"] },
+
+            // Boulder
+            { name: "Chautauqua Park", city: "Boulder", category: "Boulder", articles: ["/boulder/parks/chautauqua-park/index.html", "/boulder/chautauqua/index.html"] },
+            { name: "Flatirons", city: "Boulder", category: "Boulder", articles: ["/boulder/flatirons/index.html", "/boulder/attractions/flatirons/index.html"] },
+            { name: "Pearl Street Mall", city: "Boulder", category: "Boulder", articles: ["/boulder/pearl-street/index.html", "/boulder/attractions/pearl-street-mall/index.html"] },
+            { name: "Boulder Creek Path", city: "Boulder", category: "Boulder", articles: ["/boulder/boulder-creek-path/index.html"] },
+            { name: "CU Campus", city: "Boulder", category: "Boulder", articles: ["/boulder/cu-campus/index.html"] },
+            { name: "NCAR", city: "Boulder", category: "Boulder", articles: ["/boulder/ncar-science/index.html"] },
+            { name: "Flagstaff Mountain", city: "Boulder", category: "Boulder", articles: ["/boulder/attractions/flagstaff-mountain/index.html"] },
+            { name: "Eldorado Canyon", city: "Boulder", category: "Boulder", articles: ["/boulder/eldorado-canyon/index.html"] },
+            { name: "Boulder Reservoir", city: "Boulder", category: "Boulder", articles: ["/boulder/lakes/boulder-reservoir/index.html"] },
 
             // Colorado Springs
-            { name: "Garden of the Gods", city: "Colorado Springs", category: "Colorado Springs", lat: 38.8739, lng: -104.8867, articles: ["/colorado-springs/garden-of-the-gods/", "/colorado-springs/attractions/garden-of-the-gods/"] },
-            { name: "Pikes Peak", city: "Colorado Springs", category: "Colorado Springs", lat: 38.8409, lng: -105.0423, articles: ["/colorado-springs/pikes-peak/", "/colorado-springs/attractions/pikes-peak/"] },
-            { name: "Cheyenne Mountain Zoo", city: "Colorado Springs", category: "Colorado Springs", lat: 38.7697, lng: -104.8517, articles: ["/colorado-springs/cheyenne-mountain-zoo/"] },
-            { name: "Olympic Training Center", city: "Colorado Springs", category: "Colorado Springs", lat: 38.8428, lng: -104.7983, articles: ["/colorado-springs/olympic-training-center/"] },
-            { name: "Air Force Academy", city: "Colorado Springs", category: "Colorado Springs", lat: 38.9983, lng: -104.8617, articles: ["/colorado-springs/air-force-academy/"] },
+            { name: "Garden of the Gods", city: "Colorado Springs", category: "Colorado Springs", articles: ["/colorado-springs/garden-of-the-gods/index.html"] },
+            { name: "Pikes Peak", city: "Colorado Springs", category: "Colorado Springs", articles: ["/colorado-springs/pikes-peak/index.html"] },
+            { name: "Cheyenne Mountain Zoo", city: "Colorado Springs", category: "Colorado Springs", articles: ["/colorado-springs/cheyenne-mountain-zoo/index.html"] },
+            { name: "Olympic Training Center", city: "Colorado Springs", category: "Colorado Springs", articles: ["/colorado-springs/olympic-training-center/index.html"] },
+            { name: "Air Force Academy", city: "Colorado Springs", category: "Colorado Springs", articles: ["/colorado-springs/air-force-academy/index.html"] },
+            { name: "Manitou Incline", city: "Manitou Springs", category: "Colorado Springs", articles: ["/manitou-springs/incline/index.html"] },
 
-            // Manitou Springs
-            { name: "Manitou Incline", city: "Manitou Springs", category: "Manitou Springs", lat: 38.8575, lng: -104.9456, articles: ["/manitou-springs/incline/"] },
-            { name: "Pikes Peak Cog Railway", city: "Manitou Springs", category: "Manitou Springs", lat: 38.8589, lng: -104.9258, articles: ["/manitou-springs/pikes-peak/"] },
-            { name: "Cave of the Winds", city: "Manitou Springs", category: "Manitou Springs", lat: 38.8722, lng: -104.9200, articles: ["/manitou-springs/cave-of-the-winds/"] },
-            { name: "Manitou Mineral Springs", city: "Manitou Springs", category: "Manitou Springs", lat: 38.8589, lng: -104.9175, articles: ["/manitou-springs/mineral-springs/"] },
-
-            // Ski Resorts & Mountain Towns
-            { name: "Breckenridge Main Street", city: "Breckenridge", category: "Ski Towns", lat: 39.4817, lng: -106.0384, articles: ["/breckenridge/", "/breckenridge/things-to-do/", "/breckenridge/main-street/"] },
-            { name: "Vail Village", city: "Vail", category: "Ski Towns", lat: 39.6403, lng: -106.3742, articles: ["/vail/vail-village/", "/vail/attractions/vail-village/"] },
-            { name: "Aspen Downtown", city: "Aspen", category: "Ski Towns", lat: 39.1911, lng: -106.8175, articles: ["/aspen/", "/aspen/skiing/"] },
-            { name: "Telluride", city: "Telluride", category: "Ski Towns", lat: 37.9375, lng: -107.8123, articles: ["/telluride/", "/telluride/hiking/", "/telluride/summer-activities/"] },
-            { name: "Crested Butte Elk Avenue", city: "Crested Butte", category: "Ski Towns", lat: 38.8697, lng: -106.9878, articles: ["/crested-butte/", "/crested-butte/elk-avenue/"] },
-            { name: "Winter Park Resort", city: "Winter Park", category: "Ski Towns", lat: 39.8868, lng: -105.7625, articles: ["/winter-park/winter-park-resort/", "/winter-park/"] },
-            { name: "Keystone Village", city: "Keystone", category: "Ski Towns", lat: 39.6067, lng: -105.9497, articles: ["/keystone/", "/keystone/keystone-lake/"] },
-            { name: "Beaver Creek Village", city: "Beaver Creek", category: "Ski Towns", lat: 39.6042, lng: -106.5164, articles: ["/beaver-creek/", "/beaver-creek/beaver-creek-village/"] },
-            { name: "Snowmass Village", city: "Snowmass", category: "Ski Towns", lat: 39.2133, lng: -106.9378, articles: ["/snowmass/", "/snowmass/snowmass-village/"] },
-            { name: "Steamboat Springs Downtown", city: "Steamboat Springs", category: "Ski Towns", lat: 40.4850, lng: -106.8317, articles: ["/steamboat-springs/", "/steamboat-springs/downtown/"] },
-            { name: "Frisco Main Street", city: "Frisco", category: "Ski Towns", lat: 39.5744, lng: -106.1175, articles: ["/frisco/", "/frisco/downtown/"] },
-            { name: "Lake Dillon", city: "Frisco", category: "Ski Towns", lat: 39.6278, lng: -106.0742, articles: ["/frisco/lake-dillon/"] },
+            // Ski Towns
+            { name: "Breckenridge Main Street", city: "Breckenridge", category: "Ski Towns", articles: ["/breckenridge/index.html", "/breckenridge/things-to-do/index.html"] },
+            { name: "Vail Village", city: "Vail", category: "Ski Towns", articles: ["/vail/vail-village/index.html"] },
+            { name: "Aspen Downtown", city: "Aspen", category: "Ski Towns", articles: ["/aspen/index.html"] },
+            { name: "Telluride", city: "Telluride", category: "Ski Towns", articles: ["/telluride/index.html"] },
+            { name: "Crested Butte Elk Avenue", city: "Crested Butte", category: "Ski Towns", articles: ["/crested-butte/index.html"] },
+            { name: "Steamboat Springs Downtown", city: "Steamboat Springs", category: "Ski Towns", articles: ["/steamboat-springs/index.html"] },
 
             // Hot Springs
-            { name: "Glenwood Hot Springs", city: "Glenwood Springs", category: "Hot Springs", lat: 39.5508, lng: -107.3247, articles: ["/colorado/winter/hot-springs/glenwood/", "/glenwood-springs/hot-springs/"] },
-            { name: "Mount Princeton Hot Springs", city: "Nathrop", category: "Hot Springs", lat: 38.7336, lng: -106.1722, articles: ["/colorado/winter/hot-springs/mt-princeton/", "/hot-springs/mount-princeton-hot-springs/"] },
-            { name: "Strawberry Park Hot Springs", city: "Steamboat Springs", category: "Hot Springs", lat: 40.5544, lng: -106.8483, articles: ["/colorado/winter/hot-springs/strawberry-park/", "/hot-springs/strawberry-park-hot-springs/"] },
-            { name: "Indian Hot Springs", city: "Idaho Springs", category: "Hot Springs", lat: 39.7425, lng: -105.5133, articles: ["/colorado/winter/hot-springs/indian/", "/hot-springs/indian-hot-springs/"] },
-            { name: "Ouray Hot Springs", city: "Ouray", category: "Hot Springs", lat: 38.0228, lng: -107.6714, articles: ["/colorado/winter/hot-springs/ouray/", "/hot-springs/ouray-hot-springs/"] },
-            { name: "Pagosa Hot Springs", city: "Pagosa Springs", category: "Hot Springs", lat: 37.2694, lng: -107.0097, articles: ["/colorado/winter/hot-springs/pagosa/", "/hot-springs/pagosa-springs/"] },
-            { name: "Dunton Hot Springs", city: "Dolores", category: "Hot Springs", lat: 37.7667, lng: -108.0833, articles: ["/colorado/winter/hot-springs/dunton/"] },
-            { name: "Iron Mountain Hot Springs", city: "Glenwood Springs", category: "Hot Springs", lat: 39.5486, lng: -107.3317, articles: ["/colorado/winter/hot-springs/iron-mountain/", "/glenwood-springs/iron-mountain/"] },
+            { name: "Glenwood Hot Springs", city: "Glenwood Springs", category: "Hot Springs", articles: ["/colorado/winter/hot-springs/glenwood/index.html", "/glenwood-springs/hot-springs/index.html"] },
+            { name: "Strawberry Park Hot Springs", city: "Steamboat Springs", category: "Hot Springs", articles: ["/colorado/winter/hot-springs/strawberry-park/index.html"] },
+            { name: "Mount Princeton Hot Springs", city: "Nathrop", category: "Hot Springs", articles: ["/colorado/winter/hot-springs/mt-princeton/index.html"] },
+            { name: "Ouray Hot Springs", city: "Ouray", category: "Hot Springs", articles: ["/colorado/winter/hot-springs/ouray/index.html"] },
+            { name: "Pagosa Hot Springs", city: "Pagosa Springs", category: "Hot Springs", articles: ["/colorado/winter/hot-springs/pagosa/index.html"] },
+            { name: "Iron Mountain Hot Springs", city: "Glenwood Springs", category: "Hot Springs", articles: ["/colorado/winter/hot-springs/iron-mountain/index.html"] },
 
-            // Major Natural Attractions
-            { name: "Rocky Mountain National Park", city: "Estes Park", category: "Natural Attractions", lat: 40.3428, lng: -105.6836, articles: ["/boulder/rocky-mountain-national-park/"] },
-            { name: "Trail Ridge Road", city: "Estes Park", category: "Natural Attractions", lat: 40.4000, lng: -105.7000, articles: ["/estes-park/attractions/trail-ridge-road/"] },
-            { name: "Great Sand Dunes National Park", city: "Alamosa", category: "Natural Attractions", lat: 37.7500, lng: -105.5000, articles: ["/alamosa/great-sand-dunes/"] },
-            { name: "Mesa Verde National Park", city: "Cortez", category: "Natural Attractions", lat: 37.2309, lng: -108.4618, articles: ["/cortez/mesa-verde/"] },
-            { name: "Maroon Bells", city: "Aspen", category: "Natural Attractions", lat: 39.0708, lng: -106.9389, articles: ["/aspen/maroon-bells/", "/aspen/attractions/maroon-bells/"] },
-            { name: "Hanging Lake", city: "Glenwood Springs", category: "Natural Attractions", lat: 39.6017, lng: -107.1928, articles: ["/glenwood-springs/hanging-lake/"] },
-            { name: "Black Canyon of the Gunnison", city: "Montrose", category: "Natural Attractions", lat: 38.5754, lng: -107.7416, articles: [] },
-            { name: "Independence Pass", city: "Aspen", category: "Natural Attractions", lat: 39.1067, lng: -106.5633, articles: ["/aspen/independence-pass/", "/aspen/attractions/independence-pass/"] },
-            { name: "Colorado National Monument", city: "Fruita", category: "Natural Attractions", lat: 39.0500, lng: -108.6833, articles: ["/fruita/colorado-national-monument/"] },
-            { name: "Bridal Veil Falls", city: "Telluride", category: "Natural Attractions", lat: 37.9264, lng: -107.7656, articles: ["/telluride/hiking/"] },
-
-            // Golden Area
-            { name: "Lookout Mountain", city: "Golden", category: "Golden", lat: 39.7314, lng: -105.2386, articles: ["/golden/lookout-mountain/"] },
-            { name: "Buffalo Bill Museum and Grave", city: "Golden", category: "Golden", lat: 39.7319, lng: -105.2383, articles: ["/golden/buffalo-bill-museum/"] },
-            { name: "Coors Brewery", city: "Golden", category: "Golden", lat: 39.7556, lng: -105.2211, articles: ["/golden/coors-brewery/"] },
-            { name: "Clear Creek Kayak Park", city: "Golden", category: "Golden", lat: 39.7533, lng: -105.2194, articles: ["/golden/clear-creek-kayak-park/"] },
-            { name: "Golden Downtown", city: "Golden", category: "Golden", lat: 39.7555, lng: -105.2211, articles: ["/golden/", "/golden/downtown/"] },
-
-            // Idaho Springs Area
-            { name: "Idaho Springs Downtown", city: "Idaho Springs", category: "Mountain Towns", lat: 39.7425, lng: -105.5133, articles: ["/idaho-springs/", "/idaho-springs/downtown/"] },
-            { name: "Mount Evans Scenic Byway", city: "Idaho Springs", category: "Mountain Towns", lat: 39.5883, lng: -105.6439, articles: ["/idaho-springs/mount-evans/"] },
-            { name: "Argo Mine", city: "Idaho Springs", category: "Mountain Towns", lat: 39.7419, lng: -105.5125, articles: ["/idaho-springs/argo-mine/"] },
-            { name: "Oh My God Road", city: "Idaho Springs", category: "Mountain Towns", lat: 39.7500, lng: -105.4833, articles: ["/idaho-springs/oh-my-god-road/"] },
-
-            // Georgetown Area
-            { name: "Georgetown Downtown", city: "Georgetown", category: "Mountain Towns", lat: 39.7061, lng: -105.6975, articles: ["/georgetown/", "/georgetown/downtown/"] },
-            { name: "Georgetown Loop Railroad", city: "Georgetown", category: "Mountain Towns", lat: 39.7058, lng: -105.6969, articles: ["/georgetown/georgetown-loop/"] },
-            { name: "Guanella Pass", city: "Georgetown", category: "Mountain Towns", lat: 39.5942, lng: -105.7108, articles: ["/georgetown/guanella-pass/"] },
-
-            // Southern Colorado Towns
-            { name: "Ouray Downtown", city: "Ouray", category: "Southern Colorado", lat: 38.0228, lng: -107.6714, articles: ["/ouray/", "/ouray/box-canyon/"] },
-            { name: "Ouray Ice Park", city: "Ouray", category: "Southern Colorado", lat: 38.0178, lng: -107.6728, articles: ["/ouray/ice-park/"] },
-            { name: "Million Dollar Highway", city: "Ouray", category: "Southern Colorado", lat: 37.9333, lng: -107.7500, articles: ["/ouray/million-dollar-highway/"] },
-            { name: "Silverton Downtown", city: "Silverton", category: "Southern Colorado", lat: 37.8117, lng: -107.6642, articles: ["/silverton/"] },
-            { name: "Durango Downtown", city: "Durango", category: "Southern Colorado", lat: 37.2753, lng: -107.8801, articles: ["/durango/"] },
-            { name: "Durango & Silverton Railroad", city: "Durango", category: "Southern Colorado", lat: 37.2753, lng: -107.8801, articles: [] },
-            { name: "Pagosa Springs Downtown", city: "Pagosa Springs", category: "Southern Colorado", lat: 37.2694, lng: -107.0097, articles: ["/pagosa-springs/"] },
-            { name: "Chimney Rock", city: "Pagosa Springs", category: "Southern Colorado", lat: 37.1867, lng: -107.3117, articles: ["/pagosa-springs/chimney-rock/"] },
-            { name: "Four Corners Monument", city: "Cortez", category: "Southern Colorado", lat: 36.9990, lng: -109.0452, articles: ["/cortez/four-corners/"] },
-
-            // Central Mountain Towns
-            { name: "Leadville Downtown", city: "Leadville", category: "Central Mountains", lat: 39.2508, lng: -106.2925, articles: ["/leadville/", "/leadville/downtown/"] },
-            { name: "Salida Downtown", city: "Salida", category: "Central Mountains", lat: 38.5347, lng: -105.9989, articles: ["/salida/", "/salida/downtown/", "/salida/arts-district/"] },
-            { name: "Buena Vista Downtown", city: "Buena Vista", category: "Central Mountains", lat: 38.8422, lng: -106.1311, articles: ["/buena-vista/"] },
-            { name: "Monarch Mountain", city: "Salida", category: "Central Mountains", lat: 38.5128, lng: -106.3325, articles: ["/salida/monarch-mountain/"] },
-
-            // Estes Park
-            { name: "Estes Park Downtown", city: "Estes Park", category: "Estes Park", lat: 40.3772, lng: -105.5217, articles: ["/estes-park/"] },
-            { name: "Antlers Rooftop", city: "Estes Park", category: "Estes Park", lat: 40.3772, lng: -105.5217, articles: ["/estes-park/antlers-rooftop/"] },
-
-            // Fort Collins
-            { name: "Fort Collins Old Town", city: "Fort Collins", category: "Northern Colorado", lat: 40.5853, lng: -105.0844, articles: ["/fort-collins/", "/fort-collins/old-town/"] },
-            { name: "Horsetooth Reservoir", city: "Fort Collins", category: "Northern Colorado", lat: 40.5500, lng: -105.1667, articles: ["/fort-collins/attractions/horsetooth-reservoir/"] },
-            { name: "Poudre Canyon", city: "Fort Collins", category: "Northern Colorado", lat: 40.6833, lng: -105.3000, articles: ["/fort-collins/poudre-canyon/"] },
-
-            // Longmont
-            { name: "Longmont Downtown", city: "Longmont", category: "Northern Colorado", lat: 40.1672, lng: -105.1019, articles: ["/longmont/", "/longmont/downtown-main-street/"] },
-            { name: "Button Rock Preserve", city: "Longmont", category: "Northern Colorado", lat: 40.2167, lng: -105.3500, articles: ["/longmont/button-rock-preserve/"] },
-            { name: "Union Reservoir", city: "Longmont", category: "Northern Colorado", lat: 40.1500, lng: -105.0333, articles: ["/longmont/union-reservoir/"] },
-
-            // Loveland
-            { name: "Loveland Historic Downtown", city: "Loveland", category: "Northern Colorado", lat: 40.3978, lng: -105.0750, articles: ["/loveland/", "/loveland/historic-downtown/"] },
-            { name: "Loveland Sculpture Gardens", city: "Loveland", category: "Northern Colorado", lat: 40.4000, lng: -105.0750, articles: ["/loveland/sculpture-gardens/"] },
-            { name: "Devils Backbone", city: "Loveland", category: "Northern Colorado", lat: 40.4000, lng: -105.2167, articles: ["/loveland/devils-backbone/", "/loveland/attractions/devils-backbone/"] },
-            { name: "Lake Loveland", city: "Loveland", category: "Northern Colorado", lat: 40.4167, lng: -105.0833, articles: ["/loveland/lake-loveland/"] },
-
-            // Metro Area Cities
-            { name: "Arvada Olde Town", city: "Arvada", category: "Metro Denver", lat: 39.8028, lng: -105.0875, articles: ["/arvada/", "/arvada/olde-town/"] },
-            { name: "Littleton Historic Downtown", city: "Littleton", category: "Metro Denver", lat: 39.6133, lng: -105.0166, articles: ["/littleton/", "/littleton/historic-downtown/"] },
-            { name: "Hudson Gardens", city: "Littleton", category: "Metro Denver", lat: 39.5972, lng: -105.0208, articles: ["/littleton/hudson-gardens/"] },
-            { name: "Parker Downtown", city: "Parker", category: "Metro Denver", lat: 39.5186, lng: -104.7614, articles: ["/parker/downtown-main-street/"] },
-            { name: "Castle Rock Downtown", city: "Castle Rock", category: "Metro Denver", lat: 39.3722, lng: -104.8561, articles: ["/castle-rock/", "/castle-rock/the-rock/"] },
-            { name: "Rocky Mountain Arsenal", city: "Commerce City", category: "Metro Denver", lat: 39.8333, lng: -104.8667, articles: ["/commerce-city/rocky-mountain-arsenal/"] },
-            { name: "Aurora Cherry Creek State Park", city: "Aurora", category: "Metro Denver", lat: 39.6397, lng: -104.8558, articles: ["/aurora/cherry-creek-state-park/", "/aurora/things-to-do/"] },
-            { name: "Casa Bonita", city: "Lakewood", category: "Metro Denver", lat: 39.7422, lng: -105.0708, articles: ["/lakewood/casa-bonita/"] },
-            { name: "40 West Arts", city: "Lakewood", category: "Metro Denver", lat: 39.7350, lng: -105.0667, articles: ["/lakewood/40-west-arts/"] },
-
-            // Pueblo
-            { name: "Pueblo Riverwalk", city: "Pueblo", category: "Southern Front Range", lat: 38.2650, lng: -104.6108, articles: ["/pueblo/", "/pueblo/riverwalk/"] },
-            { name: "Pueblo Creative Corridor", city: "Pueblo", category: "Southern Front Range", lat: 38.2700, lng: -104.6100, articles: ["/pueblo/creative-corridor/"] },
-
-            // Other Areas
-            { name: "Greeley Downtown", city: "Greeley", category: "Eastern Plains", lat: 40.4233, lng: -104.7091, articles: ["/greeley/", "/greeley/downtown/"] },
-            { name: "Pawnee Buttes", city: "Greeley", category: "Eastern Plains", lat: 40.8167, lng: -104.0000, articles: ["/greeley/pawnee-buttes/"] },
-            { name: "Alamosa Downtown", city: "Alamosa", category: "San Luis Valley", lat: 37.4694, lng: -105.8700, articles: ["/alamosa/", "/alamosa/downtown/"] },
-
-            // Glenwood Springs
-            { name: "Glenwood Caverns", city: "Glenwood Springs", category: "Western Slope", lat: 39.5508, lng: -107.3247, articles: ["/glenwood-springs/caverns/"] },
-            { name: "Glenwood Springs Downtown", city: "Glenwood Springs", category: "Western Slope", lat: 39.5508, lng: -107.3247, articles: ["/glenwood-springs/"] },
-
-            // Basalt
-            { name: "Basalt Downtown", city: "Basalt", category: "Western Slope", lat: 39.3689, lng: -107.0342, articles: ["/basalt/", "/basalt/downtown/"] },
-            { name: "Frying Pan River", city: "Basalt", category: "Western Slope", lat: 39.3700, lng: -107.0500, articles: ["/basalt/frying-pan-river/"] },
-            { name: "Ruedi Reservoir", city: "Basalt", category: "Western Slope", lat: 39.3500, lng: -106.8000, articles: ["/basalt/ruedi-reservoir/"] },
-
-            // Grand Junction / Fruita
-            { name: "Grand Junction Downtown", city: "Grand Junction", category: "Western Slope", lat: 39.0639, lng: -108.5506, articles: ["/grand-junction/"] },
-            { name: "Fruita Downtown", city: "Fruita", category: "Western Slope", lat: 39.1586, lng: -108.7289, articles: ["/fruita/", "/fruita/downtown/"] },
-            { name: "Dinosaur Journey Museum", city: "Fruita", category: "Western Slope", lat: 39.1600, lng: -108.7300, articles: ["/fruita/dinosaur-journey/"] },
-
-            // Gaming Towns
-            { name: "Black Hawk", city: "Black Hawk", category: "Gaming Towns", lat: 39.7986, lng: -105.4928, articles: ["/black-hawk/"] },
-            { name: "Central City", city: "Central City", category: "Gaming Towns", lat: 39.8019, lng: -105.5142, articles: ["/central-city/", "/central-city/mining-history/"] },
-            { name: "Cripple Creek", city: "Cripple Creek", category: "Gaming Towns", lat: 38.7467, lng: -105.1783, articles: ["/cripple-creek/"] },
-
-            // Special Event Locations
-            { name: "Santa Fe Drive (Cinco de Mayo)", city: "Denver", category: "Event Venues", lat: 39.7178, lng: -105.0089, articles: ["/colorado/spring/cinco-de-mayo/"] },
-            { name: "Monte Vista NWR (Sandhill Cranes)", city: "Monte Vista", category: "Event Venues", lat: 37.5500, lng: -106.0500, articles: ["/colorado/spring/birdwatching/"] },
-            { name: "Barr Lake State Park (Birdwatching)", city: "Brighton", category: "Event Venues", lat: 39.9333, lng: -104.7500, articles: ["/colorado/spring/birdwatching/"] },
-            { name: "Chatfield State Park", city: "Littleton", category: "Event Venues", lat: 39.5333, lng: -105.0833, articles: ["/colorado/spring/birdwatching/"] },
-            { name: "Betty Ford Alpine Gardens", city: "Vail", category: "Event Venues", lat: 39.6403, lng: -106.3742, articles: ["/vail/betty-ford-alpine-gardens/"] }
+            // Natural Attractions
+            { name: "Rocky Mountain National Park", city: "Estes Park", category: "Natural Attractions", articles: ["/boulder/rocky-mountain-national-park/index.html"] },
+            { name: "Maroon Bells", city: "Aspen", category: "Natural Attractions", articles: ["/aspen/maroon-bells/index.html"] },
+            { name: "Great Sand Dunes", city: "Alamosa", category: "Natural Attractions", articles: ["/alamosa/great-sand-dunes/index.html"] },
+            { name: "Mesa Verde", city: "Cortez", category: "Natural Attractions", articles: ["/cortez/mesa-verde/index.html"] },
+            { name: "Hanging Lake", city: "Glenwood Springs", category: "Natural Attractions", articles: ["/glenwood-springs/hanging-lake/index.html"] }
         ];
-
-        // State
-        let userLat = null;
-        let userLng = null;
-        let sortedByDistance = false;
-
-        // Calculate distance between two points (Haversine formula)
-        function calculateDistance(lat1, lon1, lat2, lon2) {
-            const R = 3959; // Earth's radius in miles
-            const dLat = (lat2 - lat1) * Math.PI / 180;
-            const dLon = (lon2 - lon1) * Math.PI / 180;
-            const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
-                      Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
-                      Math.sin(dLon/2) * Math.sin(dLon/2);
-            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-            return R * c;
-        }
 
         // Generate Google Maps link
         function getMapsLink(location) {
@@ -612,199 +461,98 @@
             return `https://www.google.com/maps/search/?api=1&query=${query}`;
         }
 
-        // Generate Google Maps directions link
-        function getDirectionsLink(location) {
-            if (userLat && userLng) {
-                return `https://www.google.com/maps/dir/${userLat},${userLng}/${location.lat},${location.lng}`;
-            }
-            return getMapsLink(location);
+        // Generate prompt for AI
+        function generatePrompt(location, articlePath) {
+            const fullPath = BASE_PATH + articlePath;
+            return `PHOTO PLACEMENT TASK
+
+Location: ${location.name}
+City: ${location.city}, Colorado
+Article File: ${fullPath}
+
+Instructions:
+1. Read the article at the file path above
+2. Find the heading that mentions "${location.name}" or related content
+3. Photo placement rules:
+   - If the heading is followed by paragraph text: place photo AFTER the text
+   - If the heading has no text below it: place photo directly after the heading
+4. Add the photo using this format:
+   <img src="/images/${location.name.toLowerCase().replace(/[^a-z0-9]+/g, '-')}.jpg" alt="${location.name} in ${location.city}, Colorado" loading="lazy">
+5. Ensure the image has descriptive alt text for accessibility`;
         }
 
-        // Get user location
-        function getUserLocation() {
-            const statusEl = document.getElementById('locationStatus');
-            const textEl = document.getElementById('locationText');
-            const retryBtn = document.getElementById('retryLocation');
-            const sortBtn = document.getElementById('sortByDistance');
-
-            if (!navigator.geolocation) {
-                textEl.textContent = 'Geolocation not supported by your browser';
-                statusEl.classList.add('error');
-                retryBtn.style.display = 'none';
-                return;
-            }
-
-            textEl.textContent = 'Detecting your location...';
-
-            navigator.geolocation.getCurrentPosition(
-                (position) => {
-                    userLat = position.coords.latitude;
-                    userLng = position.coords.longitude;
-                    textEl.textContent = `Located at ${userLat.toFixed(4)}, ${userLng.toFixed(4)}`;
-                    statusEl.classList.remove('error');
-                    statusEl.classList.add('success');
-                    retryBtn.style.display = 'none';
-                    sortBtn.disabled = false;
-
-                    // Add distances to locations
-                    locations.forEach(loc => {
-                        loc.distance = calculateDistance(userLat, userLng, loc.lat, loc.lng);
-                    });
-
-                    renderLocations();
-                },
-                (error) => {
-                    let message = 'Could not detect location';
-                    switch(error.code) {
-                        case error.PERMISSION_DENIED:
-                            message = 'Location access denied. Enable location in browser settings.';
-                            break;
-                        case error.POSITION_UNAVAILABLE:
-                            message = 'Location unavailable';
-                            break;
-                        case error.TIMEOUT:
-                            message = 'Location request timed out';
-                            break;
-                    }
-                    textEl.textContent = message;
-                    statusEl.classList.add('error');
-                    statusEl.classList.remove('success');
-                    retryBtn.style.display = 'inline-block';
-                },
-                { enableHighAccuracy: true, timeout: 10000, maximumAge: 300000 }
-            );
+        // Copy prompt to clipboard
+        function copyPrompt(location, articlePath, buttonEl) {
+            const prompt = generatePrompt(location, articlePath);
+            navigator.clipboard.writeText(prompt).then(() => {
+                buttonEl.textContent = 'Copied!';
+                buttonEl.classList.add('copied');
+                showToast();
+                setTimeout(() => {
+                    buttonEl.textContent = 'Copy Prompt';
+                    buttonEl.classList.remove('copied');
+                }, 2000);
+            });
         }
 
-        // Populate filter dropdowns
-        function populateFilters() {
-            const categories = [...new Set(locations.map(l => l.category))].sort();
-            const cities = [...new Set(locations.map(l => l.city))].sort();
-
-            const categoryFilter = document.getElementById('categoryFilter');
-            const cityFilter = document.getElementById('cityFilter');
-
-            categories.forEach(cat => {
-                const option = document.createElement('option');
-                option.value = cat;
-                option.textContent = cat;
-                categoryFilter.appendChild(option);
-            });
-
-            cities.forEach(city => {
-                const option = document.createElement('option');
-                option.value = city;
-                option.textContent = city;
-                cityFilter.appendChild(option);
-            });
-
-            document.getElementById('categoriesCount').textContent = categories.length;
+        // Show toast notification
+        function showToast() {
+            const toast = document.getElementById('toast');
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2000);
         }
 
         // Render locations
         function renderLocations() {
             const container = document.getElementById('locationsContainer');
-            const searchTerm = document.getElementById('searchBox').value.toLowerCase();
-            const categoryFilter = document.getElementById('categoryFilter').value;
-            const cityFilter = document.getElementById('cityFilter').value;
+            const categories = [...new Set(locations.map(l => l.category))].sort();
 
-            // Filter locations
-            let filtered = locations.filter(loc => {
-                const matchesSearch = loc.name.toLowerCase().includes(searchTerm) ||
-                                     loc.city.toLowerCase().includes(searchTerm) ||
-                                     loc.category.toLowerCase().includes(searchTerm);
-                const matchesCategory = categoryFilter === 'all' || loc.category === categoryFilter;
-                const matchesCity = cityFilter === 'all' || loc.city === cityFilter;
-                return matchesSearch && matchesCategory && matchesCity;
-            });
-
-            // Sort by distance if enabled and available
-            if (sortedByDistance && userLat) {
-                filtered.sort((a, b) => (a.distance || 9999) - (b.distance || 9999));
-            }
+            // Update stats
+            document.getElementById('totalLocations').textContent = locations.length;
+            document.getElementById('categoriesCount').textContent = categories.length;
 
             // Group by category
             const grouped = {};
-            filtered.forEach(loc => {
+            locations.forEach(loc => {
                 if (!grouped[loc.category]) {
                     grouped[loc.category] = [];
                 }
                 grouped[loc.category].push(loc);
             });
 
-            // Update stats
-            document.getElementById('totalLocations').textContent = locations.length;
-            document.getElementById('visibleCount').textContent = filtered.length;
-
-            // Render
-            if (filtered.length === 0) {
-                container.innerHTML = '<div class="no-results"><h3>No locations found</h3><p>Try adjusting your search or filters</p></div>';
-                return;
-            }
-
             let html = '';
-
-            if (sortedByDistance && userLat) {
-                // Single list sorted by distance
-                html = '<div class="category-section"><h2 class="category-title">All Locations (Sorted by Distance)</h2><div class="location-grid">';
-                filtered.forEach(loc => {
-                    html += renderLocationCard(loc);
+            Object.keys(grouped).sort().forEach(category => {
+                html += `<div class="category-section">
+                    <h2 class="category-title">${category} (${grouped[category].length})</h2>
+                    <div class="location-grid">`;
+                grouped[category].forEach((loc, idx) => {
+                    html += renderLocationCard(loc, idx);
                 });
                 html += '</div></div>';
-            } else {
-                // Grouped by category
-                Object.keys(grouped).sort().forEach(category => {
-                    html += `<div class="category-section">
-                        <h2 class="category-title">${category} (${grouped[category].length})</h2>
-                        <div class="location-grid">`;
-                    grouped[category].forEach(loc => {
-                        html += renderLocationCard(loc);
-                    });
-                    html += '</div></div>';
-                });
-            }
+            });
 
             container.innerHTML = html;
         }
 
-        function renderLocationCard(loc) {
-            const distanceHtml = loc.distance !== undefined
-                ? `<span class="location-distance">${loc.distance.toFixed(1)} miles away</span>`
-                : '';
-
-            const articlesHtml = loc.articles.length > 0
-                ? loc.articles.slice(0, 2).map(a =>
-                    `<a href="${a}" class="article-link" target="_blank">View Article</a>`
-                  ).join('')
-                : '<span class="article-link" style="opacity:0.5">No article yet</span>';
+        function renderLocationCard(loc, idx) {
+            const promptButtons = loc.articles.map((article, i) =>
+                `<button class="copy-prompt-btn" onclick="copyPrompt(locations.find(l => l.name === '${loc.name.replace(/'/g, "\\'")}'), '${article}', this)">Copy Prompt${loc.articles.length > 1 ? ` (${i + 1})` : ''}</button>`
+            ).join('');
 
             return `<div class="location-card">
                 <div class="location-name">${loc.name}</div>
                 <div class="location-city">${loc.city}, Colorado</div>
-                ${distanceHtml}
                 <div class="location-links">
-                    <a href="${userLat ? getDirectionsLink(loc) : getMapsLink(loc)}" class="maps-link" target="_blank" rel="noopener">
-                        ${userLat ? 'Get Directions' : 'View on Maps'}
-                    </a>
-                    ${articlesHtml}
+                    <a href="${getMapsLink(loc)}" class="maps-link" target="_blank" rel="noopener">View on Maps</a>
+                    ${promptButtons}
                 </div>
             </div>`;
         }
 
-        // Event listeners
-        document.getElementById('searchBox').addEventListener('input', renderLocations);
-        document.getElementById('categoryFilter').addEventListener('change', renderLocations);
-        document.getElementById('cityFilter').addEventListener('change', renderLocations);
-        document.getElementById('retryLocation').addEventListener('click', getUserLocation);
-        document.getElementById('sortByDistance').addEventListener('click', function() {
-            sortedByDistance = !sortedByDistance;
-            this.textContent = sortedByDistance ? 'Sort by Category' : 'Sort by Distance';
-            renderLocations();
-        });
-
         // Initialize
-        populateFilters();
         renderLocations();
-        getUserLocation();
     </script>
 </body>
 </html>
