@@ -10,6 +10,34 @@
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <title>Meet the Owner — Abraham (Abe) | Denver Sam Transportation LLC</title>
 
+    <!-- JSON-LD Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "LocalBusiness",
+          "name": "Denver Sam Transportation LLC",
+          "url": "https://denversam.com/owner",
+          "telephone": "+17209380029",
+          "email": "info@denversam.com",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Denver",
+            "addressRegion": "CO",
+            "addressCountry": "US"
+          },
+          "founder": {
+            "@type": "Person",
+            "name": "Abraham",
+            "alternateName": "Abe",
+            "jobTitle": "Owner-Operator & Founder"
+          }
+        }
+      ]
+    }
+    </script>
+
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-LLL4VPHMHH"></script>
     <script>
@@ -26,7 +54,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
-        /* ── Owner page specific styles ── */
+        /* ── Owner page ── */
         .owner-hero {
             background: linear-gradient(135deg, #1a3a5c 0%, #2c5f8a 100%);
             padding: 80px 20px 70px;
@@ -47,6 +75,53 @@
             margin: 0 auto;
         }
 
+        /* Contact CTA bar */
+        .contact-bar {
+            background: #f0f7ff;
+            border-bottom: 1px solid #d1e9ff;
+            padding: 18px 20px;
+            text-align: center;
+        }
+        .contact-bar-inner {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        .contact-bar p {
+            color: #374151;
+            font-size: 0.95rem;
+            font-weight: 500;
+            margin: 0;
+        }
+        .contact-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 9px 20px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 0.92rem;
+            text-decoration: none;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .contact-pill:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+        }
+        .contact-pill-phone {
+            background: #1a3a5c;
+            color: #fff;
+        }
+        .contact-pill-email {
+            background: #fff;
+            color: #1a3a5c;
+            border: 2px solid #1a3a5c;
+        }
+
         /* Video section */
         .video-section {
             padding: 70px 20px 60px;
@@ -55,24 +130,33 @@
         .video-section .section-header {
             margin-bottom: 40px;
         }
-        .video-wrapper {
-            max-width: 420px;
+        .video-frame {
+            max-width: 360px;
             margin: 0 auto;
-            border-radius: 16px;
+            border-radius: 18px;
             overflow: hidden;
-            box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+            box-shadow: 0 0 0 6px #1a3a5c, 0 16px 50px rgba(0,0,0,0.18);
             aspect-ratio: 9 / 16;
             position: relative;
         }
-        .video-wrapper iframe {
+        .video-frame iframe {
             width: 100%;
             height: 100%;
             border: none;
             display: block;
         }
+        .video-label {
+            text-align: center;
+            margin-top: 14px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: #6b7280;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
         .intro-text {
             max-width: 700px;
-            margin: 40px auto 0;
+            margin: 36px auto 0;
             font-size: 1.1rem;
             line-height: 1.8;
             color: #374151;
@@ -111,17 +195,23 @@
         .data-section {
             padding: 70px 20px;
         }
+
+        /* Scroll shadow hint on right edge */
         .table-wrapper {
             overflow-x: auto;
             border-radius: 12px;
             box-shadow: 0 2px 12px rgba(0,0,0,0.08);
             border: 1px solid #e1e5e9;
+            background:
+                linear-gradient(to right, #fff 30%, rgba(255,255,255,0)) left center / 40px 100% no-repeat,
+                linear-gradient(to left, #e0eeff 0%, rgba(255,255,255,0)) right center / 40px 100% no-repeat;
+            background-attachment: local, scroll;
         }
         table {
             width: 100%;
             border-collapse: collapse;
             font-size: 0.95rem;
-            min-width: 560px;
+            background: #fff;
         }
         thead {
             background: linear-gradient(135deg, #1a3a5c 0%, #2c5f8a 100%);
@@ -134,6 +224,7 @@
             letter-spacing: 0.5px;
             font-size: 0.85rem;
             text-transform: uppercase;
+            white-space: nowrap;
         }
         tbody tr {
             border-bottom: 1px solid #f0f2f5;
@@ -163,31 +254,65 @@
             font-size: 0.78rem;
             font-weight: 600;
             letter-spacing: 0.3px;
+            white-space: nowrap;
         }
-        .badge-pass {
-            background: #d1fae5;
-            color: #065f46;
-        }
-        .badge-note {
-            background: #fef3c7;
-            color: #92400e;
-        }
-        .badge-level1 {
-            background: #dbeafe;
-            color: #1e40af;
-        }
-        .badge-level3 {
-            background: #ede9fe;
-            color: #5b21b6;
-        }
-        .table-footer {
+        .badge-pass   { background: #d1fae5; color: #065f46; }
+        .badge-note   { background: #fef3c7; color: #92400e; }
+        .badge-level1 { background: #dbeafe; color: #1e40af; }
+        .badge-level3 { background: #ede9fe; color: #5b21b6; }
+
+        tfoot .table-footer {
             background: #f8fafc;
             border-top: 2px solid #e1e5e9;
         }
-        .table-footer td {
+        tfoot .table-footer td {
             font-weight: 700;
             color: #1f2937;
             padding: 14px 18px;
+        }
+
+        /* ── Responsive tables — card stack on mobile ── */
+        @media (max-width: 600px) {
+            .table-wrapper {
+                border-radius: 10px;
+                background: none;
+                box-shadow: none;
+                border: none;
+            }
+            table { background: transparent; }
+            thead { display: none; }
+            tbody tr {
+                display: block;
+                border: 1px solid #e1e5e9;
+                border-radius: 10px;
+                margin-bottom: 14px;
+                background: #fff !important;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+                padding: 4px 0;
+            }
+            tbody tr:hover { background: #f7fbff !important; }
+            tbody td {
+                display: flex;
+                align-items: flex-start;
+                gap: 10px;
+                padding: 10px 16px;
+                border-bottom: 1px solid #f0f2f5;
+                font-size: 0.9rem;
+            }
+            tbody td:last-child { border-bottom: none; }
+            tbody td::before {
+                content: attr(data-label);
+                font-weight: 700;
+                color: #1a3a5c;
+                font-size: 0.72rem;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                min-width: 76px;
+                flex-shrink: 0;
+                padding-top: 2px;
+            }
+            tfoot .table-footer { display: block; border-radius: 10px; margin-top: 4px; }
+            tfoot .table-footer td { display: block; padding: 12px 16px; font-size: 0.88rem; }
         }
 
         /* Denver spots */
@@ -213,10 +338,7 @@
             padding: 28px 28px 20px;
             color: #fff;
         }
-        .spot-card-header h3 {
-            font-size: 1.25rem;
-            margin-bottom: 4px;
-        }
+        .spot-card-header h3 { font-size: 1.25rem; margin-bottom: 4px; }
         .spot-card-header .spot-tag {
             font-size: 0.78rem;
             opacity: 0.9;
@@ -224,14 +346,23 @@
             letter-spacing: 1px;
             font-weight: 600;
         }
-        .spot-card-body {
-            padding: 20px 28px 26px;
-        }
+        .spot-card-body { padding: 20px 28px 26px; }
         .spot-card-body p {
             color: #555;
             font-size: 0.97rem;
             line-height: 1.65;
+            margin-bottom: 10px;
+        }
+        .spot-abe-note {
+            font-size: 0.88rem;
+            font-style: italic;
+            color: #1a3a5c;
+            background: #f0f7ff;
+            border-left: 3px solid #2c5f8a;
+            padding: 8px 12px;
+            border-radius: 0 6px 6px 0;
             margin-bottom: 14px;
+            line-height: 1.5;
         }
         .spot-recommended {
             display: inline-flex;
@@ -246,23 +377,86 @@
             letter-spacing: 0.4px;
             text-transform: uppercase;
         }
-        .spot-recommended::before {
-            content: "★";
-        }
+        .spot-recommended::before { content: "★"; }
 
-        /* color palette for spot cards */
-        .spot-red-rocks    { background: linear-gradient(135deg, #7f1d1d 0%, #b91c1c 100%); }
-        .spot-union-sta    { background: linear-gradient(135deg, #1e3a5f 0%, #2563eb 100%); }
-        .spot-rino         { background: linear-gradient(135deg, #4c1d95 0%, #7c3aed 100%); }
-        .spot-city-park    { background: linear-gradient(135deg, #14532d 0%, #16a34a 100%); }
-        .spot-larimer      { background: linear-gradient(135deg, #78350f 0%, #d97706 100%); }
-        .spot-botanic      { background: linear-gradient(135deg, #064e3b 0%, #059669 100%); }
+        .spot-red-rocks { background: linear-gradient(135deg, #7f1d1d 0%, #b91c1c 100%); }
+        .spot-union-sta { background: linear-gradient(135deg, #1e3a5f 0%, #2563eb 100%); }
+        .spot-rino      { background: linear-gradient(135deg, #4c1d95 0%, #7c3aed 100%); }
+        .spot-city-park { background: linear-gradient(135deg, #14532d 0%, #16a34a 100%); }
+        .spot-larimer   { background: linear-gradient(135deg, #78350f 0%, #d97706 100%); }
+        .spot-botanic   { background: linear-gradient(135deg, #064e3b 0%, #059669 100%); }
+
+        /* Bottom CTA section */
+        .owner-cta {
+            background: linear-gradient(135deg, #1a3a5c 0%, #2c5f8a 100%);
+            padding: 70px 20px;
+            text-align: center;
+            color: #fff;
+        }
+        .owner-cta h2 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 14px;
+            color: #fff;
+        }
+        .owner-cta p {
+            font-size: 1.1rem;
+            color: #bfdbfe;
+            max-width: 560px;
+            margin: 0 auto 36px;
+            line-height: 1.7;
+        }
+        .owner-cta-links {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .cta-btn-solid {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #fff;
+            color: #1a3a5c;
+            padding: 14px 32px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: all 0.25s ease;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+        }
+        .cta-btn-solid:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 28px rgba(0,0,0,0.22);
+        }
+        .cta-btn-outline {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: transparent;
+            color: #fff;
+            padding: 14px 32px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 1rem;
+            text-decoration: none;
+            border: 2px solid #fff;
+            transition: all 0.25s ease;
+        }
+        .cta-btn-outline:hover {
+            background: #fff;
+            color: #1a3a5c;
+            transform: translateY(-2px);
+        }
 
         @media (max-width: 768px) {
             .owner-hero h1 { font-size: 2.2rem; }
             .stats-bar-inner { grid-template-columns: 1fr; gap: 20px; }
             .stat-item strong { font-size: 2rem; }
             .spots-grid { grid-template-columns: 1fr; }
+            .owner-cta h2 { font-size: 1.8rem; }
+            .contact-bar-inner { flex-direction: column; gap: 10px; }
         }
     </style>
 </head>
@@ -315,8 +509,21 @@
         <!-- Hero -->
         <section class="owner-hero" aria-labelledby="owner-title">
             <h1 id="owner-title">Meet the Owner</h1>
-            <p>Abraham (Abe) — Owner-Operator & Founder, Denver Sam Transportation LLC</p>
+            <p>Abraham (Abe) — Owner-Operator &amp; Founder, Denver Sam Transportation LLC</p>
         </section>
+
+        <!-- Contact bar (top) -->
+        <div class="contact-bar" role="complementary" aria-label="Contact information">
+            <div class="contact-bar-inner">
+                <p>Get in touch with Abe directly:</p>
+                <a href="tel:7209380029" class="contact-pill contact-pill-phone" aria-label="Call (720) 938-0029">
+                    &#128222; (720) 938-0029
+                </a>
+                <a href="mailto:info@denversam.com" class="contact-pill contact-pill-email" aria-label="Email info@denversam.com">
+                    &#9993; info@denversam.com
+                </a>
+            </div>
+        </div>
 
         <!-- Intro Video -->
         <section class="video-section" aria-labelledby="video-heading">
@@ -325,7 +532,7 @@
                 <p class="section-subtitle">Watch this short video to learn about Abe, his equipment, and the services Denver Sam Transportation provides.</p>
             </div>
 
-            <div class="video-wrapper">
+            <div class="video-frame">
                 <iframe
                     src="https://www.youtube.com/embed/nt0BAIzKf-w"
                     title="Introduction — Abraham (Abe), Owner of Denver Sam Transportation LLC"
@@ -334,9 +541,10 @@
                     loading="lazy">
                 </iframe>
             </div>
+            <p class="video-label">Denver Sam Transportation LLC</p>
 
             <p class="intro-text">
-                Hi, my name is Abraham, and I go by Abe. I am the owner-operator and founder of Denver Sam Transportation LLC. Please take a moment to watch the introductory video below to learn more about me, my equipment, and the transportation services we provide.
+                Hi, my name is Abraham, and I go by Abe. I am the owner-operator and founder of Denver Sam Transportation LLC. Please take a moment to watch the introductory video above to learn more about me, my equipment, and the transportation services we provide.
             </p>
         </section>
 
@@ -377,166 +585,166 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>05/08/2026</td>
-                            <td>KMX Logistics, Inc.</td>
-                            <td>251978-0</td>
-                            <td>Denver Sam Transportation LLC</td>
+                            <td data-label="Date">05/08/2026</td>
+                            <td data-label="Broker">KMX Logistics, Inc.</td>
+                            <td data-label="Load ID">251978-0</td>
+                            <td data-label="Authority">Denver Sam Transportation LLC</td>
                         </tr>
                         <tr>
-                            <td>05/07/2026</td>
-                            <td>Maze Freight Solutions</td>
-                            <td>185607</td>
-                            <td>Denver Sam Transportation LLC</td>
+                            <td data-label="Date">05/07/2026</td>
+                            <td data-label="Broker">Maze Freight Solutions</td>
+                            <td data-label="Load ID">185607</td>
+                            <td data-label="Authority">Denver Sam Transportation LLC</td>
                         </tr>
                         <tr>
-                            <td>05/04/2026</td>
-                            <td>Total Transit LLC</td>
-                            <td>55216</td>
-                            <td>Denver Sam Transportation LLC</td>
+                            <td data-label="Date">05/04/2026</td>
+                            <td data-label="Broker">Total Transit LLC</td>
+                            <td data-label="Load ID">55216</td>
+                            <td data-label="Authority">Denver Sam Transportation LLC</td>
                         </tr>
                         <tr>
-                            <td>04/30/2026</td>
-                            <td>Allstates WorldCargo</td>
-                            <td>EWR 3826357</td>
-                            <td>Denver Sam Transportation LLC</td>
+                            <td data-label="Date">04/30/2026</td>
+                            <td data-label="Broker">Allstates WorldCargo</td>
+                            <td data-label="Load ID">EWR 3826357</td>
+                            <td data-label="Authority">Denver Sam Transportation LLC</td>
                         </tr>
                         <tr>
-                            <td>04/23/2026</td>
-                            <td>MountainMovers Transportation &amp; Logistics</td>
-                            <td>1680578</td>
-                            <td>Denver Sam Transportation LLC</td>
+                            <td data-label="Date">04/23/2026</td>
+                            <td data-label="Broker">MountainMovers Transportation &amp; Logistics</td>
+                            <td data-label="Load ID">1680578</td>
+                            <td data-label="Authority">Denver Sam Transportation LLC</td>
                         </tr>
                         <tr>
-                            <td>04/23/2026</td>
-                            <td>MountainMovers Transportation &amp; Logistics</td>
-                            <td>1680547</td>
-                            <td>Denver Sam Transportation LLC</td>
+                            <td data-label="Date">04/23/2026</td>
+                            <td data-label="Broker">MountainMovers Transportation &amp; Logistics</td>
+                            <td data-label="Load ID">1680547</td>
+                            <td data-label="Authority">Denver Sam Transportation LLC</td>
                         </tr>
                         <tr>
-                            <td>04/22/2026</td>
-                            <td>MountainMovers Transportation &amp; Logistics</td>
-                            <td>1680610</td>
-                            <td>Denver Sam Transportation LLC</td>
+                            <td data-label="Date">04/22/2026</td>
+                            <td data-label="Broker">MountainMovers Transportation &amp; Logistics</td>
+                            <td data-label="Load ID">1680610</td>
+                            <td data-label="Authority">Denver Sam Transportation LLC</td>
                         </tr>
                         <tr>
-                            <td>04/22/2026</td>
-                            <td>MountainMovers Transportation &amp; Logistics</td>
-                            <td>1680647</td>
-                            <td>Denver Sam Transportation LLC</td>
+                            <td data-label="Date">04/22/2026</td>
+                            <td data-label="Broker">MountainMovers Transportation &amp; Logistics</td>
+                            <td data-label="Load ID">1680647</td>
+                            <td data-label="Authority">Denver Sam Transportation LLC</td>
                         </tr>
                         <tr>
-                            <td>04/15/2026</td>
-                            <td>Raynor Garage Doors</td>
-                            <td>111560</td>
-                            <td>Denver Sam Transportation LLC</td>
+                            <td data-label="Date">04/15/2026</td>
+                            <td data-label="Broker">Raynor Garage Doors</td>
+                            <td data-label="Load ID">111560</td>
+                            <td data-label="Authority">Denver Sam Transportation LLC</td>
                         </tr>
                         <tr>
-                            <td>04/02/2026</td>
-                            <td>Complex Logistics</td>
-                            <td>7500305</td>
-                            <td>Denver Sam Transportation LLC</td>
+                            <td data-label="Date">04/02/2026</td>
+                            <td data-label="Broker">Complex Logistics</td>
+                            <td data-label="Load ID">7500305</td>
+                            <td data-label="Authority">Denver Sam Transportation LLC</td>
                         </tr>
                         <tr>
-                            <td>04/02/2026</td>
-                            <td>Complex Logistics</td>
-                            <td>8263971</td>
-                            <td>Denver Sam Transportation LLC</td>
+                            <td data-label="Date">04/02/2026</td>
+                            <td data-label="Broker">Complex Logistics</td>
+                            <td data-label="Load ID">8263971</td>
+                            <td data-label="Authority">Denver Sam Transportation LLC</td>
                         </tr>
                         <tr>
-                            <td>04/01/2026</td>
-                            <td>Complex Logistics</td>
-                            <td>8582932</td>
-                            <td>Denver Sam Transportation LLC</td>
+                            <td data-label="Date">04/01/2026</td>
+                            <td data-label="Broker">Complex Logistics</td>
+                            <td data-label="Load ID">8582932</td>
+                            <td data-label="Authority">Denver Sam Transportation LLC</td>
                         </tr>
                         <tr>
-                            <td>04/01/2026</td>
-                            <td>Infinity Logistics Group</td>
-                            <td>Production Gear Load</td>
-                            <td>Denver Sam Transportation LLC</td>
+                            <td data-label="Date">04/01/2026</td>
+                            <td data-label="Broker">Infinity Logistics Group</td>
+                            <td data-label="Load ID">Production Gear Load</td>
+                            <td data-label="Authority">Denver Sam Transportation LLC</td>
                         </tr>
                         <tr>
-                            <td>03/13/2026</td>
-                            <td>PGL / Perimeter Logistics</td>
-                            <td>S01496569</td>
-                            <td>Denver Sam Transportation LLC</td>
+                            <td data-label="Date">03/13/2026</td>
+                            <td data-label="Broker">PGL / Perimeter Logistics</td>
+                            <td data-label="Load ID">S01496569</td>
+                            <td data-label="Authority">Denver Sam Transportation LLC</td>
                         </tr>
                         <tr>
-                            <td>03/10/2026</td>
-                            <td>NWL</td>
-                            <td>U6321767</td>
-                            <td>Leased under Gant Transportation LLC</td>
+                            <td data-label="Date">03/10/2026</td>
+                            <td data-label="Broker">NWL</td>
+                            <td data-label="Load ID">U6321767</td>
+                            <td data-label="Authority">Leased under Gant Transportation LLC</td>
                         </tr>
                         <tr>
-                            <td>03/10/2026</td>
-                            <td>Justice Bedding Company</td>
-                            <td>71750 / 71560 / 71749</td>
-                            <td>Leased under Gant Transportation LLC</td>
+                            <td data-label="Date">03/10/2026</td>
+                            <td data-label="Broker">Justice Bedding Company</td>
+                            <td data-label="Load ID">71750 / 71560 / 71749</td>
+                            <td data-label="Authority">Leased under Gant Transportation LLC</td>
                         </tr>
                         <tr>
-                            <td>03/10/2026</td>
-                            <td>MountainMovers Transportation &amp; Logistics</td>
-                            <td>1671402</td>
-                            <td>Denver Sam Transportation LLC</td>
+                            <td data-label="Date">03/10/2026</td>
+                            <td data-label="Broker">MountainMovers Transportation &amp; Logistics</td>
+                            <td data-label="Load ID">1671402</td>
+                            <td data-label="Authority">Denver Sam Transportation LLC</td>
                         </tr>
                         <tr>
-                            <td>03/10/2026</td>
-                            <td>MountainMovers Transportation &amp; Logistics</td>
-                            <td>1670795</td>
-                            <td>Denver Sam Transportation LLC</td>
+                            <td data-label="Date">03/10/2026</td>
+                            <td data-label="Broker">MountainMovers Transportation &amp; Logistics</td>
+                            <td data-label="Load ID">1670795</td>
+                            <td data-label="Authority">Denver Sam Transportation LLC</td>
                         </tr>
                         <tr>
-                            <td>03/10/2026</td>
-                            <td>MountainMovers Transportation &amp; Logistics</td>
-                            <td>1671481</td>
-                            <td>Denver Sam Transportation LLC</td>
+                            <td data-label="Date">03/10/2026</td>
+                            <td data-label="Broker">MountainMovers Transportation &amp; Logistics</td>
+                            <td data-label="Load ID">1671481</td>
+                            <td data-label="Authority">Denver Sam Transportation LLC</td>
                         </tr>
                         <tr>
-                            <td>03/10/2026</td>
-                            <td>MountainMovers Transportation &amp; Logistics</td>
-                            <td>1671499</td>
-                            <td>Denver Sam Transportation LLC</td>
+                            <td data-label="Date">03/10/2026</td>
+                            <td data-label="Broker">MountainMovers Transportation &amp; Logistics</td>
+                            <td data-label="Load ID">1671499</td>
+                            <td data-label="Authority">Denver Sam Transportation LLC</td>
                         </tr>
                         <tr>
-                            <td>03/09/2026</td>
-                            <td>Aeronet Global Logistics Solutions</td>
-                            <td>111204637</td>
-                            <td>Denver Sam Transportation LLC</td>
+                            <td data-label="Date">03/09/2026</td>
+                            <td data-label="Broker">Aeronet Global Logistics Solutions</td>
+                            <td data-label="Load ID">111204637</td>
+                            <td data-label="Authority">Denver Sam Transportation LLC</td>
                         </tr>
                         <tr>
-                            <td>02/27/2026</td>
-                            <td>Total Quality Logistics (TQL)</td>
-                            <td>35765470</td>
-                            <td>—</td>
+                            <td data-label="Date">02/27/2026</td>
+                            <td data-label="Broker">Total Quality Logistics (TQL)</td>
+                            <td data-label="Load ID">35765470</td>
+                            <td data-label="Authority">—</td>
                         </tr>
                         <tr>
-                            <td>02/27/2026</td>
-                            <td>Total Quality Logistics (TQL)</td>
-                            <td>35705470</td>
-                            <td>—</td>
+                            <td data-label="Date">02/27/2026</td>
+                            <td data-label="Broker">Total Quality Logistics (TQL)</td>
+                            <td data-label="Load ID">35705470</td>
+                            <td data-label="Authority">—</td>
                         </tr>
                         <tr>
-                            <td>02/27/2026</td>
-                            <td>Total Quality Logistics (TQL)</td>
-                            <td>35785470</td>
-                            <td>—</td>
+                            <td data-label="Date">02/27/2026</td>
+                            <td data-label="Broker">Total Quality Logistics (TQL)</td>
+                            <td data-label="Load ID">35785470</td>
+                            <td data-label="Authority">—</td>
                         </tr>
                         <tr>
-                            <td>02/17/2026</td>
-                            <td>RXO Freight Forwarding</td>
-                            <td>OVEFEB26</td>
-                            <td>Contracted Carrier — Moto Express GP LLC</td>
+                            <td data-label="Date">02/17/2026</td>
+                            <td data-label="Broker">RXO Freight Forwarding</td>
+                            <td data-label="Load ID">OVEFEB26</td>
+                            <td data-label="Authority">Contracted Carrier — Moto Express GP LLC</td>
                         </tr>
                         <tr>
-                            <td>02/16/2026</td>
-                            <td>ILG Logistics</td>
-                            <td>ILG-289195</td>
-                            <td>Contracted Carrier — Moto Express GP LLC</td>
+                            <td data-label="Date">02/16/2026</td>
+                            <td data-label="Broker">ILG Logistics</td>
+                            <td data-label="Load ID">ILG-289195</td>
+                            <td data-label="Authority">Contracted Carrier — Moto Express GP LLC</td>
                         </tr>
                         <tr>
-                            <td>02/15/2026</td>
-                            <td>Freedom Freight Services / DHL</td>
-                            <td>A11575593</td>
-                            <td>Contracted Carrier — Moto Express GP LLC</td>
+                            <td data-label="Date">02/15/2026</td>
+                            <td data-label="Broker">Freedom Freight Services / DHL</td>
+                            <td data-label="Load ID">A11575593</td>
+                            <td data-label="Authority">Contracted Carrier — Moto Express GP LLC</td>
                         </tr>
                     </tbody>
                     <tfoot>
@@ -568,25 +776,25 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>03/10/2026</td>
-                            <td>Trego County, KS</td>
-                            <td><span class="badge badge-level1">Level I</span></td>
-                            <td><span class="badge badge-note">Markings Violation</span></td>
-                            <td>Operating under Gant Transportation LLC at time of inspection — leased authority markings issue.</td>
+                            <td data-label="Date">05/08/2026</td>
+                            <td data-label="Location">Jasper, FL</td>
+                            <td data-label="Level"><span class="badge badge-level3">Level III</span></td>
+                            <td data-label="Result"><span class="badge badge-pass">No Violations</span></td>
+                            <td data-label="Notes">—</td>
                         </tr>
                         <tr>
-                            <td>05/01/2026</td>
-                            <td>Limon Port of Entry, CO</td>
-                            <td><span class="badge badge-level1">Level I</span></td>
-                            <td><span class="badge badge-pass">No Violations</span></td>
-                            <td>—</td>
+                            <td data-label="Date">05/01/2026</td>
+                            <td data-label="Location">Limon Port of Entry, CO</td>
+                            <td data-label="Level"><span class="badge badge-level1">Level I</span></td>
+                            <td data-label="Result"><span class="badge badge-pass">No Violations</span></td>
+                            <td data-label="Notes">—</td>
                         </tr>
                         <tr>
-                            <td>05/08/2026</td>
-                            <td>Jasper, FL</td>
-                            <td><span class="badge badge-level3">Level III</span></td>
-                            <td><span class="badge badge-pass">No Violations</span></td>
-                            <td>—</td>
+                            <td data-label="Date">03/10/2026</td>
+                            <td data-label="Location">Trego County, KS</td>
+                            <td data-label="Level"><span class="badge badge-level1">Level I</span></td>
+                            <td data-label="Result"><span class="badge badge-note">Markings Violation</span></td>
+                            <td data-label="Notes">Operating under Gant Transportation LLC at time of inspection — leased authority markings issue.</td>
                         </tr>
                     </tbody>
                     <tfoot>
@@ -614,6 +822,7 @@
                     </div>
                     <div class="spot-card-body">
                         <p>One of the most iconic venues in the world, carved into ancient red sandstone formations 15 miles west of Denver. Go for a show, or hike the trails early morning when the stage is yours.</p>
+                        <p class="spot-abe-note">"I stop here on my way back from a western haul — nothing beats pulling up to those rocks after a long day on I-70."</p>
                         <span class="spot-recommended">Recommended Destination</span>
                     </div>
                 </article>
@@ -625,6 +834,7 @@
                     </div>
                     <div class="spot-card-body">
                         <p>Denver's beautifully restored 1914 train station turned social hub. Great restaurants, craft cocktails, and a lively atmosphere right in the heart of LoDo — day or night.</p>
+                        <p class="spot-abe-note">"My go-to spot to decompress after a long dispatch week. The Terminal Bar never misses."</p>
                         <span class="spot-recommended">Recommended Destination</span>
                     </div>
                 </article>
@@ -636,6 +846,7 @@
                     </div>
                     <div class="spot-card-body">
                         <p>River North's creative corridor is packed with world-class murals, craft breweries, galleries, and some of Denver's best restaurants. Walk, explore, and find something new every visit.</p>
+                        <p class="spot-abe-note">"The murals out here are unreal. I walk through RiNo when I need to clear my head between loads."</p>
                         <span class="spot-recommended">Recommended Destination</span>
                     </div>
                 </article>
@@ -647,6 +858,7 @@
                     </div>
                     <div class="spot-card-body">
                         <p>Denver's largest park is home to the Denver Zoo and the Museum of Nature &amp; Science. Bring a picnic, rent a paddleboat on Ferril Lake, and catch mountain views on a clear day.</p>
+                        <p class="spot-abe-note">"Best free view of the Rockies in the city. I bring family here every time they visit from out of state."</p>
                         <span class="spot-recommended">Recommended Destination</span>
                     </div>
                 </article>
@@ -658,6 +870,7 @@
                     </div>
                     <div class="spot-card-body">
                         <p>Denver's oldest and most beloved block — lined with Victorian-era buildings, string lights, award-winning restaurants, and boutique shops. The place to go for a memorable night out.</p>
+                        <p class="spot-abe-note">"First place I take anyone new to Denver. The string lights at night make the whole block feel different."</p>
                         <span class="spot-recommended">Recommended Destination</span>
                     </div>
                 </article>
@@ -669,10 +882,25 @@
                     </div>
                     <div class="spot-card-body">
                         <p>A hidden gem in the middle of the city — 24 acres of stunning curated gardens, seasonal blooms, and summer concerts. A peaceful escape that locals love year-round.</p>
+                        <p class="spot-abe-note">"Most people don't know about this place. Quiet, beautiful, and five minutes from downtown — perfect reset spot."</p>
                         <span class="spot-recommended">Recommended Destination</span>
                     </div>
                 </article>
 
+            </div>
+        </section>
+
+        <!-- Bottom CTA -->
+        <section class="owner-cta" aria-labelledby="cta-heading">
+            <h2 id="cta-heading">Ready to Work Together?</h2>
+            <p>Denver Sam Transportation LLC is available for freight across the country. Reach out to Abe directly — no middlemen, just straightforward service.</p>
+            <div class="owner-cta-links">
+                <a href="tel:7209380029" class="cta-btn-solid" aria-label="Call (720) 938-0029">
+                    &#128222; (720) 938-0029
+                </a>
+                <a href="mailto:info@denversam.com" class="cta-btn-outline" aria-label="Email info@denversam.com">
+                    &#9993; info@denversam.com
+                </a>
             </div>
         </section>
 
