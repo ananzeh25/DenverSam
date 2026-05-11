@@ -79,23 +79,23 @@
         .contact-bar {
             background: #f0f7ff;
             border-bottom: 1px solid #d1e9ff;
-            padding: 18px 20px;
+            padding: 16px 20px;
             text-align: center;
         }
-        .contact-bar-inner {
-            max-width: 600px;
-            margin: 0 auto;
+        .contact-bar-label {
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: #6b7280;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+        .contact-bar-pills {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 16px;
+            gap: 12px;
             flex-wrap: wrap;
-        }
-        .contact-bar p {
-            color: #374151;
-            font-size: 0.95rem;
-            font-weight: 500;
-            margin: 0;
         }
         .contact-pill {
             display: inline-flex;
@@ -456,7 +456,7 @@
             .stat-item strong { font-size: 2rem; }
             .spots-grid { grid-template-columns: 1fr; }
             .owner-cta h2 { font-size: 1.8rem; }
-            .contact-bar-inner { flex-direction: column; gap: 10px; }
+            .contact-bar-pills { gap: 10px; }
         }
     </style>
 </head>
@@ -514,8 +514,8 @@
 
         <!-- Contact bar (top) -->
         <div class="contact-bar" role="complementary" aria-label="Contact information">
-            <div class="contact-bar-inner">
-                <p>Get in touch with Abe directly:</p>
+            <p class="contact-bar-label">Get in touch with Abe directly</p>
+            <div class="contact-bar-pills">
                 <a href="tel:7209380029" class="contact-pill contact-pill-phone" aria-label="Call (720) 938-0029">
                     &#128222; (720) 938-0029
                 </a>
@@ -938,7 +938,7 @@
 
             <div class="footer-bottom">
                 <p><a href="/terms-of-service" style="color: inherit; text-decoration: underline;">Terms of Service</a> | <a href="/privacy-policy" style="color: inherit; text-decoration: underline;">Privacy Policy</a></p>
-                <p>&copy; 2025 Denver Sam.</p>
+                <p>&copy; 2026 Denver Sam.</p>
             </div>
         </div>
     </footer>
