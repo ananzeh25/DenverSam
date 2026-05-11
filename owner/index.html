@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Meet Abraham (Abe), owner-operator and founder of Denver Sam Transportation LLC. Learn about his trucking operations, load history, DOT inspections, and favorite Denver spots.">
+    <link rel="canonical" href="https://denversam.com/owner">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <title>Meet the Owner — Abraham (Abe) | Denver Sam Transportation LLC</title>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LLL4VPHMHH"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-LLL4VPHMHH');
+        gtag('config', 'GT-5N2922J');
+    </script>
+
+    <link rel="stylesheet" href="/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ── Owner page specific styles ── */
+        .owner-hero {
+            background: linear-gradient(135deg, #1a3a5c 0%, #2c5f8a 100%);
+            padding: 80px 20px 70px;
+            text-align: center;
+            color: #fff;
+        }
+        .owner-hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #fff;
+        }
+        .owner-hero p {
+            font-size: 1.25rem;
+            color: #e0f2fe;
+            font-weight: 300;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Video section */
+        .video-section {
+            padding: 70px 20px 60px;
+            background: #fff;
+        }
+        .video-section .section-header {
+            margin-bottom: 40px;
+        }
+        .video-wrapper {
+            max-width: 420px;
+            margin: 0 auto;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+            aspect-ratio: 9 / 16;
+            position: relative;
+        }
+        .video-wrapper iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+        }
+        .intro-text {
+            max-width: 700px;
+            margin: 40px auto 0;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #374151;
+            text-align: center;
+        }
+
+        /* Stats bar */
+        .stats-bar {
+            background: linear-gradient(135deg, #1a3a5c 0%, #2c5f8a 100%);
+            padding: 40px 20px;
+        }
+        .stats-bar-inner {
+            max-width: 900px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            text-align: center;
+        }
+        .stat-item strong {
+            display: block;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #fff;
+            line-height: 1;
+            margin-bottom: 6px;
+        }
+        .stat-item span {
+            font-size: 0.9rem;
+            color: #bfdbfe;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Tables */
+        .data-section {
+            padding: 70px 20px;
+        }
+        .table-wrapper {
+            overflow-x: auto;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            border: 1px solid #e1e5e9;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+            min-width: 560px;
+        }
+        thead {
+            background: linear-gradient(135deg, #1a3a5c 0%, #2c5f8a 100%);
+            color: #fff;
+        }
+        thead th {
+            padding: 14px 18px;
+            text-align: left;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+        }
+        tbody tr {
+            border-bottom: 1px solid #f0f2f5;
+            transition: background 0.15s ease;
+        }
+        tbody tr:last-child {
+            border-bottom: none;
+        }
+        tbody tr:hover {
+            background: #f0f7ff;
+        }
+        tbody td {
+            padding: 13px 18px;
+            color: #374151;
+            vertical-align: middle;
+        }
+        tbody tr:nth-child(even) {
+            background: #f8fafc;
+        }
+        tbody tr:nth-child(even):hover {
+            background: #f0f7ff;
+        }
+        .badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+        }
+        .badge-pass {
+            background: #d1fae5;
+            color: #065f46;
+        }
+        .badge-note {
+            background: #fef3c7;
+            color: #92400e;
+        }
+        .badge-level1 {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+        .badge-level3 {
+            background: #ede9fe;
+            color: #5b21b6;
+        }
+        .table-footer {
+            background: #f8fafc;
+            border-top: 2px solid #e1e5e9;
+        }
+        .table-footer td {
+            font-weight: 700;
+            color: #1f2937;
+            padding: 14px 18px;
+        }
+
+        /* Denver spots */
+        .spots-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 28px;
+            margin-top: 40px;
+        }
+        .spot-card {
+            background: #fff;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            border: 1px solid #e1e5e9;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .spot-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 16px 40px rgba(0,0,0,0.12);
+        }
+        .spot-card-header {
+            padding: 28px 28px 20px;
+            color: #fff;
+        }
+        .spot-card-header h3 {
+            font-size: 1.25rem;
+            margin-bottom: 4px;
+        }
+        .spot-card-header .spot-tag {
+            font-size: 0.78rem;
+            opacity: 0.9;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+        .spot-card-body {
+            padding: 20px 28px 26px;
+        }
+        .spot-card-body p {
+            color: #555;
+            font-size: 0.97rem;
+            line-height: 1.65;
+            margin-bottom: 14px;
+        }
+        .spot-recommended {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: #fef9c3;
+            color: #854d0e;
+            font-size: 0.78rem;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 20px;
+            letter-spacing: 0.4px;
+            text-transform: uppercase;
+        }
+        .spot-recommended::before {
+            content: "★";
+        }
+
+        /* color palette for spot cards */
+        .spot-red-rocks    { background: linear-gradient(135deg, #7f1d1d 0%, #b91c1c 100%); }
+        .spot-union-sta    { background: linear-gradient(135deg, #1e3a5f 0%, #2563eb 100%); }
+        .spot-rino         { background: linear-gradient(135deg, #4c1d95 0%, #7c3aed 100%); }
+        .spot-city-park    { background: linear-gradient(135deg, #14532d 0%, #16a34a 100%); }
+        .spot-larimer      { background: linear-gradient(135deg, #78350f 0%, #d97706 100%); }
+        .spot-botanic      { background: linear-gradient(135deg, #064e3b 0%, #059669 100%); }
+
+        @media (max-width: 768px) {
+            .owner-hero h1 { font-size: 2.2rem; }
+            .stats-bar-inner { grid-template-columns: 1fr; gap: 20px; }
+            .stat-item strong { font-size: 2rem; }
+            .spots-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <a class="skip-link visually-hidden" href="#main-content">Skip to main content</a>
+
+    <header class="site-header" role="banner">
+        <div class="header-container">
+            <a href="/" class="site-logo" aria-label="Denver Sam - Home">
+                DENVER SAM
+            </a>
+            <nav class="main-nav" aria-label="Main navigation">
+                <ul>
+                    <li><a href="/denver">Denver</a></li>
+                    <li><a href="/estes-park">Estes Park</a></li>
+                    <li><a href="/boulder">Boulder</a></li>
+                    <li><a href="#cities">All Cities</a></li>
+                </ul>
+            </nav>
+            <button class="mobile-menu-toggle" aria-label="Open mobile menu" aria-expanded="false" aria-controls="mobile-menu">
+                <span aria-hidden="true">☰</span>
+            </button>
+        </div>
+
+        <nav class="mobile-menu" id="mobile-menu" aria-label="Mobile navigation" aria-hidden="true">
+            <button class="mobile-menu-close" aria-label="Close mobile menu">
+                <span aria-hidden="true">×</span>
+            </button>
+            <div class="mobile-menu-content">
+                <nav>
+                    <ul role="list">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/denver">Denver</a></li>
+                        <li><a href="/estes-park">Estes Park</a></li>
+                        <li><a href="/boulder">Boulder</a></li>
+                        <li><a href="/fort-collins">Fort Collins</a></li>
+                        <li><a href="/colorado-springs">Colorado Springs</a></li>
+                        <li><a href="/breckenridge">Breckenridge</a></li>
+                        <li><a href="/vail">Vail</a></li>
+                        <li><a href="/aspen">Aspen</a></li>
+                        <li><a href="/loveland">Loveland</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </nav>
+    </header>
+
+    <main class="site-main" id="main-content" role="main">
+
+        <!-- Hero -->
+        <section class="owner-hero" aria-labelledby="owner-title">
+            <h1 id="owner-title">Meet the Owner</h1>
+            <p>Abraham (Abe) — Owner-Operator & Founder, Denver Sam Transportation LLC</p>
+        </section>
+
+        <!-- Intro Video -->
+        <section class="video-section" aria-labelledby="video-heading">
+            <div class="section-header">
+                <h2 id="video-heading">Introduction</h2>
+                <p class="section-subtitle">Watch this short video to learn about Abe, his equipment, and the services Denver Sam Transportation provides.</p>
+            </div>
+
+            <div class="video-wrapper">
+                <iframe
+                    src="https://www.youtube.com/embed/nt0BAIzKf-w"
+                    title="Introduction — Abraham (Abe), Owner of Denver Sam Transportation LLC"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen
+                    loading="lazy">
+                </iframe>
+            </div>
+
+            <p class="intro-text">
+                Hi, my name is Abraham, and I go by Abe. I am the owner-operator and founder of Denver Sam Transportation LLC. Please take a moment to watch the introductory video above to learn more about me, my equipment, and the transportation services we provide.
+            </p>
+        </section>
+
+        <!-- Stats Bar -->
+        <div class="stats-bar" role="region" aria-label="Operations at a glance">
+            <div class="stats-bar-inner">
+                <div class="stat-item">
+                    <strong>27</strong>
+                    <span>Loads Completed</span>
+                </div>
+                <div class="stat-item">
+                    <strong>3</strong>
+                    <span>DOT Inspections</span>
+                </div>
+                <div class="stat-item">
+                    <strong>2/3</strong>
+                    <span>Inspections — No Violations</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Load History -->
+        <section class="data-section content-section" aria-labelledby="loads-heading">
+            <div class="section-header">
+                <h2 id="loads-heading">Load History</h2>
+                <p class="section-subtitle">Every load we have hauled — broker, load ID, and operating authority.</p>
+            </div>
+
+            <div class="table-wrapper">
+                <table aria-label="Load history table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Date</th>
+                            <th scope="col">Broker</th>
+                            <th scope="col">Load ID</th>
+                            <th scope="col">Authority</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>02/15/2026</td>
+                            <td>Freedom Freight Services / DHL</td>
+                            <td>A11575593</td>
+                            <td>Contracted Carrier — Moto Express GP LLC</td>
+                        </tr>
+                        <tr>
+                            <td>02/16/2026</td>
+                            <td>ILG Logistics</td>
+                            <td>ILG-289195</td>
+                            <td>Contracted Carrier — Moto Express GP LLC</td>
+                        </tr>
+                        <tr>
+                            <td>02/17/2026</td>
+                            <td>RXO Freight Forwarding</td>
+                            <td>OVEFEB26</td>
+                            <td>Contracted Carrier — Moto Express GP LLC</td>
+                        </tr>
+                        <tr>
+                            <td>02/27/2026</td>
+                            <td>Total Quality Logistics (TQL)</td>
+                            <td>35785470</td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td>02/27/2026</td>
+                            <td>Total Quality Logistics (TQL)</td>
+                            <td>35705470</td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td>02/27/2026</td>
+                            <td>Total Quality Logistics (TQL)</td>
+                            <td>35765470</td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td>03/09/2026</td>
+                            <td>Aeronet Global Logistics Solutions</td>
+                            <td>111204637</td>
+                            <td>Denver Sam Transportation LLC</td>
+                        </tr>
+                        <tr>
+                            <td>03/10/2026</td>
+                            <td>MountainMovers Transportation &amp; Logistics</td>
+                            <td>1671499</td>
+                            <td>Denver Sam Transportation LLC</td>
+                        </tr>
+                        <tr>
+                            <td>03/10/2026</td>
+                            <td>MountainMovers Transportation &amp; Logistics</td>
+                            <td>1671481</td>
+                            <td>Denver Sam Transportation LLC</td>
+                        </tr>
+                        <tr>
+                            <td>03/10/2026</td>
+                            <td>MountainMovers Transportation &amp; Logistics</td>
+                            <td>1670795</td>
+                            <td>Denver Sam Transportation LLC</td>
+                        </tr>
+                        <tr>
+                            <td>03/10/2026</td>
+                            <td>MountainMovers Transportation &amp; Logistics</td>
+                            <td>1671402</td>
+                            <td>Denver Sam Transportation LLC</td>
+                        </tr>
+                        <tr>
+                            <td>03/10/2026</td>
+                            <td>Justice Bedding Company</td>
+                            <td>71750 / 71560 / 71749</td>
+                            <td>Leased under Gant Transportation LLC</td>
+                        </tr>
+                        <tr>
+                            <td>03/10/2026</td>
+                            <td>NWL</td>
+                            <td>U6321767</td>
+                            <td>Leased under Gant Transportation LLC</td>
+                        </tr>
+                        <tr>
+                            <td>03/13/2026</td>
+                            <td>PGL / Perimeter Logistics</td>
+                            <td>S01496569</td>
+                            <td>Denver Sam Transportation LLC</td>
+                        </tr>
+                        <tr>
+                            <td>04/01/2026</td>
+                            <td>Infinity Logistics Group</td>
+                            <td>Production Gear Load</td>
+                            <td>Denver Sam Transportation LLC</td>
+                        </tr>
+                        <tr>
+                            <td>04/01/2026</td>
+                            <td>Complex Logistics</td>
+                            <td>8582932</td>
+                            <td>Denver Sam Transportation LLC</td>
+                        </tr>
+                        <tr>
+                            <td>04/02/2026</td>
+                            <td>Complex Logistics</td>
+                            <td>8263971</td>
+                            <td>Denver Sam Transportation LLC</td>
+                        </tr>
+                        <tr>
+                            <td>04/02/2026</td>
+                            <td>Complex Logistics</td>
+                            <td>7500305</td>
+                            <td>Denver Sam Transportation LLC</td>
+                        </tr>
+                        <tr>
+                            <td>04/15/2026</td>
+                            <td>Raynor Garage Doors</td>
+                            <td>111560</td>
+                            <td>Denver Sam Transportation LLC</td>
+                        </tr>
+                        <tr>
+                            <td>04/22/2026</td>
+                            <td>MountainMovers Transportation &amp; Logistics</td>
+                            <td>1680647</td>
+                            <td>Denver Sam Transportation LLC</td>
+                        </tr>
+                        <tr>
+                            <td>04/22/2026</td>
+                            <td>MountainMovers Transportation &amp; Logistics</td>
+                            <td>1680610</td>
+                            <td>Denver Sam Transportation LLC</td>
+                        </tr>
+                        <tr>
+                            <td>04/23/2026</td>
+                            <td>MountainMovers Transportation &amp; Logistics</td>
+                            <td>1680547</td>
+                            <td>Denver Sam Transportation LLC</td>
+                        </tr>
+                        <tr>
+                            <td>04/23/2026</td>
+                            <td>MountainMovers Transportation &amp; Logistics</td>
+                            <td>1680578</td>
+                            <td>Denver Sam Transportation LLC</td>
+                        </tr>
+                        <tr>
+                            <td>04/30/2026</td>
+                            <td>Allstates WorldCargo</td>
+                            <td>EWR 3826357</td>
+                            <td>Denver Sam Transportation LLC</td>
+                        </tr>
+                        <tr>
+                            <td>05/04/2026</td>
+                            <td>Total Transit LLC</td>
+                            <td>55216</td>
+                            <td>Denver Sam Transportation LLC</td>
+                        </tr>
+                        <tr>
+                            <td>05/07/2026</td>
+                            <td>Maze Freight Solutions</td>
+                            <td>185607</td>
+                            <td>Denver Sam Transportation LLC</td>
+                        </tr>
+                        <tr>
+                            <td>05/08/2026</td>
+                            <td>KMX Logistics, Inc.</td>
+                            <td>251978-0</td>
+                            <td>Denver Sam Transportation LLC</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr class="table-footer">
+                            <td colspan="4">Total Loads: 27</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </section>
+
+        <!-- DOT Inspections -->
+        <section class="data-section content-section alt-bg" aria-labelledby="dot-heading">
+            <div class="section-header">
+                <h2 id="dot-heading">DOT Inspection Record</h2>
+                <p class="section-subtitle">Full transparency on every roadside inspection — date, location, level, and outcome.</p>
+            </div>
+
+            <div class="table-wrapper">
+                <table aria-label="DOT inspection record table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Date</th>
+                            <th scope="col">Location</th>
+                            <th scope="col">Level</th>
+                            <th scope="col">Result</th>
+                            <th scope="col">Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>03/10/2026</td>
+                            <td>Trego County, KS</td>
+                            <td><span class="badge badge-level1">Level I</span></td>
+                            <td><span class="badge badge-note">Markings Violation</span></td>
+                            <td>Operating under Gant Transportation LLC at time of inspection — leased authority markings issue.</td>
+                        </tr>
+                        <tr>
+                            <td>05/01/2026</td>
+                            <td>Limon Port of Entry, CO</td>
+                            <td><span class="badge badge-level1">Level I</span></td>
+                            <td><span class="badge badge-pass">No Violations</span></td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td>05/08/2026</td>
+                            <td>Jasper, FL</td>
+                            <td><span class="badge badge-level3">Level III</span></td>
+                            <td><span class="badge badge-pass">No Violations</span></td>
+                            <td>—</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr class="table-footer">
+                            <td colspan="5">Total Inspections: 3 &nbsp;|&nbsp; 2 of 3 with zero violations</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </section>
+
+        <!-- Denver Recommended Spots -->
+        <section class="content-section" aria-labelledby="spots-heading">
+            <div class="section-header">
+                <h2 id="spots-heading">Abe's Favorite Spots in Denver</h2>
+                <p class="section-subtitle">When Abe isn't on the road, these are his top recommended destinations in Denver — tried, tested, and local-approved.</p>
+            </div>
+
+            <div class="spots-grid">
+
+                <article class="spot-card">
+                    <div class="spot-card-header spot-red-rocks">
+                        <h3>Red Rocks Amphitheatre</h3>
+                        <span class="spot-tag">Live Music &amp; Hiking</span>
+                    </div>
+                    <div class="spot-card-body">
+                        <p>One of the most iconic venues in the world, carved into ancient red sandstone formations 15 miles west of Denver. Go for a show, or hike the trails early morning when the stage is yours.</p>
+                        <span class="spot-recommended">Recommended Destination</span>
+                    </div>
+                </article>
+
+                <article class="spot-card">
+                    <div class="spot-card-header spot-union-sta">
+                        <h3>Union Station</h3>
+                        <span class="spot-tag">Food, Drinks &amp; Culture</span>
+                    </div>
+                    <div class="spot-card-body">
+                        <p>Denver's beautifully restored 1914 train station turned social hub. Great restaurants, craft cocktails, and a lively atmosphere right in the heart of LoDo — day or night.</p>
+                        <span class="spot-recommended">Recommended Destination</span>
+                    </div>
+                </article>
+
+                <article class="spot-card">
+                    <div class="spot-card-header spot-rino">
+                        <h3>RiNo Art District</h3>
+                        <span class="spot-tag">Art, Breweries &amp; Street Culture</span>
+                    </div>
+                    <div class="spot-card-body">
+                        <p>River North's creative corridor is packed with world-class murals, craft breweries, galleries, and some of Denver's best restaurants. Walk, explore, and find something new every visit.</p>
+                        <span class="spot-recommended">Recommended Destination</span>
+                    </div>
+                </article>
+
+                <article class="spot-card">
+                    <div class="spot-card-header spot-city-park">
+                        <h3>City Park</h3>
+                        <span class="spot-tag">Nature &amp; Family</span>
+                    </div>
+                    <div class="spot-card-body">
+                        <p>Denver's largest park is home to the Denver Zoo and the Museum of Nature &amp; Science. Bring a picnic, rent a paddleboat on Ferril Lake, and catch mountain views on a clear day.</p>
+                        <span class="spot-recommended">Recommended Destination</span>
+                    </div>
+                </article>
+
+                <article class="spot-card">
+                    <div class="spot-card-header spot-larimer">
+                        <h3>Larimer Square</h3>
+                        <span class="spot-tag">Dining &amp; Nightlife</span>
+                    </div>
+                    <div class="spot-card-body">
+                        <p>Denver's oldest and most beloved block — lined with Victorian-era buildings, string lights, award-winning restaurants, and boutique shops. The place to go for a memorable night out.</p>
+                        <span class="spot-recommended">Recommended Destination</span>
+                    </div>
+                </article>
+
+                <article class="spot-card">
+                    <div class="spot-card-header spot-botanic">
+                        <h3>Denver Botanic Gardens</h3>
+                        <span class="spot-tag">Nature &amp; Relaxation</span>
+                    </div>
+                    <div class="spot-card-body">
+                        <p>A hidden gem in the middle of the city — 24 acres of stunning curated gardens, seasonal blooms, and summer concerts. A peaceful escape that locals love year-round.</p>
+                        <span class="spot-recommended">Recommended Destination</span>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="site-footer" role="contentinfo">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Denver Sam</h3>
+                    <p>Your local guide to Colorado. Helping travelers discover the best of the Centennial State.</p>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Popular Cities</h3>
+                    <ul role="list">
+                        <li><a href="/denver">Denver</a></li>
+                        <li><a href="/estes-park">Estes Park</a></li>
+                        <li><a href="/boulder">Boulder</a></li>
+                        <li><a href="/colorado-springs">Colorado Springs</a></li>
+                        <li><a href="/vail">Vail</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Mountain Towns</h3>
+                    <ul role="list">
+                        <li><a href="/breckenridge">Breckenridge</a></li>
+                        <li><a href="/aspen">Aspen</a></li>
+                        <li><a href="/fort-collins">Fort Collins</a></li>
+                        <li><a href="/loveland">Loveland</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p><a href="/terms-of-service" style="color: inherit; text-decoration: underline;">Terms of Service</a> | <a href="/privacy-policy" style="color: inherit; text-decoration: underline;">Privacy Policy</a></p>
+                <p>&copy; 2025 Denver Sam.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/script.js"></script>
+</body>
+</html>
