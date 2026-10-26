@@ -534,6 +534,45 @@ select:focus {
 .city-card-header.aspen { background: linear-gradient(135deg, #6c3483 0%, #8e44ad 100%); }
 .city-card-header.loveland { background: linear-gradient(135deg, #922b21 0%, #cb4335 100%); }
 
+/* Place Card Header Colors - for restaurants, breweries, activities */
+.place-card-header { padding: 20px; color: #fff; }
+.place-card-header h3 { font-size: 1.4rem; margin: 0 0 5px 0; color: #fff; }
+.place-card-header .place-meta { font-size: 0.9rem; opacity: 0.9; margin: 0; }
+
+/* Category Colors */
+.place-card-header.restaurant { background: linear-gradient(135deg, #c0392b 0%, #e74c3c 100%); }
+.place-card-header.fine-dining { background: linear-gradient(135deg, #6c3483 0%, #8e44ad 100%); }
+.place-card-header.casual { background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%); }
+.place-card-header.brewery { background: linear-gradient(135deg, #d35400 0%, #e67e22 100%); }
+.place-card-header.bar { background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%); }
+.place-card-header.rooftop { background: linear-gradient(135deg, #1a5276 0%, #2980b9 100%); }
+.place-card-header.hiking { background: linear-gradient(135deg, #1e8449 0%, #27ae60 100%); }
+.place-card-header.activity { background: linear-gradient(135deg, #117a65 0%, #1abc9c 100%); }
+.place-card-header.attraction { background: linear-gradient(135deg, #b9770e 0%, #f39c12 100%); }
+.place-card-header.shopping { background: linear-gradient(135deg, #c2185b 0%, #e91e63 100%); }
+
+/* Place Card Body */
+.place-card-body { padding: 20px; }
+.place-card-body p { color: #495057; font-size: 14px; line-height: 1.6; margin: 0 0 15px 0; }
+.place-card-body .tip { color: #6c757d; font-size: 13px; margin: 0 0 15px 0; }
+.place-card-body .tip strong { color: #495057; }
+
+/* Place Tags */
+.place-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+.place-tag { padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: 500; }
+.place-tag.price { background: #f8f9fa; color: #495057; }
+.place-tag.feature { background: #e8f5e9; color: #2e7d32; }
+.place-tag.warning { background: #fff3e0; color: #e65100; }
+.place-tag.special { background: #fce4ec; color: #c2185b; }
+
+/* Places Grid */
+.places-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
+}
+
 .city-card-body {
     padding: 25px 30px 30px;
 }
@@ -1029,6 +1068,11 @@ select:focus {
     text-align: center;
     color: #9ca3af;
     font-size: 14px;
+}
+
+.footer-bottom a {
+    color: inherit;
+    text-decoration: underline;
 }
 
 /* Article Page Styles */
