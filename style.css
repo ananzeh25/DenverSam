@@ -535,8 +535,8 @@ select:focus {
 .city-card-header.loveland { background: linear-gradient(135deg, #922b21 0%, #cb4335 100%); }
 
 /* Place Card Header Colors - for restaurants, breweries, activities */
-.place-card-header { padding: 20px; color: #fff; }
-.place-card-header h3 { font-size: 1.4rem; margin: 0 0 5px 0; color: #fff; }
+.place-card-header { padding: 30px; color: #fff; }
+.place-card-header h3 { font-size: 1.5rem; margin-bottom: 5px; color: #fff; }
 .place-card-header .place-meta { font-size: 0.9rem; opacity: 0.9; margin: 0; }
 
 /* Category Colors */
@@ -552,15 +552,15 @@ select:focus {
 .place-card-header.shopping { background: linear-gradient(135deg, #c2185b 0%, #e91e63 100%); }
 
 /* Place Card Body */
-.place-card-body { padding: 20px; }
-.place-card-body p { color: #495057; font-size: 14px; line-height: 1.6; margin: 0 0 15px 0; }
-.place-card-body .tip { color: #6c757d; font-size: 13px; margin: 0 0 15px 0; }
-.place-card-body .tip strong { color: #495057; }
+.place-card-body { padding: 25px 30px 30px; }
+.place-card-body p { color: #555; line-height: 1.6; margin-bottom: 20px; }
+.place-card-body .tip { color: #666; margin-bottom: 20px; }
+.place-card-body .tip strong { color: #555; }
 
 /* Place Tags */
-.place-tags { display: flex; gap: 8px; flex-wrap: wrap; }
-.place-tag { padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: 500; }
-.place-tag.price { background: #f8f9fa; color: #495057; }
+.place-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 15px; }
+.place-tag { padding: 6px 12px; border-radius: 4px; font-size: 0.875rem; font-weight: 500; }
+.place-tag.price { background: #f5f5f5; color: #555; }
 .place-tag.feature { background: #e8f5e9; color: #2e7d32; }
 .place-tag.warning { background: #fff3e0; color: #e65100; }
 .place-tag.special { background: #fce4ec; color: #c2185b; }
