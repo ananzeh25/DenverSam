@@ -565,6 +565,87 @@ select:focus {
 .place-tag.warning { background: #fff3e0; color: #e65100; }
 .place-tag.special { background: #fce4ec; color: #c2185b; }
 
+/* Place Contact Info - Actionable Data */
+.place-info {
+    background: #f8f9fa;
+    border-top: 1px solid #e9ecef;
+    padding: 20px 30px;
+    font-size: 0.95rem;
+}
+.place-info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 20px;
+}
+.place-info-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    color: #555;
+}
+.place-info-item .label {
+    font-weight: 600;
+    color: #333;
+    min-width: 55px;
+}
+.place-info-item a {
+    color: #2563eb;
+    text-decoration: none;
+}
+.place-info-item a:hover {
+    text-decoration: underline;
+}
+.place-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 15px;
+    flex-wrap: wrap;
+}
+.place-action-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 18px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+.place-action-btn.primary {
+    background: #2563eb;
+    color: #fff;
+}
+.place-action-btn.primary:hover {
+    background: #1d4ed8;
+}
+.place-action-btn.secondary {
+    background: #fff;
+    color: #333;
+    border: 1px solid #ddd;
+}
+.place-action-btn.secondary:hover {
+    background: #f5f5f5;
+    border-color: #ccc;
+}
+.place-rating {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.place-rating .stars {
+    color: #f59e0b;
+}
+.place-rating .count {
+    color: #666;
+    font-size: 0.85rem;
+}
+@media (max-width: 600px) {
+    .place-info-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
 /* Places Grid */
 .places-grid {
     display: grid;
