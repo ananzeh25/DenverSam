@@ -553,7 +553,7 @@ select:focus {
 
 /* Place Card Body */
 .place-card-body { padding: 25px 30px 30px; }
-.place-card-body p { color: #555; line-height: 1.6; margin-bottom: 20px; }
+.place-card-body p { color: #555; font-size: 1.1rem; line-height: 1.8; margin-bottom: 20px; }
 .place-card-body .tip { color: #666; margin-bottom: 20px; }
 .place-card-body .tip strong { color: #555; }
 
@@ -579,8 +579,9 @@ select:focus {
 
 .city-card-body p {
     color: #555;
+    font-size: 1.1rem;
     margin-bottom: 20px;
-    line-height: 1.6;
+    line-height: 1.8;
 }
 
 .city-highlights {
@@ -676,9 +677,9 @@ select:focus {
 }
 
 .card-description {
-    color: #666;
-    line-height: 1.6;
-    font-size: 1rem;
+    color: #555;
+    line-height: 1.8;
+    font-size: 1.1rem;
     text-align: left;
 }
 
