@@ -22,10 +22,35 @@
     <a class="skip-link visually-hidden" href="#main-content">Skip to main content</a>
     <header class="site-header" role="banner">
         <div class="header-container">
-            <a href="/" class="site-logo">DENVER SAM</a>
-            <nav class="main-nav"><ul><li><a href="/denver/attractions">Attractions</a></li><li><a href="/denver">Denver</a></li></ul></nav>
-            <button class="mobile-menu-toggle" aria-label="Open mobile menu"><span>☰</span></button>
+            <a href="/" class="site-logo" aria-label="Denver Sam - Home">DENVER SAM</a>
+            <nav class="main-nav" aria-label="Main navigation">
+                <ul>
+                    <li><a href="/denver">Denver</a></li>
+                    <li><a href="/boulder">Boulder</a></li>
+                    <li><a href="/estes-park">Estes Park</a></li>
+                    <li><a href="/cities/">All Cities</a></li>
+                </ul>
+            </nav>
+            <button class="mobile-menu-toggle" aria-label="Open mobile menu" aria-expanded="false" aria-controls="mobile-menu">
+                <span aria-hidden="true">☰</span>
+            </button>
         </div>
+        <nav class="mobile-menu" id="mobile-menu" aria-label="Mobile navigation" aria-hidden="true">
+            <button class="mobile-menu-close" aria-label="Close mobile menu"><span aria-hidden="true">×</span></button>
+            <div class="mobile-menu-content">
+                <nav>
+                    <ul role="list">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/denver/">Denver</a></li>
+                        <li><a href="/denver/parks/">Parks</a></li>
+                        <li><a href="/denver/walking-trails/">Walking Trails</a></li>
+                        <li><a href="/boulder/">Boulder</a></li>
+                        <li><a href="/estes-park/">Estes Park</a></li>
+                        <li><a href="/cities/">All Cities</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </nav>
     </header>
 
     <main class="site-main" id="main-content" role="main">
